@@ -1,0 +1,6 @@
+<%# locals: (item:, cached: true) -%>
+<% cache_if cached, item do %>
+  <div class='container-fluid m-0'>
+    <%= yield item %>
+  </div>
+<% end %>

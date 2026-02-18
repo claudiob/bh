@@ -1,0 +1,46 @@
+<%# locals: (items:, empty_label:, positioned: false, cached: true, headers: [], pagy: nil) -%>
+<% cache_if cached, [items, (items.unscoped.size if cached)].compact do %>
+  <%= turbo_frame_tag :results, data: { turbo_action: :advance }, class: 'w-100' do %>
+    <% if items.present? %>
+      <table class='table caption-top table-hover table-responsive'>
+        <thead>
+          <tr>
+            <% if positioned %>
+            <th scope='col'></th>
+            <% end %>
+            <% headers.each do |header| %>
+            <th scope='col'><%= header %></th>
+            <% end %>
+          </tr>
+        </thead>
+        <% if positioned %>
+        <tbody class='table-group-divider' data-controller='sortable' data-sortable-handle-value='.sortable-handle' data-sortable-resource-name-value='<%= ActiveModel::Naming.param_key items %>' data-sortable-animation-value='200'>
+        <% else %>
+        <tbody class='table-group-divider'>
+        <% end %>
+        <% items.each do |item| %>
+          <% if positioned %>
+          <tr data-sortable-update-url='<%= url_for(action: :update, id: item) %>'>
+            <td class='sortable-handle text-center' style='cursor: pointer; width: 40px'>⇅</td>
+          <% else %>
+          <tr>
+          <% end %>
+          <% cache_if (cached && !params.key?(:q)), item do %>
+            <%= yield item %>
+          <% end %>
+          </tr>
+        <% end %>
+        </tbody>
+      </table>
+
+      <% if pagy %>
+        <div class='d-flex align-items-center'>
+          <div class='ps-2 flex-grow-1'><%== pagy.info_tag %></div>
+          <div class='pe-2'><%== pagy.series_nav(:bootstrap, classes: 'pagination mb-0') if pagy.last > 1 %></div>
+        </div>
+      <% end %>
+    <% else %>
+      <p><%= empty_label %>.</p>
+    <% end %>
+  <% end %>
+<% end %>
