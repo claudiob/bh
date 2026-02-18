@@ -6,6 +6,10 @@ For more information about changelogs, check
 [Keep a Changelog](http://keepachangelog.com) and
 [Vandamme](http://tech-angels.github.io/vandamme).
 
+## 6.0.0 - 2026-02-18
+
+* [BREAKING FIXES] Literally everything changed. Moving from Bootstrap 3 to Bootstrap 6.
+
 ## 1.3.6 - 2015-12-18
 
 * [ENHANCEMENT] Bump versions of asset libraries

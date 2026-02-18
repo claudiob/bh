@@ -1,0 +1,29 @@
+/*
+ * This file contains overrides to Bootstrap styles.
+ *
+ * Each override must be justified and explained with a comment.
+ */
+
+/* ensure highlighted text from a search is not separated from the rest of the word */
+mark { padding: 0 }
+
+/* make the base font size readable */
+:root {--bs-body-font-size: 1rem}
+
+/* ensure a field placeholder is not confused for an actual value */
+.form-control::placeholder { opacity: 0.35 }
+
+/* make radio buttons bigger */
+input[type=radio] { transform:scale(1.5); margin-right: .75rem }
+
+/* make the label around radio buttons colored when checked */
+label:has(input[type=radio]:checked) { background-color: var(--bs-primary-bg-subtle); border-color: var(--bs-primary-border) }
+
+/* Fixes bugs in Bootstrap 6.0@alpha1 where some colors are undefined */
+.form-text { color: var(--bs-secondary-text) }
+:root {
+  --bs-form-valid-color: var(--bs-success-text);
+  --bs-form-valid-border-color: var(--bs-success-border);
+  --bs-form-invalid-color: var(--bs-danger-text);
+  --bs-form-invalid-border-color: var(--bs-danger-border);
+}
