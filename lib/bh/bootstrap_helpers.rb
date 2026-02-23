@@ -125,7 +125,7 @@ module Bh
     end
 
     def card_body(&block)
-      tag.div class: 'card-body card-row py-4', &block
+      tag.div class: 'card-body py-4', &block
     end
   end
 end

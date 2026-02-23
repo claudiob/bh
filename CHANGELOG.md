@@ -6,6 +6,12 @@ For more information about changelogs, check
 [Keep a Changelog](http://keepachangelog.com) and
 [Vandamme](http://tech-angels.github.io/vandamme).
 
+## 6.0.1 - 2026-02-23
+
+- Remove class "card-row" from card_body
+
+That's because a card body with card-row does not display correct borders for nested cards
+
 ## 6.0.0 - 2026-02-18
 
 * [BREAKING FIXES] Literally everything changed. Moving from Bootstrap 3 to Bootstrap 6.

@@ -10,7 +10,6 @@ Gem::Specification.new do |spec|
     streamlines the use of Bootstrap components in Rails views.}
   spec.homepage      = "http://github.com/claudiob/bh"
   spec.license       = "MIT"
-  spec.required_ruby_version = ">= 3.2.0"
 
   spec.files         = `git ls-files`.split($/)
   spec.executables   = spec.files.grep(%r{^bin/}) { |f| File.basename(f) }
