@@ -83,8 +83,15 @@ module Bh
       tag.div class: 'collapse navbar-collapse', id: 'navbarSupportedContent', &block
     end
 
-    def table(items:, empty_label:, positioned: false, cached: true, headers: [], pagy: nil, &block)
+    def table(items:, empty_label:, positioned: false, cached: true, pagy: nil, &block)
       render 'bh/table', items: items, empty_label: empty_label, positioned: positioned, cached: cached, headers: headers, pagy: pagy, &block
+    end
+
+    def column(header:, section:, **options, &block)
+      case section
+        when :header then tag.th(header, **options.merge(scope: :col))
+        when :body then tag.td(**options, &block)
+      end
     end
 
     # Renders the block inside a grid row.
@@ -111,9 +118,7 @@ module Bh
 
     # Display a link with an emoji to edit a resource inside a table.
     def edit_link_to(path)
-      tag.td class: 'text-center', style: 'width: 40px' do
-        turbo_link_to '➡️', path, class: 'text-decoration-none'
-      end
+      turbo_link_to '➡️', path, class: 'text-decoration-none'
     end
 
   private

@@ -18,3 +18,8 @@ How to install
 ```ruby
 pin_all_from Bh::Engine.root.join('app/javascript/controllers'), under: 'controllers'
 ```
+
+Available methods
+=================
+
+See https://github.com/claudiob/bh/blob/master/lib/bh/bootstrap_helpers.rb

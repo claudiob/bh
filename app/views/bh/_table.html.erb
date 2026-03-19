@@ -8,9 +8,7 @@
             <% if positioned %>
             <th scope='col'></th>
             <% end %>
-            <% headers.each do |header| %>
-            <th scope='col'><%= header %></th>
-            <% end %>
+            <%= yield items.first, :header %>
           </tr>
         </thead>
         <% if positioned %>
@@ -26,7 +24,7 @@
           <tr>
           <% end %>
           <% cache_if (cached && !params.key?(:q)), item do %>
-            <%= yield item %>
+            <%= yield item, :body %>
           <% end %>
           </tr>
         <% end %>

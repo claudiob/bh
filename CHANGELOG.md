@@ -6,6 +6,11 @@ For more information about changelogs, check
 [Keep a Changelog](http://keepachangelog.com) and
 [Vandamme](http://tech-angels.github.io/vandamme).
 
+## 6.1.2 - 2026-03-18
+
+* [BREAKING CHANGE] The `table` method doesn't take the `headers` parameter anymore.
+* [FEATURE] New `column` method to define headers and body of a `table` at once
+
 ## 6.0.1 - 2026-02-23
 
 - Remove class "card-row" from card_body
