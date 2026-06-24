@@ -17,6 +17,7 @@ module Bh
         <link rel="apple-touch-icon" href="/apple-touch-icon.png">
         <link href='https://assets.houseaccount.com/css/bootstrap.min.css' rel='stylesheet'>
         <!-- once it's live: <link href="https://cdn.jsdelivr.net/npm/bootstrap@6.0.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-VuYVTUAUbEW1A1EgqVmiLTxfqmvVgsV8yG3KeYZmz8aLednYx2pzlYdT4NS041oo" crossorigin="anonymous"> -->
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css" rel="stylesheet">
         #{stylesheet_link_tag :app, 'data-turbo-track': 'reload'}
         #{stylesheet_link_tag :bh, 'data-turbo-track': 'reload'}
       HEAD

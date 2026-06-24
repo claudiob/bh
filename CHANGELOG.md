@@ -6,6 +6,10 @@ For more information about changelogs, check
 [Keep a Changelog](http://keepachangelog.com) and
 [Vandamme](http://tech-angels.github.io/vandamme).
 
+## 6.1.4 - 2026-06-24
+
+* [FEATURE] Include Boostrap Icons CSS
+
 ## 6.1.3 - 2026-05-16
 
 * [FEATURE] Added three Stimulus controllers (phone, require, submit)
