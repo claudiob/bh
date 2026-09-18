@@ -730,16 +730,15 @@ footer {
         <h3>In the head</h3>
         <p>With the gem in the bundle an app serves <code>/bh/css/bh.css</code> and <code>/bh/js/bh.js</code> itself. One helper puts both in the head, along with everything Bootstrap and Turbo read.</p>
 <pre><code><span class='k'>&lt;%=</span> bh_head_tags <span class='k'>%&gt;</span></code></pre>
-        <p style='margin-top:1rem'>Bh links no icon font of its own: which glyphs a page draws is the host's business, and a gem reaching for somebody else's CDN unasked is not. A combobox's chevron and a bookmark's star are Bootstrap Icons, so a page that wants them says where they come from.</p>
+        <p style='margin-top:1rem'>Icons are the host's to link — a few components draw Bootstrap Icons, so bring the font if you want them.</p>
         <a class='ref' href='https://rubydoc.info/gems/bh/Bh/Helpers/Heads'>Reference&nbsp;&rarr;</a>
-
       </div>
     </section>
 
     <section id='form'>
       <div class='panel'>
         <h2>The form</h2>
-        <p>Given to one form as <code>builder:</code>, or to every form of a controller through <code>default_form_builder</code>. What a view passes is kept: its classes join the builder's, its <code>data</code> is merged key by key with the builder's, and any other option of its overrides.</p>
+        <p>One builder dresses every field, so a view says what it wants and never a class. Hand it to a single form, or to a whole controller.</p>
 <pre><code><span class='k'>class</span> ApplicationController &lt; ActionController::Base
   default_form_builder Bh::FormBuilder
 <span class='k'>end</span></code></pre>
@@ -771,7 +770,7 @@ footer {
     <section id='fields'>
       <div class='panel'>
         <h2>The missing fields</h2>
-        <p>Everything Rails already draws, the builder dresses at one size, so a view names the kind of field it wants and no class at all. What it adds are the fields a Bootstrap page keeps needing and Rails has no method for.</p>
+        <p>The fields a Bootstrap page keeps needing and Rails has no method for.</p>
 <pre><code><span class='k'>&lt;%=</span> form.combobox <span class='s'>:county</span>, counties <span class='k'>%&gt;</span>
 <span class='k'>&lt;%=</span> form.pin_field <span class='s'>:pin_confirmation</span> <span class='k'>%&gt;</span>
 <span class='k'>&lt;%=</span> form.phone_field <span class='s'>:phone</span> <span class='k'>%&gt;</span>
@@ -783,13 +782,13 @@ footer {
     <section id='combobox'>
       <div class='panel'>
         <h2>Combobox</h2>
-        <p>A <code>&lt;select&gt;</code> drawn as a searchable menu, which stays the one thing the form submits. Its <code>:prompt</code> is what the toggle says before anything is picked; every other argument is the select's, and <code>multiple:</code> gives each row a check.</p>
+        <p>A long <code>&lt;select&gt;</code> becomes a searchable menu — and stays a select, so the form submits exactly as before.</p>
         <div class='split'>
           <div>
 <pre><code><span class='k'>&lt;%=</span> form.combobox <span class='s'>:county</span>, counties,
       { prompt: <span class='s'>'Pick a county'</span> },
       multiple: <span class='k'>true</span> <span class='k'>%&gt;</span></code></pre>
-            <p style='margin-top:1rem;font-size:0.95rem'>The same thing by hand is a select carrying <code>data-controller='combobox'</code> and nothing else in the markup.</p>
+            
           </div>
           <div class='demo'>
             <p class='demo-label'>What it draws</p>
@@ -809,7 +808,7 @@ footer {
     <section id='pin'>
       <div class='panel'>
         <h2>The 6-digit code</h2>
-        <p>One real field rendered by Bootstrap as six slots: digits only, exactly six, and <code>autocomplete='one-time-code'</code> so a phone offers the code from the text that brought it. A pasted or autofilled code is a whole one and sends itself; a typed one waits, since the sixth digit may be a typo.</p>
+        <p>The six slots a one-time code is typed into, drawn from one real field — so a phone can offer the code straight from the text that brought it.</p>
         <div class='split'>
           <div>
 <pre><code><span class='k'>&lt;%=</span> form.pin_field <span class='s'>:pin_confirmation</span>,
@@ -830,7 +829,7 @@ footer {
     <section id='phone'>
       <div class='panel'>
         <h2>Phone numbers</h2>
-        <p>A North American number reads <code>555-555-5555</code>, decided in the browser and nowhere in Ruby. The server hands over ten digits; the controller formats a cell's text and a field's value on connect, keeps the separators as it is typed, and gives the field <code>pattern</code>, <code>placeholder</code>, <code>title</code> and <code>inputmode</code> where the markup left them blank.</p>
+        <p>A number that formats itself as it is typed and stores as ten bare digits, so no page has to agree on how to write one.</p>
         <div class='split'>
           <div>
 <pre><code><span class='k'>&lt;%=</span> form.phone_field <span class='s'>:phone</span> <span class='k'>%&gt;</span></code></pre>
@@ -847,7 +846,7 @@ footer {
     <section id='dialog'>
       <div class='panel'>
         <h2>Dialogs</h2>
-        <p>A link and the dialog it opens: headed, with an X, holding the block, and closed by an <em>Okay</em> too — <code>okay:</code> words it otherwise, <code>okay: false</code> leaves it out. The two share an id made from the link's own words, so a page invents none. The browser's own element brings the backdrop, the focus trap and Esc; nothing is scripted.</p>
+        <p>A link and the dialog it opens, with the backdrop, the focus trap and Esc that the browser's own element brings. Nothing is scripted, and no page invents an id.</p>
         <div class='split'>
           <div>
 <pre><code><span class='k'>&lt;%=</span> dialog <span class='s'>'I’m not on Google Business'</span>,
@@ -872,11 +871,11 @@ footer {
     <section id='toasts'>
       <div class='panel'>
         <h2>Toasts</h2>
-        <p>What the flash says, as a fixed stack at the bottom right: green for a <code>notice</code>, red for an <code>alert</code>, the primary for any other key. Visible at first paint so a message stands before any script runs, and <code>data-turbo-temporary</code> so it never replays from a Back.</p>
+        <p>The flash, as toasts at the bottom right. They stand before any script runs and leave on their own.</p>
         <div class='split'>
           <div>
 <pre><code><span class='k'>&lt;%=</span> notices <span class='k'>%&gt;</span></code></pre>
-            <p style='margin-top:1rem;font-size:0.95rem'>The hide is two seconds, held while a reader hovers or focuses a toast, with an X for whoever will not wait. Only words are shown: a value in the flash that is not a string is another part of the host's data and is passed over.</p>
+            
           </div>
           <div class='demo'>
             <p class='demo-label'>What it draws</p>
@@ -891,7 +890,7 @@ footer {
     <section id='chat'>
       <div class='panel'>
         <h2>Chat</h2>
-        <p>A thread of messages, newest at the foot, and — where <code>url</code> is given — the field that posts the next one there, suggesting <code>hints</code> one at a time. Any object answering <code>side</code>, <code>text</code>, <code>sender</code>, <code>at</code>, <code>delivery</code> and <code>cost</code> is a message; <code>Bh::Message</code> is for a host that has the facts and no model to hang them on.</p>
+        <p>A thread of bubbles with a field under it, drawn from anything that can say who spoke, when, and whether it arrived.</p>
         <div class='split'>
           <div>
 <pre><code><span class='k'>&lt;%=</span> chat_with url: questions_path,
@@ -915,7 +914,7 @@ footer {
     <section id='flow'>
       <div class='panel'>
         <h2>Flow</h2>
-        <p>The page of a signup flow: <code>header</code> over the title and line the view set in <code>content_for</code>, one card as wide as <code>:width</code> says, and the pieces of <code>footer</code> under it joined by a middot. Every other option is an attribute of the column, which is where a host names the controller that paints what the page stands on.</p>
+        <p>The page a signup flow lives on — a header, a title, one card, a footer — so every step of one looks like the last.</p>
         <div class='split'>
           <div>
 <pre><code><span class='k'>&lt;%=</span> flow header: logo,
@@ -941,7 +940,7 @@ footer {
     <section id='palettes'>
       <div class='panel'>
         <h2>The palettes</h2>
-        <p>Nine of them, served at <code>/bh/theme/&lt;name&gt;.css</code> and linked one at a time after the stylesheet. Each restates all thirteen steps of every Bootstrap family it repaints, plus <code>--bs-white</code>, <code>--bs-black</code> and the three text tones. Every accent clears 3:1 against its label and every text tone 4:1, in both modes.</p>
+        <p>Nine of them, linked one at a time after the stylesheet. Each repaints Bootstrap's own families, and every one of them is legible in both light and dark.</p>
         <ul class='chips' style='justify-content: center'>
           <li><span class='gum' style='background:#8899aa'></span> <code>bootstrap</code></li>
           <li><span class='gum' style='background:#575279'></span> <code>dawn</code></li>
@@ -955,13 +954,12 @@ footer {
         </ul>
         <a class='ref' href='https://github.com/claudiob/bh/tree/master/app/stylesheets/theme'>Reference&nbsp;&rarr;</a>
         <h3>Swapping one for another</h3>
-        <p>The <code>scheme</code> controller does it, and the choice belongs to the reader rather than to the app, so it is kept in their browser.</p>
+        <p>The <code>scheme</code> controller does it, and remembers what the reader picked.</p>
 <pre><code><span class='k'>&lt;button</span> type=<span class='s'>'button'</span> data-controller=<span class='s'>'scheme'</span> data-action=<span class='s'>'scheme#rotate'</span>
         data-scheme-themes-value=<span class='s'>'["bootstrap","nord","dracula"]'</span>
         data-scheme-path-value=<span class='s'>'/bh/theme'</span> data-scheme-storage-value=<span class='s'>'scheme'</span><span class='k'>&gt;</span>
   Another palette
 <span class='k'>&lt;/button&gt;</span></code></pre>
-        <p style='margin-top:1rem'>A click moves to another palette and into the mode it is not in. Put the stored choice back before the first paint from the layout's own script: a controller connects far too late for that, and the page would otherwise flash the palette the server chose.</p>
       </div>
     </section>
 
