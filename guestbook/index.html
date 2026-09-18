@@ -93,6 +93,8 @@ h1 {
 .entry p { margin: 0 0 0.5rem; font-size: 1.05rem; overflow-wrap: anywhere; white-space: pre-wrap; }
 .entry footer { font-size: 0.85rem; font-weight: 700; color: var(--ink-soft); display: flex; flex-wrap: wrap; gap: 0.5rem; align-items: center; }
 .entry footer a { display: inline-flex; border-radius: 50%; }
+/* Out at the end of the line, away from the date and the name it follows. */
+.entry footer .whence { margin-left: auto; border-radius: 0.4rem; white-space: nowrap; }
 .entry img { width: 1.4rem; height: 1.4rem; border-radius: 50%; display: block; }
 .empty, .broke { text-align: center; font-weight: 600; list-style: none; padding: 1.5rem; }
 .btn {
@@ -236,10 +238,24 @@ h1 {
       foot.appendChild(portrait)
     }
 
+    var shown = name || (d.user && d.user.login) || 'someone'
     var who = document.createElement('span')
-    who.textContent = name || (d.user && d.user.login) || 'someone'
+    who.textContent = shown
     if (name && d.user && d.user.login) { who.title = '@' + d.user.login }
     foot.appendChild(who)
+
+    if (d.html_url) {
+      // Where the message actually lives: its writer can edit it there, which is the only
+      // thing anybody but the owner of the repository can do to a discussion.
+      var whence = document.createElement('a')
+      whence.className = 'whence'
+      whence.href = d.html_url
+      whence.rel = 'noopener'
+      whence.textContent = 'on GitHub →'
+      // A page of links all reading the same is a page a screen reader cannot navigate.
+      whence.setAttribute('aria-label', shown + '’s message on GitHub')
+      foot.appendChild(whence)
+    }
     li.appendChild(p)
     li.appendChild(foot)
     return li
