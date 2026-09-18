@@ -411,9 +411,17 @@ dl.defs dd { margin: 0.15rem 0 0; color: var(--ink-soft); }
 
 /* ---------- the Earl's guestbook ---------- */
 
-/* Found the code: every wand on the page goes at it, and the one in the hero wakes up. */
-.frenzy { --wave-time: 0.3s; }
+/* Found the code: three hard shakes and then he stops, which is the animation's own count
+   rather than anything the script has to time. The modal opens on the third. */
+@keyframes frenzy {
+  0%, 100% { transform: rotate(0deg); }
+  22% { transform: rotate(-16deg); }
+  48% { transform: rotate(13deg); }
+  74% { transform: rotate(-8deg); }
+}
+.frenzy { --wave-name: frenzy; --wave-time: 0.3s; --wave-count: 3; }
 .frenzy .earl, .frenzy .understudy { --wave: running; }
+@media (prefers-reduced-motion: reduce) { .frenzy { --wave-count: 1; } }
 
 .bubble {
   border: 0; padding: 0; max-width: min(30rem, 100% - 2rem);
@@ -435,8 +443,17 @@ dl.defs dd { margin: 0.15rem 0 0; color: var(--ink-soft); }
   border: 1.15rem solid transparent; border-top-color: var(--card-solid); border-bottom: 0;
 }
 .bubble h2 { font-size: 1.5rem; font-weight: 800; margin: 0 0 0.9rem; }
+.named { display: block; font-weight: 800; font-size: 0.92rem; margin: 0 0 0.3rem; }
+.named + textarea, .named + .who { margin-bottom: 0; }
+.who + .named { margin-top: 0.9rem; }
+.bubble .who {
+  width: 100%; min-height: 48px;
+  border: 2px solid var(--card-edge); border-radius: 0.9rem;
+  background: var(--card); color: var(--ink);
+  font: inherit; font-weight: 600; font-size: 1.02rem; padding: 0 0.9rem;
+}
 .bubble textarea {
-  width: 100%; min-height: 8rem; resize: vertical;
+  width: 100%; min-height: 7rem; resize: vertical;
   border: 2px solid var(--card-edge); border-radius: 1rem;
   background: var(--card); color: var(--ink);
   font: inherit; font-weight: 600; font-size: 1.02rem; padding: 0.8rem 0.9rem;
@@ -536,7 +553,7 @@ footer {
     <circle cx='142' cy='256' r='7' fill='#FF2E96'/>
     <circle cx='142' cy='284' r='6' fill='#2FD3CB'/>
     <circle cx='142' cy='310' r='5' fill='#FFE23D'/>
-    <g style='transform-box: view-box; transform-origin: 182px 228px; animation: wave var(--wave-time, 4.5s) ease-in-out infinite; animation-play-state: var(--wave, paused);'>
+    <g style='transform-box: view-box; transform-origin: 182px 228px; animation: var(--wave-name, wave) var(--wave-time, 4.5s) ease-in-out var(--wave-count, infinite); animation-play-state: var(--wave, paused);'>
       <path d='M180 228 Q222 216 230 156' stroke='#FFFFFF' stroke-width='20' fill='none' stroke-linecap='round'/>
       <rect x='218' y='88' width='10' height='70' rx='5' transform='rotate(12 223 123)' fill='#4A0A2C'/>
       <circle cx='230' cy='82' r='9' fill='#FFE23D'/>
@@ -933,14 +950,16 @@ rails s</code></pre>
 <dialog class='bubble' id='bubble' aria-labelledby='bubble-title'>
   <form class='bubble-in' method='dialog' id='bubble-form'>
     <h2 id='bubble-title'>Your message for the Earl</h2>
-    <label class='vh' for='say'>Your message for the Earl</label>
+    <label class='named' for='who'>Your name</label>
+    <input class='who' id='who' type='text' maxlength='40' placeholder='Humble visitor' autocomplete='name'>
+    <label class='named' for='say'>Your message</label>
     <textarea id='say' maxlength='200' placeholder='Your hat is so sharp 💖' required></textarea>
     <span class='tally' id='tally' aria-live='polite'>200</span>
     <div class='bubble-ways'>
       <button type='button' class='never' id='never'>Not now</button>
       <button type='submit' class='send'>Send</button>
     </div>
-    <small>Sending opens GitHub, where the message is posted as a discussion under your own name. That is what lets the guestbook be everyone's without this page holding a secret.</small>
+    <small>Sends to a GitHub discussion with your GitHub handle</small>
   </form>
 </dialog>
 
@@ -1282,9 +1301,13 @@ rails s</code></pre>
     e.preventDefault()
     var said = say.value.trim()
     if (!said) { return }
+    var who = document.getElementById('who').value.trim()
     var title = said.length > 60 ? said.slice(0, 57) + '…' : said
+    // Signed on its own last line, which is how the book tells a given name from the
+    // GitHub one it was posted under.
+    var body = who ? said + '\n\n— ' + who : said
     var where = 'https://github.com/claudiob/bh/discussions/new?category=general' +
-      '&title=' + encodeURIComponent(title) + '&body=' + encodeURIComponent(said)
+      '&title=' + encodeURIComponent(title) + '&body=' + encodeURIComponent(body)
     window.open(where, '_blank', 'noopener')
     bubble.close()
     window.location.href = 'guestbook/?thanks'

@@ -201,8 +201,13 @@ h1 {
     var li = document.createElement('li')
     li.className = 'entry'
     var p = document.createElement('p')
-    // Every word here was written by somebody else, so it goes in as text and never as markup.
-    p.textContent = (d.body && d.body.trim()) || d.title
+    // A name given in the bubble is signed on the body's own last line, so it is lifted back
+    // out and shown as the name. Every word was written by somebody else, so all of it goes
+    // in as text and never as markup.
+    var said = ((d.body && d.body.trim()) || d.title || '')
+    var signed = said.match(/^([\s\S]*?)\n+—[ \t]*(.+)$/)
+    var name = signed && signed[2].trim()
+    p.textContent = signed ? signed[1].trim() : said
     var foot = document.createElement('footer')
     if (d.user && d.user.avatar_url) {
       var img = document.createElement('img')
@@ -212,7 +217,8 @@ h1 {
       foot.appendChild(img)
     }
     var who = document.createElement('span')
-    who.textContent = (d.user && d.user.login) || 'someone'
+    who.textContent = name || (d.user && d.user.login) || 'someone'
+    if (name && d.user && d.user.login) { who.title = '@' + d.user.login }
     var dot = document.createElement('span')
     dot.textContent = '·'
     var at = document.createElement('time')
