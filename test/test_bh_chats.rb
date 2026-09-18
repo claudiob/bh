@@ -26,6 +26,33 @@ class TestBhChats < IntegrationCase
     refute_includes body, '<small class="chat-aside chat-aside-out"></small>'
   end
 
+  # A picture rides in the bubble under the words, opening full size in a tab of its own:
+  # what fits beside words is rarely what somebody wants to look at. A message carrying
+  # pictures and nothing else is a message all the same, rather than one being typed.
+  def test_a_message_carries_its_pictures_in_the_bubble_under_its_words
+    visit '/'
+
+    photo = '<a href="/meter.png" target="_blank" rel="noopener">' \
+            '<img src="/meter.png" alt="Photo" class="chat-photo" loading="lazy"></a>'
+
+    assert_includes body, %(<p class="chat-bubble chat-out">Here is the meter\n#{photo}</p>)
+    # Two of them in one bubble, with no words over either -- pictures alone are a
+    # message, not a message still being typed.
+    assert_includes body, '<p class="chat-bubble chat-in"><a href="/reading.png"'
+    assert_includes body, '<img src="/dial.png" alt="Photo" class="chat-photo" loading="lazy">'
+  end
+
+  # What the thread is about stands over the whole of it rather than in it: nobody said
+  # this, and a bubble would claim somebody had.
+  def test_a_note_stands_over_the_thread_rather_than_in_it
+    visit '/'
+
+    assert_includes body, '<div class="chat-thread" data-controller="thread">' \
+                          '<p class="chat-note">About the March invoice</p>'
+    # And a thread with nothing to say about itself opens straight onto its messages.
+    refute_includes body, '<p class="chat-note"></p>'
+  end
+
   def test_the_field_under_a_thread_posts_the_next_question_and_suggests_what_to_ask
     visit '/'
 

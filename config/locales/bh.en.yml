@@ -8,6 +8,7 @@ en:
     more: '%{first} + %{count} more'
     no_results: Nothing matches that
     okay: Okay
+    photo: Photo
     search: Search
     send: Send
     typing: Typing

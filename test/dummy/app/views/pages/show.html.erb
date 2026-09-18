@@ -33,7 +33,10 @@
         Bh::Message.new(side: :left, text: tag.span('$12,400', class: 'fs-4'), sender: 'Claude', at:,
                         cost: 0.0123),
         Bh::Message.new(side: :right, text: 'And the month before?', delivery: 'failed'),
+        Bh::Message.new(side: :right, text: 'Here is the meter', photos: ['/meter.png'],
+                        delivery: :delivered),
+        Bh::Message.new(side: :left, photos: ['/reading.png', '/dial.png']),
         Bh::Message.new(side: :left),
-      ] %>
+      ], note: 'About the March invoice' %>
 
 <%= chat_with url: '/questions', messages: [Bh::Message.new(side: :right, text: 'Read only')] %>

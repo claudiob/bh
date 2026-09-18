@@ -7,6 +7,33 @@
    overflows pushes its first message clean out of the top with no way to scroll back. */
 .chat > :first-child { margin-block-start: auto }
 
+/* What the whole thread is about, or the other way to reach whoever is on the far end of
+   it: said over the conversation rather than in it, quiet and in the page's own words,
+   because nobody in the conversation said it. It holds the top while the thread scrolls
+   under it, which is why it carries the page's background and not a band of its own: a
+   tint here would read as somebody's turn, and bubbles would show through without one. */
+.chat-note {
+  position: sticky;
+  inset-block-start: 0;
+  z-index: 1;
+  background-color: var(--bs-body-bg);
+  font-size: var(--bs-font-size-sm);
+  color: var(--bs-fg-2);
+  margin: 0;
+  padding-block: 0.25rem 0.75rem;
+}
+
+/* A picture a message carries, under its words and no wider than the bubble holding it. */
+.chat-photo {
+  display: block;
+  max-width: 100%;
+  height: auto;
+  border-radius: 0.5rem;
+  margin-block-start: 0.5rem;
+}
+/* The first thing in a bubble has the bubble's own padding over it already. */
+.chat-bubble > a:first-child .chat-photo { margin-block-start: 0 }
+
 /* Who said it and when, small, over the bubble it belongs to and on its side. */
 .chat-aside { font-size: var(--bs-font-size-sm); color: var(--bs-fg-2); margin: 0 0.75rem }
 .chat-aside-out { align-self: flex-end; margin-inline-end: 1.25rem }
