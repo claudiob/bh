@@ -444,7 +444,9 @@ footer {
   border-top: 1px solid var(--card-edge);
   background: var(--card);
   backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px);
-  padding: 2.5rem 1.25rem 3rem;
+  /* Trimmed so that at the very bottom of the page the two links sit on the same line as
+     the middle of the wand button, rather than below it. */
+  padding: 2.5rem 1.25rem 1.75rem;
 }
 .foot-in { width: min(72rem, 100%); margin-inline: auto; display: flex; flex-wrap: wrap; gap: 1.5rem; align-items: center; }
 .foot-in img { width: 3rem; height: 3rem; border-radius: 0.8rem; }
@@ -787,8 +789,8 @@ footer {
             <p class='demo-label'>What it draws</p>
             <div class='f-flow'>
               <p style='margin:0;font-weight:800;color:#10314F'>▲ your mark</p>
-              <p style='margin:0;font-weight:800;font-size:1.05rem;color:#10314F'>Verify your business</p>
-              <div class='f-flow-card'>one card, as wide as you said</div>
+              <p style='margin:0;font-weight:800;font-size:1.05rem;color:#10314F'>Your business</p>
+              <div class='f-flow-card'>your message</div>
               <p style='margin:0;font-size:0.8rem;color:#10314F'>Disconnect · Sign out</p>
             </div>
           </div>
@@ -1083,8 +1085,6 @@ rails s</code></pre>
   var SMALL = 26   // the few pixels of hat he starts as
   var TALL = 430   // and the most of him there is, however deep the window
   var RISE = 620   // how far the page travels while he grows to full height
-  var FOOT = 460   // and how far, on the stage a phone gives him under the last section
-  var LEAD = 300   // which starts while that section is still this far below the fold
   var still = window.matchMedia('(prefers-reduced-motion: reduce)')
 
   // Called straight off the scroll rather than through a frame request: it reads one
@@ -1093,17 +1093,26 @@ rails s</code></pre>
     // How far the hero's Earl has travelled past the top of the window, and — for the stage
     // a phone gets — how far the last section has risen past the foot of it.
     var gone = -hero.getBoundingClientRect().bottom
-    var past = window.innerHeight - last.getBoundingClientRect().bottom + LEAD
 
     stages.forEach(function (stage) {
       var floor = Math.min(stage.pocket.clientHeight - GAP, TALL)
-      var run = stage.foot ? past : gone
+      var run = gone
+      var span = RISE
+      if (stage.foot) {
+        // Measured off his own stage rather than off the page: he starts the moment its top
+        // crosses the foot of the window and is full by the time the footer is under him, so
+        // the growing happens where it can be watched. Reading it off a section further up
+        // left him all but grown before he had scrolled into view at all.
+        var box = stage.pocket.getBoundingClientRect()
+        run = window.innerHeight - box.top
+        span = box.height + 90
+      }
       if (floor < ROOM || run <= 0 || getComputedStyle(stage.pocket).display === 'none') {
         stage.art.style.height = '0px'
         stage.pocket.style.opacity = '0'
         return
       }
-      var grown = still.matches ? 1 : Math.min(run / (stage.foot ? FOOT : RISE), 1)
+      var grown = still.matches ? 1 : Math.min(run / span, 1)
       stage.art.style.height = (SMALL + grown * (floor - SMALL)).toFixed(1) + 'px'
       stage.pocket.style.opacity = Math.min(run / 140, 1).toFixed(3)
     })
