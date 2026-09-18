@@ -6,6 +6,10 @@ For more information about changelogs, check
 [Keep a Changelog](http://keepachangelog.com) and
 [Vandamme](http://tech-angels.github.io/vandamme).
 
+## 6.1.5 - 2026-06-29
+
+* [FEATURE] Point to main boostrap v6 CSS
+
 ## 6.1.4 - 2026-06-24
 
 * [FEATURE] Include Boostrap Icons CSS
