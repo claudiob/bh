@@ -287,7 +287,6 @@ p code, li code, dd code, td code {
   display: flex; align-items: center; padding: 0 0.85rem; font: inherit; font-weight: 600;
   width: 100%;
 }
-.f-control.dim { color: var(--ink-soft); }
 .f-pill {
   min-height: 46px; border-radius: 999px; border: 0;
   background: var(--accent-bright); color: #FFFFFF;
@@ -348,7 +347,6 @@ p code, li code, dd code, td code {
 }
 .f-flow-card { background: rgba(255, 255, 255, 0.92); border-radius: 0.8rem; padding: 0.8rem; width: 100%; color: #10314F; font-weight: 700; }
 
-.grid-fields { display: grid; grid-template-columns: repeat(auto-fit, minmax(9rem, 1fr)); gap: 0.6rem; }
 .chips { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 1rem; padding: 0; list-style: none; }
 .chips li {
   background: var(--chip); color: var(--chip-ink); border-radius: 999px;
@@ -663,7 +661,6 @@ footer {
     <ul>
       <li><a href='#install'><span class='gum' style='background:#FF2E96'></span><span class='full'>How to install</span><span class='brief'>Install</span></a></li>
       <li><a href='#form'><span class='gum' style='background:#FF6FC6'></span><span class='full'>The form</span><span class='brief'>Form</span></a></li>
-      <li><a href='#fields'><span class='gum' style='background:#E86FFF'></span><span class='full'>The missing fields</span><span class='brief'>Fields</span></a></li>
       <li><a href='#combobox'><span class='gum' style='background:#9D6BFF'></span><span class='full'>Combobox</span><span class='brief'>Combobox</span></a></li>
       <li><a href='#pin'><span class='gum' style='background:#6B8BFF'></span><span class='full'>The 6-digit code</span><span class='brief'>OTP</span></a></li>
       <li><a href='#phone'><span class='gum' style='background:#2FD3CB'></span><span class='full'>Phone numbers</span><span class='brief'>Phone</span></a></li>
@@ -724,7 +721,7 @@ footer {
         <h2>How to install</h2>
         <p>Bh is a Rails engine. It brings Bootstrap&nbsp;6 with it, so nothing else goes in the Gemfile.</p>
 <pre><code><span class='c'># Gemfile</span>
-<span class='k'>gem</span> <span class='s'>'bh'</span>, <span class='s'>'~&gt; 6.2.0'</span></code></pre>
+<span class='k'>gem</span> <span class='s'>'bh'</span>, <span class='s'>'~&gt; 6.3.0'</span></code></pre>
         <p style='margin-top:1rem'>Rails&nbsp;8.1 and Ruby&nbsp;3.2 are the minimum.</p>
 
         <h3>In the head</h3>
@@ -764,18 +761,6 @@ footer {
           </div>
         </div>
         <a class='ref' href='https://rubydoc.info/gems/bh/Bh/FormBuilder'>Reference&nbsp;&rarr;</a>
-      </div>
-    </section>
-
-    <section id='fields'>
-      <div class='panel'>
-        <h2>The missing fields</h2>
-        <p>The fields a Bootstrap page keeps needing and Rails has no method for.</p>
-<pre><code><span class='k'>&lt;%=</span> form.combobox <span class='s'>:county</span>, counties <span class='k'>%&gt;</span>
-<span class='k'>&lt;%=</span> form.pin_field <span class='s'>:pin_confirmation</span> <span class='k'>%&gt;</span>
-<span class='k'>&lt;%=</span> form.phone_field <span class='s'>:phone</span> <span class='k'>%&gt;</span>
-<span class='k'>&lt;%=</span> form.check <span class='s'>:agreed</span>, <span class='s'>'I agree to the terms'</span> <span class='k'>%&gt;</span></code></pre>
-        <a class='ref' href='https://rubydoc.info/gems/bh/Bh/FormBuilder/Controls'>Reference&nbsp;&rarr;</a>
       </div>
     </section>
 
