@@ -635,7 +635,7 @@ footer {
     <div>
       <p class='kicker'><span aria-hidden='true'>✻</span> The Earl of Bubblehum presents <span aria-hidden='true'>✻</span></p>
       <h1 class='wordmark'>Bootstrap<br>Helpers</h1>
-      <p class='lede'>Bootstrap&nbsp;6 in a Rails app, with the markup already written. A form builder that dresses every field, the components Bootstrap ships behavior for and no markup, and the one stylesheet and script that carry them.</p>
+      <p class='lede'>Include Bootstrap components in your Ruby apps with short, documented, tested helpers.</p>
       <div class='cta'>
         <a class='btn btn-solid' href='#install'>gem install bh</a>
         <a class='btn btn-ghost' href='https://github.com/claudiob/bh'>Source</a>
@@ -688,6 +688,36 @@ footer {
   </nav>
 
   <main>
+
+    <section id='overview'>
+      <div class='panel'>
+        <h2>Overview</h2>
+        <p>Combine the beauty of Bootstrap's design and the expressiveness of Ruby, and get both for the fewest keystrokes.</p>
+        <p>Bootstrap is a great framework, but it asks for <strong>many lines of HTML</strong> even for simple components. A dialog that opens from a link, closes on its X, on its button, on Esc and on the backdrop, and tells a screen reader what it is called, is all of this:</p>
+<pre><code><span class='k'>&lt;a</span> class=<span class='s'>'small'</span> data-bs-toggle=<span class='s'>'dialog'</span>
+   data-bs-target=<span class='s'>'#not-on-google'</span> href=<span class='s'>'#not-on-google'</span><span class='k'>&gt;</span>
+  I’m not on Google Business
+<span class='k'>&lt;/a&gt;</span>
+<span class='k'>&lt;dialog</span> class=<span class='s'>'dialog dialog-slide-down'</span> id=<span class='s'>'not-on-google'</span>
+        aria-labelledby=<span class='s'>'not-on-google-title'</span><span class='k'>&gt;</span>
+  <span class='k'>&lt;div</span> class=<span class='s'>'dialog-header'</span><span class='k'>&gt;</span>
+    <span class='k'>&lt;h2</span> class=<span class='s'>'dialog-title'</span> id=<span class='s'>'not-on-google-title'</span><span class='k'>&gt;</span>Not a problem<span class='k'>&lt;/h2&gt;</span>
+    <span class='k'>&lt;button</span> type=<span class='s'>'button'</span> class=<span class='s'>'btn-close ms-auto'</span>
+            data-bs-dismiss=<span class='s'>'dialog'</span> aria-label=<span class='s'>'Close'</span><span class='k'>&gt;&lt;/button&gt;</span>
+  <span class='k'>&lt;/div&gt;</span>
+  <span class='k'>&lt;div</span> class=<span class='s'>'dialog-body'</span><span class='k'>&gt;</span>We will look your business up ourselves.<span class='k'>&lt;/div&gt;</span>
+  <span class='k'>&lt;div</span> class=<span class='s'>'dialog-footer'</span><span class='k'>&gt;</span>
+    <span class='k'>&lt;button</span> type=<span class='s'>'button'</span> class=<span class='s'>'btn btn-solid theme-secondary'</span>
+            data-bs-dismiss=<span class='s'>'dialog'</span><span class='k'>&gt;</span>Okay<span class='k'>&lt;/button&gt;</span>
+  <span class='k'>&lt;/div&gt;</span>
+<span class='k'>&lt;/dialog&gt;</span></code></pre>
+        <p style='margin-top:1.2rem'>Writing that for every dialog in a site is cumbersome, repetitive and easy to get subtly wrong — a mismatched id, a missing <code>aria-labelledby</code>, a close button with no name. With Bh it is <strong>three lines</strong>, and the id is made from the link's own words:</p>
+<pre><code><span class='k'>&lt;%=</span> dialog <span class='s'>'I’m not on Google Business'</span>, title: <span class='s'>'Not a problem'</span> <span class='k'>do %&gt;</span>
+  We will look your business up ourselves.
+<span class='k'>&lt;% end %&gt;</span></code></pre>
+        <p style='margin-top:1.2rem'>Every component below reads the same way: one helper, the facts it draws, and no classes in the view. Nothing is overwritten either, so a page can mix these with the markup it already has.</p>
+      </div>
+    </section>
 
     <section id='install'>
       <div class='panel'>
