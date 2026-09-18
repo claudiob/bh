@@ -545,12 +545,6 @@ footer {
 <pre><code><span class='k'>&lt;%=</span> bh_head_tags <span class='k'>%&gt;</span></code></pre>
         <p style='margin-top:1rem'>Bh links no icon font of its own: which glyphs a page draws is the host's business, and a gem reaching for somebody else's CDN unasked is not. A combobox's chevron and a bookmark's star are Bootstrap Icons, so a page that wants them says where they come from.</p>
 
-        <h3>From npm</h3>
-        <p>For a host that bundles the sources itself rather than serving the built tree. The package is <code>bh6</code>, since <code>bh</code> on npm is somebody else's.</p>
-<pre><code>npm install bh6
-
-<span class='c'>// esbuild: Bootstrap 6 is not on npm, so its bundle ships inside the package</span>
-alias: { bootstrap: <span class='s'>'bh6/bootstrap'</span> }</code></pre>
       </div>
     </section>
 
