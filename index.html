@@ -166,6 +166,12 @@ p:last-child { margin-bottom: 0; }
 .btn-ghost:active { box-shadow: 0 2px 0 var(--btn-edge-ghost); }
 
 .earl { width: clamp(11rem, 26vw, 19rem); height: auto; display: block; }
+/* The star on his hat is the one thing on him you can press. It is drawn over the one the
+   symbol carries, so it is the same star, and it leans when you reach for it. */
+.star { cursor: pointer; }
+.star path { transform-box: view-box; transform-origin: 156px 30px; transition: transform 0.18s ease; }
+.star:hover path, .star:focus-visible path { transform: scale(1.22) rotate(-12deg); }
+@media (prefers-reduced-motion: reduce) { .star path { transition: none; } }
 @media (width < 860px) {
   .hero-in { grid-template-columns: 1fr; }
   .earl { width: 13rem; margin-inline: auto; }
@@ -631,6 +637,11 @@ footer {
     <svg class='earl' viewBox='0 0 280 380' role='img' aria-labelledby='earl-title'>
       <title id='earl-title'>The Earl of Bubblehum, a magician in a tall hat with a gumball beard, raising a wand.</title>
       <use href='#earl'/>
+      <a class='star' id='star' href='https://github.com/claudiob/bh' target='_blank' rel='noopener'
+         aria-label='Star bh on GitHub'>
+        <title id='star-title'>Star bh on GitHub</title>
+        <path d='M158 4 L164 22 L183 24 L168 37 L174 56 L156 44 L139 55 L145 36 L130 23 L149 21 Z' fill='#FFE23D'/>
+      </a>
     </svg>
   </div>
 </header>
@@ -1196,6 +1207,27 @@ rails s</code></pre>
     }, { rootMargin: '0px 0px -72% 0px' })
     seen.forEach(function (el) { if (el) { spy.observe(el) } })
   }
+}());
+
+// The star on the Earl's hat leads to the repository. It cannot do the starring itself —
+// that wants a token, and a page anybody can read is the last place to keep one — so it
+// says how many the repo has and hands the visitor to GitHub, where the button is real.
+(function () {
+  'use strict'
+
+  var star = document.getElementById('star')
+  var title = document.getElementById('star-title')
+  if (!star || !title) { return }
+
+  fetch('https://api.github.com/repos/claudiob/bh', { headers: { Accept: 'application/vnd.github+json' } })
+    .then(function (r) { return r.ok ? r.json() : null })
+    .then(function (repo) {
+      if (!repo || typeof repo.stargazers_count !== 'number') { return }
+      var said = 'Star bh on GitHub — ' + repo.stargazers_count.toLocaleString() + ' so far'
+      title.textContent = said
+      star.setAttribute('aria-label', said)
+    })
+    .catch(function () { /* The label it was born with says enough. */ })
 }());
 
 // The understudy. Once the Earl in the hero has gone off the top, a second of him stands
