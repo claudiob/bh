@@ -46,7 +46,15 @@ a { color: var(--accent); }
 /* The Earl and the rainbow his wand throws are one drawing, so the arc can start exactly at
    the wand's tip however wide the page is. */
 .stage { position: relative; }
-.stage svg { display: block; width: 100%; height: auto; }
+/* He and the rainbow are the way back, so the whole drawing is the link. */
+.home { display: block; transition: transform 0.18s ease; }
+.home:hover, .home:focus-visible { transform: translateY(-4px); }
+@media (prefers-reduced-motion: reduce) { .home { transition: none; } .home:hover { transform: none; } }
+.home svg { display: block; width: 100%; height: auto; }
+.vh {
+  position: absolute; width: 1px; height: 1px; margin: -1px; padding: 0;
+  overflow: hidden; clip-path: inset(50%); white-space: nowrap; border: 0;
+}
 .arc { fill: none; stroke-width: 13; stroke-linecap: round; }
 .arc-draw { stroke-dasharray: 1400; stroke-dashoffset: 1400; animation: throw 1.6s 0.3s ease-out forwards; }
 @keyframes throw { to { stroke-dashoffset: 0; } }
@@ -100,7 +108,9 @@ h1 {
 <div class='wrap'>
   <div class='stage'>
     <p class='said' id='said' hidden>Thank you</p>
-    <svg viewBox='0 0 760 346' role='img' aria-labelledby='stage-title'>
+    <a class='home' href='../'>
+      <span class='vh'>Back to Bh</span>
+      <svg viewBox='0 0 760 346' role='img' aria-labelledby='stage-title'>
       <title id='stage-title'>The Earl of Bubblehum throwing a rainbow from his wand over the guestbook</title>
       <defs>
         <linearGradient id='bow' gradientUnits='userSpaceOnUse' x1='191' y1='104' x2='726' y2='300'>
@@ -151,8 +161,9 @@ h1 {
     <path d='M94 152 Q110 30 158 4 Q178 68 182 152 Z' fill='#FF2E96'/>
     <path d='M98 133 Q140 122 180 133 L179 152 Q140 142 96 152 Z' fill='#4A0A2C'/>
     <path d='M158 4 L164 22 L183 24 L168 37 L174 56 L156 44 L139 55 L145 36 L130 23 L149 21 Z' fill='#FFE23D'/>
-      </g>
-    </svg>
+        </g>
+      </svg>
+    </a>
   </div>
 
   <h1>The guestbook</h1>
@@ -162,7 +173,6 @@ h1 {
 
   <div class='ways'>
     <a class='btn' href='https://github.com/claudiob/bh/discussions/new?category=general'>Leave a message</a>
-    <a href='../'>Back to Bh</a>
   </div>
 </div>
 
