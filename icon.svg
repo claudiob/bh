@@ -1,12 +1,13 @@
-<svg xmlns='http://www.w3.org/2000/svg' viewBox='52 -3 176 176' role='img' aria-labelledby='icon-title'>
+<svg xmlns='http://www.w3.org/2000/svg' viewBox='58 3 164 164' role='img' aria-labelledby='icon-title'>
 <title id='icon-title'>The Earl of Bubblehum's hat.</title>
 <!--
   The Earl's hat and nothing else: the brim, the leaning cone and the band, at exactly the
   coordinates they have in the drawing on the page, cropped to them by the viewBox so the
   two cannot drift. The star he wears on it and the face under it are dropped — a 16-pixel
   tab carries one shape, and this is the one. No ground behind it: on a tab it takes the
-  browser's own, and iOS lays a transparent home-screen icon over black, which a pink hat
-  is happy on.
+  browser's own, and iOS lays whatever it is given over its own ground. The box is the
+  hat's own extents and a pixel either side — iOS and the share sheet add margin of
+  their own, and anything left inside the file is margin twice over.
 -->
 <path d='M62 150 Q140 128 218 150 Q216 164 140 166 Q64 164 62 150 Z' fill='#FF2E96'/>
 <path d='M94 152 Q110 30 158 4 Q178 68 182 152 Z' fill='#FF2E96'/>
