@@ -252,9 +252,10 @@ p code, li code, dd code, td code {
   padding: 0.08em 0.4em; border-radius: 0.4rem; font-size: 0.9em; font-weight: 600;
 }
 
-.split { display: grid; grid-template-columns: 1fr 1fr; gap: 1.1rem; margin-top: 1.2rem; }
+/* The code and the picture of what it draws read one under the other, always: side by
+   side, each is half a column wide and the code wraps where nobody would break it. */
+.split { display: grid; grid-template-columns: 1fr; gap: 1.1rem; margin-top: 1.2rem; }
 .split > * { min-width: 0; }
-@media (width < 780px) { .split { grid-template-columns: 1fr; } }
 .demo {
   border: 2px dashed var(--card-edge); border-radius: 1rem;
   padding: 1.1rem; background: var(--card-solid);
@@ -342,6 +343,8 @@ p code, li code, dd code, td code {
   padding: 0.35rem 0.85rem; font-size: 0.9rem; font-weight: 700;
 }
 .chips code { background: transparent; padding: 0; font-size: 0.9em; }
+.chips a { color: inherit; text-decoration: none; }
+.chips li:has(a):hover { background: var(--accent-bright); color: #FFFFFF; }
 
 dl.defs { margin: 1rem 0 0; }
 dl.defs dt { font-weight: 800; margin-top: 0.9rem; }
@@ -623,7 +626,7 @@ footer {
     <ul>
       <li><a href='#install'><span class='gum' style='background:#FF2E96'></span><span class='full'>How to install</span><span class='brief'>Install</span></a></li>
       <li><a href='#form'><span class='gum' style='background:#FF6FC6'></span><span class='full'>The form</span><span class='brief'>Form</span></a></li>
-      <li><a href='#fields'><span class='gum' style='background:#E86FFF'></span><span class='full'>Every field</span><span class='brief'>Fields</span></a></li>
+      <li><a href='#fields'><span class='gum' style='background:#E86FFF'></span><span class='full'>The missing fields</span><span class='brief'>Fields</span></a></li>
       <li><a href='#combobox'><span class='gum' style='background:#9D6BFF'></span><span class='full'>Combobox</span><span class='brief'>Combobox</span></a></li>
       <li><a href='#pin'><span class='gum' style='background:#6B8BFF'></span><span class='full'>The 6-digit code</span><span class='brief'>OTP</span></a></li>
       <li><a href='#phone'><span class='gum' style='background:#2FD3CB'></span><span class='full'>Phone numbers</span><span class='brief'>Phone</span></a></li>
@@ -632,7 +635,7 @@ footer {
       <li><a href='#chat'><span class='gum' style='background:#D8E63C'></span><span class='full'>Chat</span><span class='brief'>Chat</span></a></li>
       <li><a href='#flow'><span class='gum' style='background:#FFE23D'></span><span class='full'>Flow</span><span class='brief'>Flow</span></a></li>
       <li><a href='#palettes'><span class='gum' style='background:#FF9B3D'></span><span class='full'>The palettes</span><span class='brief'>Themes</span></a></li>
-      <li><a href='#controllers'><span class='gum' style='background:#FFB13D'></span><span class='full'>The controllers</span><span class='brief'>Controllers</span></a></li>
+      <li><a href='#controllers'><span class='gum' style='background:#FFB13D'></span><span class='full'>Stimulus</span><span class='brief'>Stimulus</span></a></li>
       <li><a href='#dummy'><span class='gum' style='background:#FF7A3D'></span><span class='full'>Trying it out</span><span class='brief'>Try it</span></a></li>
     </ul>
     <div class='understudy understudy-rail' aria-hidden='true'>
@@ -648,8 +651,7 @@ footer {
         <p>Bh is a Rails engine. It brings Bootstrap&nbsp;6 with it, so nothing else goes in the Gemfile.</p>
 <pre><code><span class='c'># Gemfile</span>
 <span class='k'>gem</span> <span class='s'>'bh'</span>, <span class='s'>'~&gt; 6.2.0'</span></code></pre>
-        <p style='margin-top:1rem'><code>~&gt; 6.2.0</code> stops short of <code>6.3</code>, and that is the pin to hold: until this line settles it breaks on a minor, not on a major. Rails&nbsp;8.1 and Ruby&nbsp;3.2 are the minimum.</p>
-        <div class='note'>6.2.0 breaks everything before it and keeps its major anyway. 6.0 through 6.1.4 were an alpha in everything but the number — Bootstrap&nbsp;3 wrappers with a Bootstrap&nbsp;6 stopgap bolted on, cut while Bootstrap&nbsp;6 was itself pre-release — so there was no settled API to break. Those numbers are taken and cannot be withdrawn, RubyGems keeping anything published over thirty days ago, so this release steps over them.</div>
+        <p style='margin-top:1rem'>Rails&nbsp;8.1 and Ruby&nbsp;3.2 are the minimum.</p>
 
         <h3>In the head</h3>
         <p>With the gem in the bundle an app serves <code>/bh/css/bh.css</code> and <code>/bh/js/bh.js</code> itself. One helper puts both in the head, along with everything Bootstrap and Turbo read.</p>
@@ -694,36 +696,12 @@ footer {
 
     <section id='fields'>
       <div class='panel'>
-        <h2>Every field</h2>
-        <p>A page says which kind of field it wants and nothing about how it looks. Rails hands an undressed control to whatever the builder has no method for, which is how a Bootstrap class ends up written in a view.</p>
-        <div class='split'>
-          <div>
-<pre><code><span class='k'>&lt;%=</span> form.email_field <span class='s'>:email</span> <span class='k'>%&gt;</span>
-<span class='k'>&lt;%=</span> form.number_field <span class='s'>:size</span> <span class='k'>%&gt;</span>
-<span class='k'>&lt;%=</span> form.date_field <span class='s'>:day</span> <span class='k'>%&gt;</span>
-<span class='k'>&lt;%=</span> form.text_area <span class='s'>:notes</span> <span class='k'>%&gt;</span>
-<span class='k'>&lt;%=</span> form.select <span class='s'>:state</span>, states <span class='k'>%&gt;</span>
-<span class='k'>&lt;%=</span> form.check <span class='s'>:agreed</span>, <span class='s'>'I agree'</span> <span class='k'>%&gt;</span></code></pre>
-          </div>
-          <div class='demo'>
-            <p class='demo-label'>What it draws</p>
-            <div class='grid-fields'>
-              <div class='f-control dim'>ada@example.com</div>
-              <div class='f-control dim'>12</div>
-              <div class='f-control dim'>2026-09-18</div>
-              <div class='f-control dim'>California ▾</div>
-            </div>
-            <div class='f-control dim' style='min-height:64px;align-items:flex-start;padding-top:0.6rem'>Notes…</div>
-            <p style='margin:0;font-weight:700;font-size:0.95rem'><span style='color:var(--accent-bright)'>☑</span> I agree</p>
-          </div>
-        </div>
-        <ul class='chips'>
-          <li><code>text_field</code></li><li><code>email_field</code></li><li><code>number_field</code></li>
-          <li><code>password_field</code></li><li><code>search_field</code></li><li><code>url_field</code></li>
-          <li><code>date_field</code></li><li><code>time_field</code></li><li><code>datetime_field</code></li>
-          <li><code>text_area</code></li><li><code>select</code></li><li><code>check_box</code></li>
-          <li><code>radio_button</code></li><li><code>check</code></li>
-        </ul>
+        <h2>The missing fields</h2>
+        <p>Everything Rails already draws, the builder dresses at one size, so a view names the kind of field it wants and no class at all. What it adds are the fields a Bootstrap page keeps needing and Rails has no method for.</p>
+<pre><code><span class='k'>&lt;%=</span> form.combobox <span class='s'>:county</span>, counties <span class='k'>%&gt;</span>
+<span class='k'>&lt;%=</span> form.pin_field <span class='s'>:pin_confirmation</span> <span class='k'>%&gt;</span>
+<span class='k'>&lt;%=</span> form.phone_field <span class='s'>:phone</span> <span class='k'>%&gt;</span>
+<span class='k'>&lt;%=</span> form.check <span class='s'>:agreed</span>, <span class='s'>'I agree to the terms'</span> <span class='k'>%&gt;</span></code></pre>
         <a class='ref' href='https://rubydoc.info/gems/bh/Bh/FormBuilder/Controls'>Reference&nbsp;&rarr;</a>
       </div>
     </section>
@@ -901,7 +879,7 @@ footer {
           <li><span class='gum' style='background:#268bd2'></span> <code>solarized</code></li>
           <li><span class='gum' style='background:#7aa2f7'></span> <code>tokyo_night</code></li>
         </ul>
-        <div class='note'><code>bootstrap</code> declares nothing: upstream's palette comes back by dropping the others' block rather than by writing one. It is named anyway, so a toggle can reach it — a reader who rotates through nine and never finds the one the pages started in has been shown a door with no handle on the inside.</div>
+        <a class='ref' href='https://github.com/claudiob/bh/tree/master/app/stylesheets/theme'>Reference&nbsp;&rarr;</a>
         <h3>Swapping one for another</h3>
         <p>The <code>scheme</code> controller does it, and the choice belongs to the reader rather than to the app, so it is kept in their browser.</p>
 <pre><code><span class='k'>&lt;button</span> type=<span class='s'>'button'</span> data-controller=<span class='s'>'scheme'</span> data-action=<span class='s'>'scheme#rotate'</span>
@@ -915,23 +893,31 @@ footer {
 
     <section id='controllers'>
       <div class='panel'>
-        <h2>The controllers</h2>
-        <p>Twenty-two Stimulus controllers, registered by the bundle under these names, for markup to call by <code>data-controller</code>. Nothing has to be imported or registered by a host.</p>
-        <dl class='defs'>
-          <dt>bookmark</dt><dd>keeps a row and says so before the server does</dd>
-          <dt>combobox</dt><dd>draws the searchable menu above from a plain select</dd>
-          <dt>otp</dt><dd>draws the six slots a code is typed into</dd>
-          <dt>phone</dt><dd>shapes a number as it is typed</dd>
-          <dt>sortable</dt><dd>drags a row of an arranged table into another place</dd>
-          <dt>thread</dt><dd>opens a chat at its newest message and keeps it there</dd>
-          <dt>toast</dt><dd>hides a notice, held while a reader is on it</dd>
-          <dt>scheme</dt><dd>moves a page between palettes</dd>
-        </dl>
+        <h2>Stimulus</h2>
+        <p>Twenty-two controllers for markup to call by <code>data-controller</code>.</p>
         <ul class='chips'>
-          <li><code>clear</code></li><li><code>density</code></li><li><code>deselect</code></li><li><code>limit</code></li>
-          <li><code>map</code></li><li><code>placeholder</code></li><li><code>relative-time</code></li><li><code>require</code></li>
-          <li><code>reveal</code></li><li><code>search</code></li><li><code>shortcuts</code></li><li><code>timezone</code></li>
-          <li><code>tooltip</code></li><li><code>written</code></li>
+          <li><a href='https://github.com/claudiob/bh/blob/master/app/javascript/bh/bookmark_controller.js'><code>bookmark</code></a></li>
+          <li><a href='https://github.com/claudiob/bh/blob/master/app/javascript/bh/clear_controller.js'><code>clear</code></a></li>
+          <li><a href='https://github.com/claudiob/bh/blob/master/app/javascript/bh/combobox_controller.js'><code>combobox</code></a></li>
+          <li><a href='https://github.com/claudiob/bh/blob/master/app/javascript/bh/density_controller.js'><code>density</code></a></li>
+          <li><a href='https://github.com/claudiob/bh/blob/master/app/javascript/bh/deselect_controller.js'><code>deselect</code></a></li>
+          <li><a href='https://github.com/claudiob/bh/blob/master/app/javascript/bh/limit_controller.js'><code>limit</code></a></li>
+          <li><a href='https://github.com/claudiob/bh/blob/master/app/javascript/bh/map_controller.js'><code>map</code></a></li>
+          <li><a href='https://github.com/claudiob/bh/blob/master/app/javascript/bh/otp_controller.js'><code>otp</code></a></li>
+          <li><a href='https://github.com/claudiob/bh/blob/master/app/javascript/bh/phone_controller.js'><code>phone</code></a></li>
+          <li><a href='https://github.com/claudiob/bh/blob/master/app/javascript/bh/placeholder_controller.js'><code>placeholder</code></a></li>
+          <li><a href='https://github.com/claudiob/bh/blob/master/app/javascript/bh/relative_time_controller.js'><code>relative-time</code></a></li>
+          <li><a href='https://github.com/claudiob/bh/blob/master/app/javascript/bh/require_controller.js'><code>require</code></a></li>
+          <li><a href='https://github.com/claudiob/bh/blob/master/app/javascript/bh/reveal_controller.js'><code>reveal</code></a></li>
+          <li><a href='https://github.com/claudiob/bh/blob/master/app/javascript/bh/scheme_controller.js'><code>scheme</code></a></li>
+          <li><a href='https://github.com/claudiob/bh/blob/master/app/javascript/bh/search_controller.js'><code>search</code></a></li>
+          <li><a href='https://github.com/claudiob/bh/blob/master/app/javascript/bh/shortcuts_controller.js'><code>shortcuts</code></a></li>
+          <li><a href='https://github.com/claudiob/bh/blob/master/app/javascript/bh/sortable_controller.js'><code>sortable</code></a></li>
+          <li><a href='https://github.com/claudiob/bh/blob/master/app/javascript/bh/thread_controller.js'><code>thread</code></a></li>
+          <li><a href='https://github.com/claudiob/bh/blob/master/app/javascript/bh/timezone_controller.js'><code>timezone</code></a></li>
+          <li><a href='https://github.com/claudiob/bh/blob/master/app/javascript/bh/toast_controller.js'><code>toast</code></a></li>
+          <li><a href='https://github.com/claudiob/bh/blob/master/app/javascript/bh/tooltip_controller.js'><code>tooltip</code></a></li>
+          <li><a href='https://github.com/claudiob/bh/blob/master/app/javascript/bh/written_controller.js'><code>written</code></a></li>
         </ul>
       </div>
     </section>
