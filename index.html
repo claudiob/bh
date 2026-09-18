@@ -434,6 +434,11 @@ dl.defs dd { margin: 0.15rem 0 0; color: var(--ink-soft); }
      is long enough to need it; the textarea scrolls on its own. */
   overflow: visible;
 }
+/* Room to write in on a desktop. A dialog shrink-wraps its content, so a max-width alone
+   changes nothing — the width has to be asked for. */
+@media (width >= 860px) {
+  .bubble { width: 42rem; max-width: calc(100vw - 4rem); }
+}
 .bubble::backdrop { background: rgba(74, 10, 44, 0.55); backdrop-filter: blur(3px); }
 .bubble-in {
   position: relative;

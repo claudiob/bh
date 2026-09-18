@@ -268,10 +268,14 @@ h1 {
       return r.json()
     })
     .then(function (all) {
-      if (!all.length) { note('Nobody has said anything yet. Be the first.', 'empty'); return }
-      all.sort(function (a, b) { return new Date(b.created_at) - new Date(a.created_at) })
+      // Closing a discussion is how an entry is retired: nobody but the owner of the
+      // repository can delete one, and the endpoint ignores `?state=`, so the book does the
+      // filtering. GitHub caches this answer for a minute, so a close shows up within one.
+      var open = all.filter(function (d) { return d.state !== 'closed' })
+      if (!open.length) { note('Nobody has said anything yet. Be the first.', 'empty'); return }
+      open.sort(function (a, b) { return new Date(b.created_at) - new Date(a.created_at) })
       book.innerHTML = ''
-      all.forEach(function (d) { book.appendChild(entry(d)) })
+      open.forEach(function (d) { book.appendChild(entry(d)) })
     })
     .catch(function (e) {
       note(e.message === 'closed'
