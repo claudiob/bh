@@ -347,6 +347,10 @@ dl.defs { margin: 1rem 0 0; }
 dl.defs dt { font-weight: 800; margin-top: 0.9rem; }
 dl.defs dd { margin: 0.15rem 0 0; color: var(--ink-soft); }
 
+.ref {
+  display: block; text-align: center; margin-top: 1.4rem;
+  font-weight: 800; font-size: 0.95rem;
+}
 .note {
   margin-top: 1.1rem; border-left: 4px solid var(--accent-bright);
   padding: 0.2rem 0 0.2rem 0.9rem; color: var(--ink-soft); font-weight: 600;
@@ -548,6 +552,7 @@ footer {
       <li><a href='#toasts'><span class='gum' style='background:#9DE93F'></span><span class='full'>Toasts</span><span class='brief'>Toasts</span></a></li>
       <li><a href='#chat'><span class='gum' style='background:#D8E63C'></span><span class='full'>Chat</span><span class='brief'>Chat</span></a></li>
       <li><a href='#flow'><span class='gum' style='background:#FFE23D'></span><span class='full'>Flow</span><span class='brief'>Flow</span></a></li>
+      <li><a href='#palettes'><span class='gum' style='background:#FF9B3D'></span><span class='full'>The palettes</span><span class='brief'>Themes</span></a></li>
       <li><a href='#controllers'><span class='gum' style='background:#FFB13D'></span><span class='full'>The controllers</span><span class='brief'>Controllers</span></a></li>
       <li><a href='#dummy'><span class='gum' style='background:#FF7A3D'></span><span class='full'>Trying it out</span><span class='brief'>Try it</span></a></li>
     </ul>
@@ -571,6 +576,7 @@ footer {
         <p>With the gem in the bundle an app serves <code>/bh/css/bh.css</code> and <code>/bh/js/bh.js</code> itself. One helper puts both in the head, along with everything Bootstrap and Turbo read.</p>
 <pre><code><span class='k'>&lt;%=</span> bh_head_tags <span class='k'>%&gt;</span></code></pre>
         <p style='margin-top:1rem'>Bh links no icon font of its own: which glyphs a page draws is the host's business, and a gem reaching for somebody else's CDN unasked is not. A combobox's chevron and a bookmark's star are Bootstrap Icons, so a page that wants them says where they come from.</p>
+        <a class='ref' href='https://rubydoc.info/gems/bh/Bh/Helpers/Heads'>Reference&nbsp;&rarr;</a>
 
       </div>
     </section>
@@ -603,7 +609,7 @@ footer {
             <button type='button' class='f-pill out'>Call us</button>
           </div>
         </div>
-        <p style='margin-top:1.2rem'><code>fieldset</code> is a one-column grid with a legend where one is given. A <code>label</code> is Bootstrap's <code>form-label</code>; given both words and a block it wraps the control the words name, so a form laid out in two columns has one cell to place rather than a pair to bind. <code>submit</code> and <code>button</code> are the large pill — solid where they submit, outlined where <code>type: :button</code> says they do not — and a disabled one given a <code>title</code> says why on hover, from a wrapper that hears the mouse for it.</p>
+        <a class='ref' href='https://rubydoc.info/gems/bh/Bh/FormBuilder'>Reference&nbsp;&rarr;</a>
       </div>
     </section>
 
@@ -639,6 +645,7 @@ footer {
           <li><code>text_area</code></li><li><code>select</code></li><li><code>check_box</code></li>
           <li><code>radio_button</code></li><li><code>check</code></li>
         </ul>
+        <a class='ref' href='https://rubydoc.info/gems/bh/Bh/FormBuilder/Controls'>Reference&nbsp;&rarr;</a>
       </div>
     </section>
 
@@ -664,7 +671,7 @@ footer {
             </div>
           </div>
         </div>
-        <p style='margin-top:1.2rem'>On a multiple menu <code>data-combobox-all-value</code> names an <em>All</em> row that puts held-back options on the menu, and <code>data-combobox-more-value</code> words the toggle when several are picked. On an option, <code>data-count</code> puts a figure beside it and <code>data-hidden</code> holds it back until <em>All</em> asks. A pick is announced as the select's own <code>change</code>.</p>
+        <a class='ref' href='https://rubydoc.info/gems/bh/Bh/FormBuilder/Comboboxes'>Reference&nbsp;&rarr;</a>
       </div>
     </section>
 
@@ -685,7 +692,7 @@ footer {
             </div>
           </div>
         </div>
-        <div class='note'>Refused, the slots redden from the container rather than a red box being drawn around all six — the field itself never wears <code>form-control</code>. The slots are held back until the controller draws them, so a page without the script still keeps a field a code can be typed into.</div>
+        <a class='ref' href='https://rubydoc.info/gems/bh/Bh/FormBuilder/Pins'>Reference&nbsp;&rarr;</a>
       </div>
     </section>
 
@@ -702,7 +709,7 @@ footer {
             <div class='f-control'>415-555-0000</div>
           </div>
         </div>
-        <p style='margin-top:1.2rem'>Storage stays ten bare digits. The shape is the browser's business.</p>
+        <a class='ref' href='https://rubydoc.info/gems/bh/Bh/FormBuilder'>Reference&nbsp;&rarr;</a>
       </div>
     </section>
 
@@ -727,7 +734,7 @@ footer {
             </div>
           </div>
         </div>
-        <p style='margin-top:1.2rem'>Any link or form with <code>data-turbo-confirm</code> asks through a dialog the bundle draws on the first ask: the first line of the message is the question, the rest are paragraphs, and the answer wears the words of the button that asked. A host in another language names the other word in <code>&lt;meta name='bh-cancel'&gt;</code>.</p>
+        <a class='ref' href='https://rubydoc.info/gems/bh/Bh/Helpers/Dialogs'>Reference&nbsp;&rarr;</a>
       </div>
     </section>
 
@@ -746,6 +753,7 @@ footer {
             <div class='f-toast bad'>The team could not be reached. <span class='f-x'>✕</span></div>
           </div>
         </div>
+        <a class='ref' href='https://rubydoc.info/gems/bh/Bh/Helpers/Notices'>Reference&nbsp;&rarr;</a>
       </div>
     </section>
 
@@ -769,7 +777,7 @@ footer {
             <div class='f-bubble f-in f-typing'><span></span><span></span><span></span></div>
           </div>
         </div>
-        <p style='margin-top:1.2rem'>A bubble is 85% wide at most, with the corner nearest the speaker squared. Over each one, small and on its side: who, how long ago, a tick for delivered or sent, a cross for failed, and what the turn cost where anything did. A turn with nothing said yet is three dots, still under reduced motion.</p>
+        <a class='ref' href='https://rubydoc.info/gems/bh/Bh/Helpers/Chats'>Reference&nbsp;&rarr;</a>
       </div>
     </section>
 
@@ -795,7 +803,34 @@ footer {
             </div>
           </div>
         </div>
-        <p style='margin-top:1.2rem'>A card 40rem across or wider lays its fields out in two columns, measured on the card rather than on the window, so the narrow card of a sign-in page stays in one on the widest screen. Anything that runs long earns a scroll by putting <code>flow-scroll</code> on the part that scrolls.</p>
+        <a class='ref' href='https://rubydoc.info/gems/bh/Bh/Helpers/Flows'>Reference&nbsp;&rarr;</a>
+      </div>
+    </section>
+
+    <section id='palettes'>
+      <div class='panel'>
+        <h2>The palettes</h2>
+        <p>Nine of them, served at <code>/bh/theme/&lt;name&gt;.css</code> and linked one at a time after the stylesheet. Each restates all thirteen steps of every Bootstrap family it repaints, plus <code>--bs-white</code>, <code>--bs-black</code> and the three text tones. Every accent clears 3:1 against its label and every text tone 4:1, in both modes.</p>
+        <ul class='chips' style='justify-content: center'>
+          <li><span class='gum' style='background:#8899aa'></span> <code>bootstrap</code></li>
+          <li><span class='gum' style='background:#575279'></span> <code>dawn</code></li>
+          <li><span class='gum' style='background:#bd93f9'></span> <code>dracula</code></li>
+          <li><span class='gum' style='background:#d79921'></span> <code>gruvbox</code></li>
+          <li><span class='gum' style='background:#a6e22e'></span> <code>monokai</code></li>
+          <li><span class='gum' style='background:#81a1c1'></span> <code>nord</code></li>
+          <li><span class='gum' style='background:#61afef'></span> <code>one_dark</code></li>
+          <li><span class='gum' style='background:#268bd2'></span> <code>solarized</code></li>
+          <li><span class='gum' style='background:#7aa2f7'></span> <code>tokyo_night</code></li>
+        </ul>
+        <div class='note'><code>bootstrap</code> declares nothing: upstream's palette comes back by dropping the others' block rather than by writing one. It is named anyway, so a toggle can reach it — a reader who rotates through nine and never finds the one the pages started in has been shown a door with no handle on the inside.</div>
+        <h3>Swapping one for another</h3>
+        <p>The <code>scheme</code> controller does it, and the choice belongs to the reader rather than to the app, so it is kept in their browser.</p>
+<pre><code><span class='k'>&lt;button</span> type=<span class='s'>'button'</span> data-controller=<span class='s'>'scheme'</span> data-action=<span class='s'>'scheme#rotate'</span>
+        data-scheme-themes-value=<span class='s'>'["bootstrap","nord","dracula"]'</span>
+        data-scheme-path-value=<span class='s'>'/bh/theme'</span> data-scheme-storage-value=<span class='s'>'scheme'</span><span class='k'>&gt;</span>
+  Another palette
+<span class='k'>&lt;/button&gt;</span></code></pre>
+        <p style='margin-top:1rem'>A click moves to another palette and into the mode it is not in. Put the stored choice back before the first paint from the layout's own script: a controller connects far too late for that, and the page would otherwise flash the palette the server chose.</p>
       </div>
     </section>
 
