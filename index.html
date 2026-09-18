@@ -158,6 +158,9 @@ p:last-child { margin-bottom: 0; }
 }
 .btn-solid { background: var(--ink); color: #FFE6F3; box-shadow: 0 6px 0 var(--btn-edge-solid); }
 .btn-ghost { background: var(--card-solid); color: var(--ink); box-shadow: 0 6px 0 var(--btn-edge-ghost); }
+@media (prefers-color-scheme: dark) {
+  .btn-solid { background: #FF2E96; color: #240415; }
+}
 .btn:active { transform: translateY(3px); }
 .btn-solid:active { box-shadow: 0 2px 0 var(--btn-edge-solid); }
 .btn-ghost:active { box-shadow: 0 2px 0 var(--btn-edge-ghost); }
@@ -178,7 +181,17 @@ p:last-child { margin-bottom: 0; }
   display: grid; grid-template-columns: 16rem 1fr; gap: 2.2rem;
   padding-bottom: 5rem;
 }
-@media (width < 980px) { .shell { grid-template-columns: 1fr; gap: 0; } .rail { display: none; } }
+@media (width < 980px) {
+  .shell { grid-template-columns: 1fr; gap: 0.9rem; }
+  .rail .understudy { display: none; }
+  .rail { position: static; height: auto; display: block; }
+  .rail h2 { display: none; }
+  .rail ul { flex-direction: row; flex-wrap: wrap; justify-content: center; gap: 0.4rem; }
+  .rail a { padding: 0.2rem 0.8rem; font-size: 0.92rem; gap: 0.45rem; box-shadow: 0 3px 0 var(--card-edge); }
+  .rail .gum { width: 0.9rem; height: 0.9rem; }
+  .full { display: none; }
+  .brief { display: inline; }
+}
 
 .rail {
   align-self: start; position: sticky; top: 1.5rem;
@@ -186,7 +199,6 @@ p:last-child { margin-bottom: 0; }
   display: flex; flex-direction: column;
 }
 .rail h2, .rail ul { flex: none; }
-@media (width < 980px) { .rail { position: static; } }
 .rail h2 {
   font-size: 0.78rem; font-weight: 800; letter-spacing: 0.2em; text-transform: uppercase;
   color: var(--ink); opacity: 0.72; margin: 0 0 0.5rem 1rem;
@@ -349,7 +361,10 @@ dl.defs dd { margin: 0.15rem 0 0; color: var(--ink-soft); }
   --wave: running;
 }
 .understudy svg { width: auto; height: 0; display: block; }
-@media (width < 980px) { .understudy { display: none; } }
+.understudy-foot { display: none; }
+/* His whole stage on a phone, sized up front so the page does not jump as he stands
+   up in it. After the base rule above, or that one would win on being later. */
+@media (width < 980px) { .understudy-foot { display: flex; height: 15rem; } }
 @media (prefers-reduced-motion: reduce) { .understudy { --wave: paused; } }
 
 /* Every so often he remembers he is holding a wand. Paused everywhere the custom property
@@ -428,7 +443,12 @@ footer {
 }
 .foot-in { width: min(72rem, 100%); margin-inline: auto; display: flex; flex-wrap: wrap; gap: 1.5rem; align-items: center; }
 .foot-in img { width: 3rem; height: 3rem; border-radius: 0.8rem; }
-.foot-links { margin-left: auto; display: flex; flex-wrap: wrap; gap: 1.4rem; font-weight: 700; }
+.foot-links { display: flex; flex-wrap: wrap; gap: 1.4rem; font-weight: 700; }
+.foot-line { display: inline; }
+@media (width < 860px) {
+  .foot-in { flex-direction: column; align-items: flex-start; gap: 1rem; }
+  .foot-line { display: block; }
+}
 </style>
 </head>
 <body>
@@ -511,20 +531,20 @@ footer {
   <nav class='rail' aria-label='Components'>
     <h2>The bill</h2>
     <ul>
-      <li><a href='#install'><span class='gum' style='background:#FF2E96'></span> How to install</a></li>
-      <li><a href='#form'><span class='gum' style='background:#FF6FC6'></span> The form</a></li>
-      <li><a href='#fields'><span class='gum' style='background:#E86FFF'></span> Every field</a></li>
-      <li><a href='#combobox'><span class='gum' style='background:#9D6BFF'></span> Combobox</a></li>
-      <li><a href='#pin'><span class='gum' style='background:#6B8BFF'></span> The 6-digit code</a></li>
-      <li><a href='#phone'><span class='gum' style='background:#2FD3CB'></span> Phone numbers</a></li>
-      <li><a href='#dialog'><span class='gum' style='background:#3FD98E'></span> Dialogs</a></li>
-      <li><a href='#toasts'><span class='gum' style='background:#9DE93F'></span> Toasts</a></li>
-      <li><a href='#chat'><span class='gum' style='background:#D8E63C'></span> Chat</a></li>
-      <li><a href='#flow'><span class='gum' style='background:#FFE23D'></span> Flow</a></li>
-      <li><a href='#controllers'><span class='gum' style='background:#FFB13D'></span> The controllers</a></li>
-      <li><a href='#dummy'><span class='gum' style='background:#FF7A3D'></span> Trying it out</a></li>
+      <li><a href='#install'><span class='gum' style='background:#FF2E96'></span><span class='full'>How to install</span><span class='brief'>Install</span></a></li>
+      <li><a href='#form'><span class='gum' style='background:#FF6FC6'></span><span class='full'>The form</span><span class='brief'>Form</span></a></li>
+      <li><a href='#fields'><span class='gum' style='background:#E86FFF'></span><span class='full'>Every field</span><span class='brief'>Fields</span></a></li>
+      <li><a href='#combobox'><span class='gum' style='background:#9D6BFF'></span><span class='full'>Combobox</span><span class='brief'>Combobox</span></a></li>
+      <li><a href='#pin'><span class='gum' style='background:#6B8BFF'></span><span class='full'>The 6-digit code</span><span class='brief'>OTP</span></a></li>
+      <li><a href='#phone'><span class='gum' style='background:#2FD3CB'></span><span class='full'>Phone numbers</span><span class='brief'>Phone</span></a></li>
+      <li><a href='#dialog'><span class='gum' style='background:#3FD98E'></span><span class='full'>Dialogs</span><span class='brief'>Dialogs</span></a></li>
+      <li><a href='#toasts'><span class='gum' style='background:#9DE93F'></span><span class='full'>Toasts</span><span class='brief'>Toasts</span></a></li>
+      <li><a href='#chat'><span class='gum' style='background:#D8E63C'></span><span class='full'>Chat</span><span class='brief'>Chat</span></a></li>
+      <li><a href='#flow'><span class='gum' style='background:#FFE23D'></span><span class='full'>Flow</span><span class='brief'>Flow</span></a></li>
+      <li><a href='#controllers'><span class='gum' style='background:#FFB13D'></span><span class='full'>The controllers</span><span class='brief'>Controllers</span></a></li>
+      <li><a href='#dummy'><span class='gum' style='background:#FF7A3D'></span><span class='full'>Trying it out</span><span class='brief'>Try it</span></a></li>
     </ul>
-    <div class='understudy' aria-hidden='true'>
+    <div class='understudy understudy-rail' aria-hidden='true'>
       <svg viewBox='0 0 280 380'><use href='#earl'/></svg>
     </div>
   </nav>
@@ -806,6 +826,10 @@ rails s</code></pre>
     </section>
 
   </main>
+
+  <div class='understudy understudy-foot' aria-hidden='true'>
+    <svg viewBox='0 0 280 380'><use href='#earl'/></svg>
+  </div>
 </div>
 
 <button class='spell' id='spell' type='button' aria-pressed='false'>
@@ -822,9 +846,9 @@ rails s</code></pre>
 <footer>
   <div class='foot-in'>
     <img src='icon.svg' alt='' width='48' height='48'>
-    <p style='margin:0;font-weight:700'>Bh · Bootstrap Helpers<br><span style='font-weight:500;color:var(--ink-soft)'>MIT licensed. Drawn for <a class='lockup quicksand' href='https://houseaccount.com/'><svg style='width: 0.8117em; height: 0.8117em; top: 0.0358em' aria-hidden='true' xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'><g fill='none' stroke='#3b8ae8' stroke-width='28' stroke-linecap='round' stroke-linejoin='round'><path d='M256 302Q256 256 295.8 233L406.2 169.3Q446 146.3 446 192.3V319.7Q446 365.7 406.2 388.7L295.8 452.4Q256 475.4 256 429.4Z' fill='#1B5288'/><path d='M216.2 59.6Q256 36.6 295.8 59.6L406.2 123.3Q446 146.3 446 192.3V319.7Q446 365.7 406.2 388.7L295.8 452.4Q256 475.4 216.2 452.4L105.8 388.7Q66 365.7 66 319.7V192.3Q66 146.3 105.8 123.3Z'/><path d='M256 256 95.4 163.3'/><path d='M256 256 416.6 163.3'/><path d='M256 256V441.4'/></g></svg><span class='house'>house</span>account</a> by the Earl of Bubblehum.</span></p>
+    <p style='margin:0;font-weight:700'>Bh · Bootstrap Helpers<br><span style='font-weight:500;color:var(--ink-soft)'><span class='foot-line'>Drawn for <a class='lockup quicksand' href='https://houseaccount.com/'><svg style='width: 0.8117em; height: 0.8117em; top: 0.0358em' aria-hidden='true' xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'><g fill='none' stroke='#3b8ae8' stroke-width='28' stroke-linecap='round' stroke-linejoin='round'><path d='M256 302Q256 256 295.8 233L406.2 169.3Q446 146.3 446 192.3V319.7Q446 365.7 406.2 388.7L295.8 452.4Q256 475.4 256 429.4Z' fill='#1B5288'/><path d='M216.2 59.6Q256 36.6 295.8 59.6L406.2 123.3Q446 146.3 446 192.3V319.7Q446 365.7 406.2 388.7L295.8 452.4Q256 475.4 216.2 452.4L105.8 388.7Q66 365.7 66 319.7V192.3Q66 146.3 105.8 123.3Z'/><path d='M256 256 95.4 163.3'/><path d='M256 256 416.6 163.3'/><path d='M256 256V441.4'/></g></svg><span class='house'>house</span>account</a></span> <span class='foot-line'>by the Earl of Bubblehum</span> <span class='foot-line'>under MIT license</span></span></p>
     <div class='foot-links'>
-      <a href='https://github.com/claudiob/bh'>Source on GitHub</a>
+      <a href='https://github.com/claudiob/bh'>Source</a>
       <a href='https://rubydoc.info/gems/bh'>API reference</a>
     </div>
   </div>
@@ -1043,32 +1067,40 @@ rails s</code></pre>
   'use strict'
 
   var hero = document.querySelector('.hero .earl')
-  var pocket = document.querySelector('.understudy')
-  var art = pocket && pocket.querySelector('svg')
-  if (!hero || !pocket || !art) { return }
+  var last = document.getElementById('dummy')
+  var stages = Array.prototype.map.call(document.querySelectorAll('.understudy'), function (el) {
+    return { pocket: el, art: el.querySelector('svg'), foot: el.classList.contains('understudy-foot') }
+  })
+  if (!hero || !last || !stages.length) { return }
 
   var GAP = 30     // air kept between the point of his hat and the last section
   var ROOM = 120   // floor under the rail before he is worth standing up at all
   var SMALL = 26   // the few pixels of hat he starts as
   var TALL = 430   // and the most of him there is, however deep the window
   var RISE = 620   // how far the page travels while he grows to full height
+  var FOOT = 300   // and how far, on the stage a phone gives him under the last section
   var still = window.matchMedia('(prefers-reduced-motion: reduce)')
 
   // Called straight off the scroll rather than through a frame request: it reads one
   // rectangle, which the browser has already worked out to keep the rail stuck.
   function place() {
-    // The floor is whatever the list of sections leaves; the flex box already measures it.
-    var floor = Math.min(pocket.clientHeight - GAP, TALL)
-    // How far the hero's Earl has travelled past the top of the window.
+    // How far the hero's Earl has travelled past the top of the window, and — for the stage
+    // a phone gets — how far the last section has risen past the foot of it.
     var gone = -hero.getBoundingClientRect().bottom
-    if (floor < ROOM || gone <= 0 || getComputedStyle(pocket).display === 'none') {
-      art.style.height = '0px'
-      pocket.style.opacity = '0'
-      return
-    }
-    var grown = still.matches ? 1 : Math.min(gone / RISE, 1)
-    art.style.height = (SMALL + grown * (floor - SMALL)).toFixed(1) + 'px'
-    pocket.style.opacity = Math.min(gone / 140, 1).toFixed(3)
+    var past = window.innerHeight - last.getBoundingClientRect().bottom
+
+    stages.forEach(function (stage) {
+      var floor = Math.min(stage.pocket.clientHeight - GAP, TALL)
+      var run = stage.foot ? past : gone
+      if (floor < ROOM || run <= 0 || getComputedStyle(stage.pocket).display === 'none') {
+        stage.art.style.height = '0px'
+        stage.pocket.style.opacity = '0'
+        return
+      }
+      var grown = still.matches ? 1 : Math.min(run / (stage.foot ? FOOT : RISE), 1)
+      stage.art.style.height = (SMALL + grown * (floor - SMALL)).toFixed(1) + 'px'
+      stage.pocket.style.opacity = Math.min(run / 140, 1).toFixed(3)
+    })
   }
 
   window.addEventListener('scroll', place, { passive: true })
