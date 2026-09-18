@@ -39,8 +39,8 @@
   --accent-bright: #FF2E96;
   --shadow: rgba(74, 10, 44, 0.20);
   --hat: #4A0A2C;
-  --btn-edge-solid: #240415;
-  --btn-edge-ghost: #D8A9C4;
+  --btn-edge-solid: #C01274;
+  --btn-edge-ghost: #E39CC6;
   --goo-op: 1;
 }
 @media (prefers-color-scheme: dark) {
@@ -63,8 +63,8 @@
     --accent-bright: #FF6FC6;
     --shadow: rgba(0, 0, 0, 0.5);
     --hat: #FFC2E6;
-    --btn-edge-solid: #A8105F;
-    --btn-edge-ghost: #5C1740;
+    --btn-edge-solid: #8E0B52;
+    --btn-edge-ghost: #7A2352;
     --goo-op: 0.85;
   }
 }
@@ -355,11 +355,11 @@ dl.defs dd { margin: 0.15rem 0 0; color: var(--ink-soft); }
    is not turned on, which is how the one in the hero stays still: a `use` shadow tree
    cannot be reached by a selector, but an inherited property reaches into it. */
 @keyframes wave {
-  0%, 86%, 100% { transform: rotate(0deg); }
-  89% { transform: rotate(-10deg); }
-  92% { transform: rotate(8deg); }
-  95% { transform: rotate(-5deg); }
-  98% { transform: rotate(2deg); }
+  0%, 71%, 100% { transform: rotate(0deg); }
+  76% { transform: rotate(-10deg); }
+  82% { transform: rotate(8deg); }
+  88% { transform: rotate(-5deg); }
+  94% { transform: rotate(2deg); }
 }
 
 /* The sprite the two of him are stamped from, which draws nothing itself. */
@@ -427,7 +427,7 @@ footer {
     <circle cx='142' cy='256' r='7' fill='#FF2E96'/>
     <circle cx='142' cy='284' r='6' fill='#2FD3CB'/>
     <circle cx='142' cy='310' r='5' fill='#FFE23D'/>
-    <g style='transform-box: view-box; transform-origin: 182px 228px; animation: wave 9s ease-in-out infinite; animation-play-state: var(--wave, paused);'>
+    <g style='transform-box: view-box; transform-origin: 182px 228px; animation: wave 4.5s ease-in-out infinite; animation-play-state: var(--wave, paused);'>
       <path d='M180 228 Q222 216 230 156' stroke='#FFFFFF' stroke-width='20' fill='none' stroke-linecap='round'/>
       <rect x='218' y='88' width='10' height='70' rx='5' transform='rotate(12 223 123)' fill='#4A0A2C'/>
       <circle cx='230' cy='82' r='9' fill='#FFE23D'/>
@@ -1016,7 +1016,7 @@ rails s</code></pre>
     }, { rootMargin: '0px 0px -72% 0px' })
     seen.forEach(function (el) { if (el) { spy.observe(el) } })
   }
-}())
+}());
 
 // The understudy. Once the Earl in the hero has gone off the top, a second of him stands
 // up out of the rail — but only where the list of sections leaves him somewhere to stand:
@@ -1031,6 +1031,7 @@ rails s</code></pre>
   var art = pocket && pocket.querySelector('svg')
   if (!hero || !pocket || !art) { return }
 
+  var GAP = 30     // air kept between the point of his hat and the last section
   var ROOM = 120   // floor under the rail before he is worth standing up at all
   var SMALL = 26   // the few pixels of hat he starts as
   var TALL = 430   // and the most of him there is, however deep the window
@@ -1041,7 +1042,7 @@ rails s</code></pre>
   // rectangle, which the browser has already worked out to keep the rail stuck.
   function place() {
     // The floor is whatever the list of sections leaves; the flex box already measures it.
-    var floor = Math.min(pocket.clientHeight, TALL)
+    var floor = Math.min(pocket.clientHeight - GAP, TALL)
     // How far the hero's Earl has travelled past the top of the window.
     var gone = -hero.getBoundingClientRect().bottom
     if (floor < ROOM || gone <= 0 || getComputedStyle(pocket).display === 'none') {
@@ -1058,7 +1059,7 @@ rails s</code></pre>
   window.addEventListener('resize', place)
   if (still.addEventListener) { still.addEventListener('change', place) }
   place()
-}())
+}());
 
 // The Earl's one spell: an ocean that is not a recording. Noise is generated once, looped,
 // and then swelled and darkened wave by wave with a fresh set of random numbers each time,
@@ -1158,7 +1159,7 @@ rails s</code></pre>
     button.querySelector('.spell-words').textContent = on ? 'on' : 'off'
     if (on) { begin() } else { end() }
   })
-}())
+}());
 </script>
 </body>
 </html>
