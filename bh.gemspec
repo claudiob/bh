@@ -24,7 +24,7 @@ Gem::Specification.new do |spec|
   # stylesheet and the script into one file of its own, and needs what went into them.
   gemspec = File.basename __FILE__
   contributor_only = %w[bin/ test/ .github/ .gitignore .rubocop.yml node_modules/ Gemfile
-                        package-lock.json Rakefile]
+                        package-lock.json Rakefile screenshot/]
   spec.files = IO.popen(%w[git ls-files -z], chdir: __dir__, err: IO::NULL) do |ls|
     ls.readlines("\x0", chomp: true).reject do |f|
       (f == gemspec) || f.start_with?(*contributor_only)

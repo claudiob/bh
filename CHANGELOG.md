@@ -8,7 +8,16 @@ For more information about changelogs, check
 
 ## [Unreleased]
 
-## 6.2.0.alpha - 2026-09-18
+## 6.2.0 - 2026-09-18
+
+A breaking change that keeps its major on purpose. 6.0 through 6.1.4 were an alpha in
+everything but the number — Bootstrap 3 wrappers with a Bootstrap 6 stopgap bolted on,
+cut while Bootstrap 6 was itself pre-release — so there is no settled API here to have
+broken, and nothing is owed the major a real break would earn. Those numbers are taken
+and cannot be withdrawn, RubyGems keeping anything published over thirty days ago, so
+6.2.0 steps over them and lands above 6.1.4, where `bundle update` reaches it.
+
+Until this line settles it breaks on a minor: pin `~> 6.2.0`, never `~> 6`.
 
 * [BREAKING CHANGE] Everything. Bh is now Bootstrap 6 components rather than Bootstrap 3
   wrappers, and no helper of 1.x or 6.1.x survives: `head_tags`, `script_tags`, `navbar`,
@@ -30,8 +39,6 @@ For more information about changelogs, check
 * [FEATURE] A dummy app under `test/dummy` drawing every helper on one page, which `rails s`
   from the root of a clone runs.
 
-  The number skips 6.0 and 6.1, which are taken and cannot be withdrawn, and this line breaks
-  on a minor rather than on a major: pin `~> 6.2.0`, not `~> 6`.
 
 ## 6.1.5 - 2026-06-29
 

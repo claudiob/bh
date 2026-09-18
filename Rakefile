@@ -18,8 +18,9 @@ end
 # Ceiling for every code file, blank and comment lines included.
 MAX_FILE_LINES = 100
 
-# Prose, markup and data are exempt: only Ruby and JavaScript are code here.
-EXEMPT_EXTENSIONS = %w[.css .erb .html .json .md .txt .yml].freeze
+# Prose, markup, data and artwork are exempt: only Ruby and JavaScript are code here.
+EXEMPT_EXTENSIONS = %w[.css .erb .html .ico .jpg .json .md .png .svg .txt .webmanifest
+                       .yml].freeze
 
 # Upstream's formatting is not ours to fix, and a built file is as long as what went in.
 EXEMPT_DIRECTORIES = %w[vendor/ public/].freeze
