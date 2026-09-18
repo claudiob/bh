@@ -1,0 +1,34 @@
+/* The field a 6-digit code is typed into: one real field, drawn by Bootstrap as six slots.
+   `pin_field` draws the markup and the `otp` controller draws the slots. */
+
+/* Bootstrap's OTP container is a flex row, so it has to be told to center where its card is
+   centered and to let the message drop onto a line of its own under the slots. `min-width: 0`,
+   or the grid item will not shrink below the width its slots come to, which is the whole
+   row hanging off the side of the card before the slots are asked to fit. */
+.otp { justify-content: center; flex-wrap: wrap; min-width: 0 }
+/* Six slots at a fixed width plus the five gaps between them come to 328 pixels, and a
+   phone's card holds 327 — so the last slot sat outside it. Sized off the row instead, they
+   share whatever there is and never exceed the width they were drawn at. */
+.otp-slots { display: flex; justify-content: center; width: 100% }
+.otp-slot { flex: 1 1 0; min-width: 0; max-width: var(--bs-otp-size) }
+.otp .invalid-feedback { order: 1; flex-basis: 100%; margin-top: 0.5rem }
+
+/* .form-control.is-invalid would outrank .otp-input on specificity and draw one red box
+   across all six slots; the field takes no such class, and Bootstrap reddens the slots
+   themselves from the container. */
+.otp .otp-input.is-invalid { border: 0; box-shadow: none }
+
+/* Bootstrap builds the six slots in JavaScript, so one box is what the server can send and
+   what the reader sees until they land. Held back for that moment — but on a class the
+   controller itself sets, so a controller that never runs leaves a field somebody can still
+   type a code into rather than an invisible one. */
+.otp-drawing:not(.otp-rendered) .otp-input { visibility: hidden }
+
+/* Bootstrap lays the real field transparently over the slots, so an autofilled one painted
+   yellow paints over them. The text stays invisible, and the fill is deferred by longer than
+   anybody's session rather than overridden, which is the only thing that holds it off. */
+.otp-input:-webkit-autofill,
+.otp-input:-webkit-autofill:focus {
+  -webkit-text-fill-color: transparent;
+  transition: background-color 0s 600000s;
+}

@@ -1,9 +1,0 @@
-/*
- * This file contains overrides to Bootstrap styles.
- *
- * Each override must be justified and explained with a comment.
- */
-
-/* ensure highlighted text from a search is not separated from the rest of the word */
-mark { padding: 0 }
-

@@ -1,0 +1,82 @@
+inherit_mode:
+  merge:
+    - Exclude
+
+AllCops:
+  NewCops: enable
+  SuggestExtensions: false
+  TargetRubyVersion: 3.2
+  Exclude:
+    # Rails rewrites this on every migration, so formatting it would not last.
+    - test/dummy/db/schema.rb
+
+# Declining `rubygems_mfa_required`: whether a push needs MFA is settled on the
+# RubyGems account, not asserted in the gem's own metadata.
+Gemspec/RequireMFA:
+  Enabled: false
+
+Layout/AccessModifierIndentation:
+  EnforcedStyle: outdent
+
+Layout/LineLength:
+  Max: 100
+
+# A routes file is one block by design, and the dummy's grows a line per feature
+# it demonstrates — its length measures the gem's surface, not a design choice.
+Metrics/BlockLength:
+  Exclude:
+    - 'test/dummy/config/routes.rb'
+
+# Two places where length is not a design choice either, so measuring it says
+# nothing. A migration is as long as the table it makes and the rows it carries,
+# which is why `rake file_length` already exempts them. And a test here renders one
+# page and asserts everything true of it: the suite is small on purpose — forty
+# runs for the whole gem — so each run is broad by design, and splitting one to
+# satisfy a count would add tests that reach no line the others do not.
+Metrics/AbcSize:
+  Exclude: &long_by_nature
+    - 'test/dummy/db/migrate/*.rb'
+    - 'test/test_*.rb'
+
+Metrics/MethodLength:
+  Exclude: *long_by_nature
+
+# Demands that a memo's variable be named after its method. Every variable this
+# gem puts on a view carries a `recourse_` prefix, since the view is the host's
+# too and an unprefixed name is one to collide with — so the two cannot both hold.
+Naming/MemoizedInstanceVariableName:
+  Enabled: false
+
+Style/DocumentationMethod:
+  Enabled: true
+  Exclude:
+    - test/**/*
+
+Style/FrozenStringLiteralComment:
+  EnforcedStyle: never
+
+# Off by default; keeps parentheses only where parsing needs them.
+Style/MethodCallWithArgsParentheses:
+  Enabled: true
+  EnforcedStyle: omit_parentheses
+
+# Default is `separated`, one statement per mixin; ours share a line.
+Style/MixinGrouping:
+  EnforcedStyle: grouped
+
+# Demands `.freeze` on string constants, which this project never does.
+Style/MutableConstant:
+  Enabled: false
+
+Style/StringLiterals:
+  EnforcedStyle: single_quotes
+
+Style/StringLiteralsInInterpolation:
+  EnforcedStyle: single_quotes
+
+Style/TrailingCommaInArrayLiteral:
+  EnforcedStyleForMultiline: consistent_comma
+
+# Not `comma`: that style forbids the comma unless each entry is on its own line.
+Style/TrailingCommaInHashLiteral:
+  EnforcedStyleForMultiline: consistent_comma

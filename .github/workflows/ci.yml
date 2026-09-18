@@ -1,0 +1,36 @@
+name: CI
+
+on:
+  pull_request:
+  push:
+    branches: [ master ]
+
+jobs:
+  # The default task: the build matching its sources, the suite at 100% coverage, RuboCop,
+  # and the file-length ceiling. On the Ruby the host apps run, and on the oldest admitted.
+  check:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        ruby: [ '3.4', '4.0' ]
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v6
+
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - name: Set up Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: ${{ matrix.ruby }}
+          bundler-cache: true
+
+      - name: Install the build
+        run: npm ci
+
+      - name: Build, test, lint and measure
+        run: bundle exec rake

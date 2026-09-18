@@ -1,0 +1,202 @@
+/* A crumb that is not a link keeps its resting colors under the cursor.
+   Bootstrap lights every .breadcrumb-link on hover, which on a <span>
+   promises a click that goes nowhere — and the element is the whole
+   discriminator, since a crumb that links is an <a>. Redefining the hover
+   tokens, rather than out-cascading the hover rule, leaves Bootstrap's own
+   selector in charge and the active crumb its own resting color. */
+span.breadcrumb-link {
+  --bs-breadcrumb-link-hover-color: var(--bs-breadcrumb-link-color);
+  --bs-breadcrumb-link-hover-bg: transparent;
+}
+span.breadcrumb-link.active {
+  --bs-breadcrumb-link-hover-color: var(--bs-breadcrumb-link-active-color);
+}
+
+/* Nothing here is meant to be wider than the window: the one thing that is, a
+   table, scrolls inside its own wrapper. Safari lays a stacked table's hidden
+   header row out at its full width all the same, and a page that can be
+   scrolled to it is a page Safari zooms out of and draws the navbar short on.
+   `clip` on the shell rather than `hidden`: a `hidden` axis turns the other into
+   `auto`, and the body then cut off whatever hung below it — a filter's menu, on a
+   page whose table had no rows to be taller than the menu. `clip` leaves the
+   other axis alone. */
+html { overflow-x: hidden; }
+.recourse-shell { overflow-x: clip; }
+
+/* A finger does not hover. The tint a pointer leaves on the row under it, or on
+   the link under it, would stay on whatever was last touched — or land on whatever
+   the redrawn page put under the finger — so a touch screen gets none. */
+@media (hover: none) {
+  .table-hover > tbody > tr:hover > * {
+    --bs-table-color-state: initial;
+    --bs-table-bg-state: initial;
+  }
+  .nav-link:hover:not(.active) { background-color: transparent; }
+}
+
+/* The navbar stacks over the content: a menu opened from a filter drops over the
+   first rows of the table rather than under them. */
+.recourse-shell > nav { position: relative; z-index: 1; }
+
+/* A focus ring is drawn outside the link it rings, so the link after it paints its own
+   background over the half that overlaps — which is how a ring ends up behind the tint
+   of the row below it. Lifting the focused link above its siblings keeps the ring whole. */
+.nav-link:focus-visible { position: relative; z-index: 1; }
+
+/* The shell is three things — the sidebar, the navbar, the content — written in
+   the order a phone reads them: a row of icons at the very top, the trail and the
+   search under it, the page under that, scrolling as one. From the width the
+   sidebar becomes a column at, a grid seats them the other way round. The navbar
+   runs across the top, the sidebar takes the column under it and the content the
+   rest, the shell is exactly the viewport, and `main` is the only thing in it that
+   scrolls — so the navbar and the sidebar stay where they are however far down the
+   table a reader is. `minmax(0, 1fr)` is what lets the second row be shorter than
+   what is in it; a `1fr` alone is as tall as its content, and the page would scroll
+   after all.
+   The sidebar deliberately does not scroll. A window dragged shorter than the
+   sidebar itself is the one case the viewport cannot hold, and there the sidebar
+   is allowed to spill past the shell and let the browser scroll the page — which is
+   what a reader expects of something taller than the screen. Were it to scroll on
+   its own instead, the same overflow would be hidden inside it and the page would
+   look whole while its foot was unreachable. */
+@media (width >= 768px) {
+  .recourse-shell {
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr);
+    grid-template-rows: auto minmax(0, 1fr);
+    grid-template-areas: 'nav nav' 'aside main';
+    height: 100dvh;
+  }
+  .recourse-shell > nav { grid-area: nav; }
+  .recourse-sidebar { grid-area: aside; }
+  .recourse-shell > main { grid-area: main; overflow-y: auto; }
+}
+
+/* The sidebar rules off the navbar below it while it is the band at the top of a
+   phone, and off the content beside it once it is a column. v6 generates no
+   responsive border utilities, so the switch is written out. */
+.recourse-sidebar {
+  border-block-end: var(--bs-border-width) solid var(--bs-border-color);
+}
+@media (width >= 768px) {
+  .recourse-sidebar {
+    border-block-end: 0;
+    border-inline-end: var(--bs-border-width) solid var(--bs-border-color);
+  }
+}
+
+/* Held Option marks the letter each sidebar link answers to. Marked rather than
+   bracketed: '[C]ontacts' would shift the whole sidebar two characters wide the
+   moment the key went down. Swap the two rules below for the bracketed form. */
+.recourse-keys .recourse-key {
+  font-weight: var(--bs-font-weight-semibold);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+/* .recourse-keys .recourse-key::before { content: '['; }
+   .recourse-keys .recourse-key::after  { content: ']'; } */
+
+/* The foot of the sidebar holds the scheme toggle and the way out side by side,
+   each centered in its own half of the row: the toggle alone is in the middle, and
+   the two together are at a quarter and at three quarters. Each control sits in
+   a wrapper — the toggle's own, the form `button_to` draws — and the wrapper is
+   the half, so a button is only as wide as its icon and so is its hover. */
+.recourse-foot { display: flex; }
+.recourse-foot > * { flex: 1 1 0; display: flex; justify-content: center; }
+.recourse-foot .nav-link { border-radius: var(--bs-radius-5); }
+/* A hand cursor alone says little on an icon: a tint under it says it is a control.
+   Only where something can hover: a finger's tap leaves `:hover` set until the next
+   tap elsewhere, and a tint that stays reads as a button stuck down. */
+@media (hover: hover) {
+  .recourse-foot .nav-link:hover { background-color: var(--bs-bg-1); color: var(--bs-fg-body); }
+}
+
+/* `.nav-item` ships `flex: auto`: in a row every entry would take an equal share
+   of the width and in a full-height column an equal share of the height, and the
+   foot's auto margin would never have anything left to push against. Every item is
+   its own size instead, in both directions. */
+.recourse-sidebar .nav-item { flex: 0 0 auto; }
+
+/* On a phone the sidebar is one row of icons across the top, centered, each entry
+   with less room around it than a column gives — a dozen have to fit — and wrapping
+   to a second line only where a host has more than a screen's width of them. */
+@media (width < 768px) {
+  .recourse-sidebar .nav { justify-content: center; --bs-nav-link-padding-x: .5rem; }
+}
+
+/* The foot sits at the bottom of the sidebar and stretches across it while the
+   sidebar is a column, and is simply the last item of the row while it is not
+   — the query matches the `md:` the sidebar's own classes use. */
+@media (width >= 768px) {
+  /* A floor rather than a height, and never wrapped. `.nav` ships `flex-wrap:
+     wrap`, and a column that may wrap, whose items are pinned to their own height
+     above, and which is told exactly how tall to be has one way to place a link
+     that does not fit: a second column. Which is what a short window used to draw.
+     The floor lets it be taller than the space it was given. */
+  .recourse-sidebar .nav { min-height: 100%; flex-wrap: nowrap; }
+  /* And it rides at the foot of the screen, which the auto margin alone is
+     enough to do: the nav's floor is the sidebar's full height, so while the
+     links leave room the margin takes all of it and the foot sits on the fold,
+     rising with it as the window is shortened. Once the links fill the nav there
+     is no room left to take, and the foot comes to rest immediately below the
+     last of them and goes under the fold with it, to be scrolled to.
+     Deliberately not sticky. Sticking it to the bottom of the viewport would lift
+     it off that resting place and hold it over the links it had passed — which is
+     what the background color was for, masking whichever one it covered. Both go
+     together: nothing is painted over, so nothing needs painting out. */
+  .recourse-sidebar .recourse-foot {
+    margin-block-start: auto;
+    align-self: stretch;
+  }
+}
+
+/* A phone reads the chrome as pictures. A sidebar entry is its icon, a crumb its
+   icon, a tab its icon and its figure — `17` rather than `17 franchises` — and the
+   foot's controls their icons, so the sidebar is one row of squares and the trail
+   leaves the search its room. The words are there all the same, read but not seen
+   the way Bootstrap's `.visually-hidden` does it, and the arrows at the foot put
+   them back: the cookie they write has the server draw the shell `.recourse-expanded`,
+   and then none of this applies. A tab or a crumb with no icon keeps its word at
+   every width, there being nothing else to stand for it.
+   The same hiding, at every width, for the foot's words once the sidebar is a
+   column: there is room for an icon and not for a word beside it. */
+.recourse-foot-word { margin-inline-start: .4em; }
+@media (width < 768px) {
+  .recourse-shell:not(.recourse-expanded) :is(.recourse-nav-word, .recourse-crumb-word,
+                                              .recourse-tab-word, .recourse-foot-word) {
+    position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
+    overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0;
+  }
+}
+@media (width >= 768px) {
+  .recourse-foot-word {
+    position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
+    overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0;
+  }
+  /* Nothing to expand: a column has its words already. */
+  .recourse-density { display: none; }
+}
+
+/* The arrows say where a tap goes, like the moon: parting, with `Expand`, while
+   the chrome is icons; meeting, with `Compact`, once the words are out. Both faces
+   are drawn and the shell's class picks, so the button needs no script to redraw. */
+.recourse-density-expanded { display: none; }
+.recourse-expanded .recourse-density-compact { display: none; }
+.recourse-expanded .recourse-density-expanded { display: inline; }
+
+/* The toggle draws both icons and shows the one that names where a click
+   would go: a moon on a light page, a sun on a dark one. Three states rather than
+   two, because a page nobody has chosen for carries no attribute at all, and the
+   media query is then the only thing that knows which mode it is in. Both are
+   declared at every step rather than one left to its default, so that no state
+   can end up hiding the pair and leaving a button with nothing in it. */
+.recourse-scheme-light { display: inline; }
+.recourse-scheme-dark { display: none; }
+@media (prefers-color-scheme: dark) {
+  :root:not([data-bs-theme='light']) .recourse-scheme-light { display: none; }
+  :root:not([data-bs-theme='light']) .recourse-scheme-dark { display: inline; }
+}
+:root[data-bs-theme='light'] .recourse-scheme-light { display: inline; }
+:root[data-bs-theme='light'] .recourse-scheme-dark { display: none; }
+:root[data-bs-theme='dark'] .recourse-scheme-light { display: none; }
+:root[data-bs-theme='dark'] .recourse-scheme-dark { display: inline; }

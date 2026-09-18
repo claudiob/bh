@@ -1,0 +1,41 @@
+/* One rule per row of the show page, so a value and its heading read as one thing
+   and the next pair as another. On the cells rather than between them: a column's
+   gutter is padding inside it, so two side by side draw one unbroken line.
+   Every row reserves the width a rule takes, in `transparent`, and the show page
+   only colors it in — which is what leaves a field at exactly the height of the
+   value it edits, row after row down two pages. */
+.recourse-row {
+  border-block-end: var(--bs-border-width) solid transparent;
+}
+.recourse-values > .recourse-row {
+  border-block-end-color: var(--bs-border-color);
+}
+/* And a value stands as tall as the control that edits it, so a row on one page
+   is a row of the same height on the other. Bootstrap gives
+   `.form-control-plaintext` a control's padding and line height but no minimum,
+   and an icon or a badge is shorter than a box. */
+.recourse-values .form-control-plaintext {
+  min-height: var(--bs-control-min-height);
+}
+/* The reveal is a word beside a value rather than a control beside it, so it takes
+   the line's height and not `.btn-sm`'s minimum — which would leave a masked row
+   taller than the field that edits the same attribute. */
+.form-control-plaintext .btn {
+  min-height: 0;
+}
+
+/* A payload in a block of its own, bounded so it scrolls rather than grows. `pre`
+   for the indentation that makes JSON readable, but wrapping rather than running
+   off to the side: a flex item's automatic minimum size is the min-content width
+   of whatever is inside it, and `overflow` on this box does not lower it — so one
+   unbroken 4,000-character token became the width of the value's column, then of
+   `main`, which then wrapped below the sidebar it belongs beside. `pre-wrap` keeps
+   the indentation and takes the wrapping, and `anywhere` is what lowers
+   min-content, which `break-word` in its place would not. */
+.recourse-payload {
+  max-height: 12rem;
+  margin-block-end: 0;
+  overflow: auto;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}

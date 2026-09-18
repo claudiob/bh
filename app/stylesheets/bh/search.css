@@ -1,0 +1,60 @@
+/* The search and its filters take the width the breadcrumb and the buttons
+   leave, and give it back as the viewport narrows: the box shrinks to a floor
+   that still shows a word, and below 768px the row is allowed to wrap. */
+.recourse-search { flex: 1 1 auto; max-width: 48rem; }
+/* The box grows and the filters do not, so the field someone types into is the
+   widest thing in the row on a large viewport. A toggle is `width: 100%`, which
+   as a flex item would otherwise mean the whole form. */
+.recourse-search-box { flex: 2 1 16rem; min-width: 8rem; }
+
+.recourse-search .combobox-toggle { flex: 0 1 10rem; }
+/* The per-page switch is a word in the sentence beside it rather than a control
+   next to one, so it takes the line's height and not `.btn`'s own minimum —
+   which would leave the row under every table taller than the words in it. */
+.recourse-limit { min-height: 0; }
+/* The bookmark square is an icon in a row of text, not a control in a form, so it
+   takes the line's height too: `.btn`'s minimum made every row with one taller
+   than the rows without. */
+.recourse-bookmark { min-height: 0; }
+/* Stacked, each control is a row of its own rather than a fragment of one:
+   there is no second control beside it to share the line with. */
+@media (width < 768px) {
+  /* The room the breadcrumb leaves, and never more: a form sized by its content
+     widened with the words a picked option put on a toggle, and wrapped under
+     the crumbs. A basis of nothing and leave to shrink hold it in its row. */
+  .recourse-search { flex: 1 1 0; min-width: 0; max-width: none; }
+  .recourse-search-box,
+  .recourse-search .combobox-toggle { flex: 1 1 100%; min-width: 0; }
+  /* Safari zooms in on a field whose text is under 16px, an absolute figure: the
+     small controls are 14px, and so is the body on a phone, so the controls say
+     16px themselves and focusing one moves nothing. */
+  .recourse-search .form-control { font-size: 16px; }
+  /* A page under a record has a trail two or three crumbs long, and what sat beside
+     the trail — the search, its filters, a button — was squeezed into what those
+     left: `Filter by na`. Under such a trail each takes a row of its own, the form
+     the whole width and every control in it a row in turn, and the margin that set
+     a button apart from the trail goes, there being no trail beside it. An index at
+     the top keeps its form beside its one crumb, where it fits. */
+  .recourse-trailed > :not(nav) { flex: 0 0 100%; margin-inline-start: 0; }
+}
+
+/* The button that empties a combobox search sits inside the field it clears. */
+.combobox-search { position: relative; }
+.combobox-search-input { padding-inline-end: 2rem; }
+/* `:not(.d-none)`, because v6's display utilities carry no `!important` and
+   this rule is later in the cascade: a plain `display` here would beat the
+   `.d-none` the button is hidden with, and show an X over an empty field. */
+.combobox-search-clear:not(.d-none) { display: flex; }
+.combobox-search-clear {
+  position: absolute;
+  inset-block-start: 50%;
+  inset-inline-end: calc(var(--bs-menu-padding-x) + .35rem);
+  transform: translateY(-50%);
+  padding: .15rem;
+  border: 0;
+  border-radius: var(--bs-radius-5);
+  background: transparent;
+  color: var(--bs-fg-2);
+  line-height: 1;
+}
+.combobox-search-clear:hover { background-color: var(--bs-bg-1); color: var(--bs-fg-body); }

@@ -1,0 +1,11 @@
+#!/usr/bin/env ruby
+# Runs any Rails command against the dummy app from the root of the gem, so trying a
+# component out is `rails s` rather than a visit to test/dummy first. `rails` itself walks
+# up for this file and execs it, so the bare command works here too.
+ENGINE_ROOT = File.expand_path '..', __dir__
+ENGINE_PATH = File.expand_path '../lib/bh/engine', __dir__
+APP_PATH = File.expand_path '../test/dummy/config/application', __dir__
+
+require_relative '../test/dummy/config/boot'
+require 'rails/all'
+require 'rails/engine/commands'
