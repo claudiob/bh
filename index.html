@@ -1416,8 +1416,8 @@ rails s</code></pre>
   }
 
   // While the waves run, the wand steps aside and the code goes past in its place, one
-  // symbol every two seconds. Ten symbols and it is over, and the pill is a wand again —
-  // whether or not the sound is still playing.
+  // symbol a second. Ten symbols and it is over, and the pill is a wand again — whether or
+  // not the sound is still playing.
   var CODE = ['\u2b06\ufe0f', '\u2b06\ufe0f', '\u2b07\ufe0f', '\u2b07\ufe0f',
               '\u2b05\ufe0f', '\u27a1\ufe0f', '\u2b05\ufe0f', '\u27a1\ufe0f',
               '\ud83c\udd71\ufe0f', '\ud83c\udd70\ufe0f']
@@ -1441,7 +1441,7 @@ rails s</code></pre>
       step += 1
       if (step >= CODE.length) { marchOff(); return }
       show()
-    }, 2000)
+    }, 1000)
   }
 
   function marchOff() {
