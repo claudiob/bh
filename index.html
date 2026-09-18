@@ -179,7 +179,12 @@ p:last-child { margin-bottom: 0; }
 }
 @media (width < 980px) { .shell { grid-template-columns: 1fr; gap: 0; } .rail { display: none; } }
 
-.rail { align-self: start; position: sticky; top: 1.5rem; }
+.rail {
+  align-self: start; position: sticky; top: 1.5rem;
+  height: calc(100svh - 3rem);
+  display: flex; flex-direction: column;
+}
+.rail h2, .rail ul { flex: none; }
 @media (width < 980px) { .rail { position: static; } }
 .rail h2 {
   font-size: 0.78rem; font-weight: 800; letter-spacing: 0.2em; text-transform: uppercase;
@@ -334,15 +339,28 @@ dl.defs dd { margin: 0.15rem 0 0; color: var(--ink-soft); }
    full height as the page is read. Height is the only thing that moves, and it is
    anchored at the floor, so growing and rising are the one gesture. */
 .understudy {
-  height: 0;
+  flex: 1 1 0; min-height: 0;
   overflow: hidden;
   display: flex;
   align-items: flex-end;
   justify-content: center;
   opacity: 0;
+  --wave: running;
 }
-.understudy svg { width: auto; height: 100%; display: block; }
+.understudy svg { width: auto; height: 0; display: block; }
 @media (width < 980px) { .understudy { display: none; } }
+@media (prefers-reduced-motion: reduce) { .understudy { --wave: paused; } }
+
+/* Every so often he remembers he is holding a wand. Paused everywhere the custom property
+   is not turned on, which is how the one in the hero stays still: a `use` shadow tree
+   cannot be reached by a selector, but an inherited property reaches into it. */
+@keyframes wave {
+  0%, 86%, 100% { transform: rotate(0deg); }
+  89% { transform: rotate(-10deg); }
+  92% { transform: rotate(8deg); }
+  95% { transform: rotate(-5deg); }
+  98% { transform: rotate(2deg); }
+}
 
 /* The sprite the two of him are stamped from, which draws nothing itself. */
 .sprite { position: absolute; width: 0; height: 0; overflow: hidden; }
@@ -409,11 +427,13 @@ footer {
     <circle cx='142' cy='256' r='7' fill='#FF2E96'/>
     <circle cx='142' cy='284' r='6' fill='#2FD3CB'/>
     <circle cx='142' cy='310' r='5' fill='#FFE23D'/>
-    <path d='M180 228 Q222 216 230 156' stroke='#FFFFFF' stroke-width='20' fill='none' stroke-linecap='round'/>
-    <rect x='218' y='88' width='10' height='70' rx='5' transform='rotate(12 223 123)' fill='#4A0A2C'/>
-    <circle class='twinkle' cx='230' cy='82' r='9' fill='#FFE23D'/>
-    <circle class='twinkle' cx='256' cy='62' r='5' fill='#9DE93F'/>
-    <circle class='twinkle' cx='208' cy='52' r='4' fill='#2FD3CB'/>
+    <g style='transform-box: view-box; transform-origin: 182px 228px; animation: wave 9s ease-in-out infinite; animation-play-state: var(--wave, paused);'>
+      <path d='M180 228 Q222 216 230 156' stroke='#FFFFFF' stroke-width='20' fill='none' stroke-linecap='round'/>
+      <rect x='218' y='88' width='10' height='70' rx='5' transform='rotate(12 223 123)' fill='#4A0A2C'/>
+      <circle cx='230' cy='82' r='9' fill='#FFE23D'/>
+      <circle cx='256' cy='62' r='5' fill='#9DE93F'/>
+      <circle cx='208' cy='52' r='4' fill='#2FD3CB'/>
+    </g>
     <circle cx='140' cy='182' r='47' fill='#FFF0F8'/>
     <circle cx='106' cy='202' r='22' fill='#FF9BD8'/>
     <circle cx='174' cy='202' r='22' fill='#FF9BD8'/>
@@ -1007,12 +1027,12 @@ rails s</code></pre>
   'use strict'
 
   var hero = document.querySelector('.hero .earl')
-  var list = document.querySelector('.rail ul')
   var pocket = document.querySelector('.understudy')
-  if (!hero || !list || !pocket) { return }
+  var art = pocket && pocket.querySelector('svg')
+  if (!hero || !pocket || !art) { return }
 
-  var ROOM = 188   // clear window under the rail before he is worth showing at all
-  var SMALL = 48   // the thumbnail he starts as
+  var ROOM = 120   // floor under the rail before he is worth standing up at all
+  var SMALL = 26   // the few pixels of hat he starts as
   var TALL = 430   // and the most of him there is, however deep the window
   var RISE = 620   // how far the page travels while he grows to full height
   var still = window.matchMedia('(prefers-reduced-motion: reduce)')
@@ -1020,21 +1040,17 @@ rails s</code></pre>
   // Called straight off the scroll rather than through a frame request: it reads one
   // rectangle, which the browser has already worked out to keep the rail stuck.
   function place() {
-    var room = Math.min(window.innerHeight - list.getBoundingClientRect().bottom - 26, TALL)
-    if (room < ROOM || getComputedStyle(pocket).display === 'none') {
-      pocket.style.height = '0px'
-      pocket.style.opacity = '0'
-      return
-    }
+    // The floor is whatever the list of sections leaves; the flex box already measures it.
+    var floor = Math.min(pocket.clientHeight, TALL)
     // How far the hero's Earl has travelled past the top of the window.
     var gone = -hero.getBoundingClientRect().bottom
-    if (gone <= 0) {
-      pocket.style.height = '0px'
+    if (floor < ROOM || gone <= 0 || getComputedStyle(pocket).display === 'none') {
+      art.style.height = '0px'
       pocket.style.opacity = '0'
       return
     }
     var grown = still.matches ? 1 : Math.min(gone / RISE, 1)
-    pocket.style.height = (SMALL + grown * (room - SMALL)).toFixed(1) + 'px'
+    art.style.height = (SMALL + grown * (floor - SMALL)).toFixed(1) + 'px'
     pocket.style.opacity = Math.min(gone / 140, 1).toFixed(3)
   }
 
