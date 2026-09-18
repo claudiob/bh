@@ -1,251 +1,1060 @@
----
----
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="Bh · Bootstrap Helpers for Ruby">
-    <meta name="keywords" content="Bootstrap, Rails, ActionView, helpers, HTML, CSS, JS">
-    <meta name="author" content="Claudio B.">
-    <title>Bh &middot; Bootstrap helpers</title>
-    <link href="//netdna.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" media="screen" rel="stylesheet" type="text/css" />
-    <link href="//netdna.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" media="screen" rel="stylesheet" type="text/css" />
-    <link href="data:text/css;charset=utf-8," data-href="//netdna.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap-theme.min.css" rel="stylesheet" id="bs-theme-stylesheet">
-    <link rel="stylesheet" media="screen" href="//netdna.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" />
-    <link href="assets/css/bh.css" rel="stylesheet">
-    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!--[if lt IE 9]>
-      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
-      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-    <![endif]-->
-    <link rel="apple-touch-icon-precomposed" href="apple-touch-icon-precomposed.png">
-    <link rel="icon" href="favicon.ico">
-  </head>
-  <body>
-    <a class="sr-only sr-only-focusable" href="#content">Skip to main content</a>
-    <header class="navbar navbar-fixed-top bs-docs-nav" id="top" role="banner">
-      <div class="container">
-        <div class="navbar-header">
-          <button class="navbar-toggle collapsed" type="button" data-toggle="collapse" data-target=".bs-navbar-collapse">
-            <span class="sr-only">Toggle navigation</span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </button>
-          <a href="#" class="navbar-brand">Bh · Bootstrap Helpers</a>
-        </div>
-        <nav class="collapse navbar-collapse bs-navbar-collapse" role="navigation">
-          <ul class="nav navbar-nav">
-          </ul>
-          <ul class="nav navbar-nav navbar-right">
-            <li><a href="http://www.rubydoc.info/github/Fullscreen/bh/master/Bh/Helpers"><span class="fa fa-fw fa-book"></span> API docs on Rubydoc</a></li>
-            <li><a href="https://github.com/Fullscreen/bh"><span class="fa fa-fw fa-github"></span> Source code on GitHub</a></li>
-          </ul>
-        </nav>
-      </div>
-    </header>
+<!doctype html>
+<html lang='en'>
+<head>
+<meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'>
+<title>Bh — Bootstrap 6 in a Rails app, with the markup already written</title>
+<meta name='description' content='Bh is a Rails engine for Bootstrap 6: a form builder that dresses every field, a combobox, a 6-digit code, a dialog, a toast and a thread of messages, and the one stylesheet and script that carry them.'>
+<!-- All rendered from icon.svg by build-icons.sh; nothing here is fetched from anywhere else. -->
+<link rel='icon' href='icon.svg' type='image/svg+xml'>
+<link rel='icon' href='favicon-96x96.png' type='image/png' sizes='96x96'>
+<link rel='icon' href='favicon.ico' sizes='16x16 32x32 48x48'>
+<link rel='apple-touch-icon' href='apple-touch-icon.png' sizes='180x180'>
+<link rel='manifest' href='site.webmanifest'>
+<meta name='apple-mobile-web-app-title' content='Bh'>
+<meta name='theme-color' content='#F056B4' media='(prefers-color-scheme: light)'>
+<meta name='theme-color' content='#1A0412' media='(prefers-color-scheme: dark)'>
+<link rel='preconnect' href='https://fonts.googleapis.com'>
+<link rel='preconnect' href='https://fonts.gstatic.com' crossorigin>
+<link rel='stylesheet' href='https://fonts.googleapis.com/css2?family=Modak&family=Baloo+2:wght@500;600;700;800&display=swap'>
+<style>
+:root {
+  --ground-1: #FFC2E6;
+  --ground-2: #FF8AD2;
+  --ground-3: #F056B4;
+  --ink: #4A0A2C;
+  --ink-soft: #7A2A54;
+  --ink-deep: #240415;
+  --card: rgba(255, 255, 255, 0.93);
+  --card-edge: rgba(74, 10, 44, 0.12);
+  --card-solid: #FFFFFF;
+  --chip: #FFE6F3;
+  --chip-ink: #4A0A2C;
+  --code-bg: #2C0519;
+  --code-ink: #FFE6F3;
+  --code-key: #FF8AD2;
+  --code-str: #9DE93F;
+  --code-dim: #C58FAE;
+  --accent: #C01274;
+  --accent-bright: #FF2E96;
+  --shadow: rgba(74, 10, 44, 0.20);
+  --hat: #4A0A2C;
+  --goo-op: 1;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --ground-1: #4A0E38;
+    --ground-2: #2A0620;
+    --ground-3: #160310;
+    --ink: #FFE6F3;
+    --ink-soft: #E3AFCE;
+    --ink-deep: #FFFFFF;
+    --card: rgba(44, 6, 30, 0.90);
+    --card-edge: rgba(255, 143, 210, 0.22);
+    --card-solid: #34081F;
+    --chip: #4A0E33;
+    --chip-ink: #FFE6F3;
+    --code-bg: #14020D;
+    --code-ink: #FFE6F3;
+    --code-dim: #A87593;
+    --accent: #FF8AD2;
+    --accent-bright: #FF6FC6;
+    --shadow: rgba(0, 0, 0, 0.5);
+    --hat: #FFC2E6;
+    --goo-op: 0.85;
+  }
+}
 
-    <div class="bs-docs-header" id="content">
-      <div class="container">
-        Include Bootstrap components in your Ruby apps with short, documented, tested helpers.
+* { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; scroll-behavior: smooth; scroll-padding-top: 1.5rem; }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+
+body {
+  margin: 0;
+  background: radial-gradient(120% 85% at 46% 12%, var(--ground-1) 0%, var(--ground-2) 46%, var(--ground-3) 100%);
+  background-attachment: fixed;
+  color: var(--ink);
+  font: 500 1rem/1.65 'Baloo 2', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  overflow-x: hidden;
+}
+
+/* The goo field: one fixed sheet of spiked orbs behind everything, each drifting at its
+   own rate as the page scrolls, so the page reads as depth rather than as a flat sheet. */
+.goo {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  opacity: var(--goo-op);
+}
+.goo svg { width: 100%; height: 100%; display: block; }
+
+a { color: var(--accent); text-underline-offset: 0.2em; }
+a:hover { text-decoration-thickness: 0.16em; }
+:focus-visible { outline: 3px solid var(--accent-bright); outline-offset: 3px; border-radius: 0.5rem; }
+
+.skip {
+  position: absolute; left: 0.75rem; top: -5rem; z-index: 60;
+  background: var(--card-solid); color: var(--accent);
+  padding: 0.7rem 1.1rem; border-radius: 0 0 0.8rem 0.8rem;
+  font-weight: 700; text-decoration: none;
+  transition: top 0.15s ease-out;
+}
+.skip:focus { top: 0; }
+
+h1, h2, h3 { line-height: 1.12; margin: 0; }
+h2 {
+  font-size: clamp(1.7rem, 4.4vw, 2.3rem); font-weight: 800; color: var(--ink);
+  letter-spacing: -0.015em;
+}
+h3 { font-size: 1.12rem; font-weight: 800; margin: 1.6rem 0 0.5rem; color: var(--ink); }
+p { margin: 0 0 1rem; }
+p:last-child { margin-bottom: 0; }
+
+/* ---------- hero ---------- */
+
+.hero {
+  position: relative; z-index: 1;
+  padding: clamp(2.5rem, 7vw, 5rem) 1.25rem clamp(3rem, 8vw, 6rem);
+}
+.hero-in {
+  width: min(72rem, 100%); margin-inline: auto;
+  display: grid; grid-template-columns: 1fr auto; gap: clamp(1rem, 4vw, 3rem);
+  align-items: center;
+}
+.kicker {
+  display: inline-flex; align-items: center; gap: 0.6rem;
+  background: var(--ink); color: #FFD3EC;
+  border-radius: 999px; padding: 0.45rem 1.1rem;
+  font-size: 0.78rem; font-weight: 800; letter-spacing: 0.2em; text-transform: uppercase;
+}
+@media (prefers-color-scheme: dark) { .kicker { background: #FF2E96; color: #240415; } }
+
+.wordmark {
+  font-family: Modak, system-ui, cursive; font-weight: 400;
+  font-size: clamp(3.4rem, 11vw, 6rem); line-height: 0.86;
+  margin: 1rem 0 0; color: #FFFFFF;
+  -webkit-text-stroke: clamp(2px, 0.55vw, 4px) var(--hat);
+  text-shadow: 5px 5px 0 var(--accent), 10px 12px 26px var(--shadow);
+  letter-spacing: 0.01em;
+}
+@media (prefers-color-scheme: dark) {
+  .wordmark { color: #2A0620; -webkit-text-stroke-color: #FFC2E6; text-shadow: 5px 5px 0 #FF2E96; }
+}
+.lede { font-size: clamp(1.05rem, 2.4vw, 1.28rem); font-weight: 600; margin: 1.35rem 0 0; max-width: 34rem; }
+.cta { display: flex; flex-wrap: wrap; gap: 0.8rem; margin-top: 1.7rem; }
+.btn {
+  min-height: 52px; display: inline-flex; align-items: center; gap: 0.5rem;
+  padding: 0 1.7rem; border-radius: 999px;
+  font-weight: 800; font-size: 1.05rem; text-decoration: none;
+}
+.btn-solid { background: var(--ink); color: #FFE6F3; box-shadow: 0 7px 0 var(--ink-deep); }
+.btn-ghost { background: var(--card-solid); color: var(--ink); box-shadow: 0 7px 0 var(--card-edge); }
+@media (prefers-color-scheme: dark) {
+  .btn-solid { background: #FF2E96; color: #240415; box-shadow: 0 7px 0 #A8105F; }
+}
+.btn:active { transform: translateY(3px); box-shadow: 0 4px 0 var(--ink-deep); }
+
+.earl { width: clamp(11rem, 26vw, 19rem); height: auto; display: block; }
+@media (width < 860px) {
+  .hero-in { grid-template-columns: 1fr; }
+  .earl { width: 12rem; margin-inline: auto; order: -1; }
+}
+
+/* ---------- shell ---------- */
+
+.shell {
+  position: relative; z-index: 1;
+  width: min(72rem, 100% - 2.5rem); margin-inline: auto;
+  display: grid; grid-template-columns: 16rem 1fr; gap: 2.2rem;
+  padding-bottom: 5rem;
+}
+@media (width < 980px) { .shell { grid-template-columns: 1fr; gap: 1.4rem; } }
+
+.rail { align-self: start; position: sticky; top: 1.5rem; }
+@media (width < 980px) { .rail { position: static; } }
+.rail h2 {
+  font-size: 0.78rem; font-weight: 800; letter-spacing: 0.2em; text-transform: uppercase;
+  color: var(--ink); opacity: 0.72; margin: 0 0 0.7rem 1rem;
+}
+.rail ul { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 0.55rem; }
+@media (width < 980px) { .rail ul { flex-direction: row; flex-wrap: wrap; } }
+.rail a {
+  display: flex; align-items: center; gap: 0.7rem;
+  min-height: 48px; padding: 0.4rem 1.05rem;
+  border-radius: 999px; background: var(--card-solid); color: var(--ink);
+  text-decoration: none; font-weight: 700; font-size: 0.98rem;
+  box-shadow: 0 5px 0 var(--card-edge);
+}
+.rail a:hover { background: var(--chip); }
+.rail a[aria-current='true'] { background: var(--ink); color: #FFE6F3; }
+@media (prefers-color-scheme: dark) { .rail a[aria-current='true'] { background: #FF2E96; color: #240415; } }
+.gum {
+  width: 1.25rem; height: 1.25rem; border-radius: 50%; flex-shrink: 0;
+  box-shadow: inset -3px -3px 0 rgba(0, 0, 0, 0.18);
+}
+
+main { min-width: 0; }
+section { margin-bottom: 2rem; scroll-margin-top: 1.5rem; }
+.panel {
+  background: var(--card);
+  backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px);
+  border: 1px solid var(--card-edge);
+  border-radius: 1.6rem;
+  padding: clamp(1.3rem, 3vw, 2.1rem);
+  box-shadow: 0 18px 44px var(--shadow);
+}
+.panel > p, .panel > h3 + p { color: var(--ink-soft); }
+.panel > h2 + p { margin-top: 0.7rem; font-size: 1.06rem; }
+
+pre {
+  margin: 0; padding: 1.1rem 1.2rem; border-radius: 1rem;
+  background: var(--code-bg); color: var(--code-ink);
+  overflow-x: auto; font-size: 0.88rem; line-height: 1.7;
+}
+pre, code { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; }
+.k { color: var(--code-key); }
+.s { color: var(--code-str); }
+.c { color: var(--code-dim); }
+p code, li code, dd code, td code {
+  background: var(--chip); color: var(--chip-ink);
+  padding: 0.08em 0.4em; border-radius: 0.4rem; font-size: 0.9em; font-weight: 600;
+}
+
+.split { display: grid; grid-template-columns: 1fr 1fr; gap: 1.1rem; margin-top: 1.2rem; }
+@media (width < 780px) { .split { grid-template-columns: 1fr; } }
+.demo {
+  border: 2px dashed var(--card-edge); border-radius: 1rem;
+  padding: 1.1rem; background: var(--card-solid);
+  display: flex; flex-direction: column; gap: 0.7rem; justify-content: center;
+}
+.demo-label {
+  font-size: 0.7rem; font-weight: 800; letter-spacing: 0.18em; text-transform: uppercase;
+  color: var(--accent); margin-bottom: 0.2rem;
+}
+
+/* ---------- the facsimiles ---------- */
+
+.f-label { font-weight: 700; font-size: 0.95rem; }
+.f-control {
+  min-height: 46px; border-radius: 0.8rem; border: 2px solid var(--card-edge);
+  background: var(--card-solid); color: var(--ink);
+  display: flex; align-items: center; padding: 0 0.85rem; font: inherit; font-weight: 600;
+  width: 100%;
+}
+.f-control.dim { color: var(--ink-soft); }
+.f-pill {
+  min-height: 46px; border-radius: 999px; border: 0;
+  background: var(--accent-bright); color: #FFFFFF;
+  font: inherit; font-weight: 800; padding: 0 1.4rem; cursor: pointer;
+}
+.f-pill.out { background: transparent; color: var(--ink); border: 2px solid var(--card-edge); }
+.f-slots { display: flex; gap: 0.45rem; }
+.f-slot {
+  flex: 1 1 0; min-width: 0; height: 52px; border-radius: 0.7rem;
+  border: 2px solid var(--card-edge); background: var(--card-solid);
+  display: flex; align-items: center; justify-content: center;
+  font-weight: 800; font-size: 1.25rem;
+}
+.f-slot.on { border-color: var(--accent-bright); }
+.f-menu {
+  border: 2px solid var(--card-edge); border-radius: 0.9rem; overflow: hidden;
+  background: var(--card-solid);
+}
+.f-menu-row {
+  display: flex; align-items: center; gap: 0.6rem; padding: 0.55rem 0.8rem;
+  font-weight: 600; font-size: 0.95rem; border-top: 1px solid var(--card-edge);
+}
+.f-menu-row:first-child { border-top: 0; }
+.f-tick { color: var(--accent-bright); font-weight: 800; }
+.f-count { margin-left: auto; color: var(--ink-soft); font-size: 0.85rem; }
+.f-toast {
+  border-radius: 0.8rem; padding: 0.7rem 0.9rem; font-weight: 700; font-size: 0.92rem;
+  display: flex; align-items: center; gap: 0.6rem;
+}
+.f-toast.ok { background: #E6FAF0; border: 1px solid #9FE4C4; color: #0F4F2E; }
+.f-toast.bad { background: #FFE8EE; border: 1px solid #F5B3C4; color: #6E0A24; }
+.f-bubble { max-width: 85%; padding: 0.6rem 0.9rem; border-radius: 1rem; font-weight: 600; font-size: 0.94rem; }
+.f-in { align-self: flex-start; background: var(--chip); border-bottom-left-radius: 0.25rem; }
+.f-out { align-self: flex-end; background: #FFD0E9; border-bottom-right-radius: 0.25rem; color: #4A0A2C; }
+.f-aside { font-size: 0.74rem; color: var(--ink-soft); font-weight: 700; }
+.f-aside.r { align-self: flex-end; }
+.f-typing span {
+  display: inline-block; width: 0.42rem; height: 0.42rem; border-radius: 50%;
+  background: var(--ink-soft); margin-right: 0.2rem;
+  animation: blink 1.3s infinite;
+}
+.f-typing span:nth-child(2) { animation-delay: 0.18s; }
+.f-typing span:nth-child(3) { animation-delay: 0.36s; }
+@keyframes blink { 0%, 60%, 100% { opacity: 0.3; } 30% { opacity: 1; } }
+@media (prefers-reduced-motion: reduce) { .f-typing span { animation: none; opacity: 0.6; } }
+.f-dialog { border: 2px solid var(--card-edge); border-radius: 1rem; overflow: hidden; }
+.f-dialog-h {
+  display: flex; align-items: center; gap: 0.6rem;
+  padding: 0.7rem 0.9rem; border-bottom: 1px solid var(--card-edge); font-weight: 800;
+}
+.f-dialog-b { padding: 0.9rem; font-size: 0.94rem; color: var(--ink-soft); font-weight: 600; }
+.f-dialog-f { padding: 0.7rem 0.9rem; border-top: 1px solid var(--card-edge); text-align: right; }
+.f-x { margin-left: auto; color: var(--ink-soft); font-weight: 800; }
+.f-flow {
+  border-radius: 1rem; padding: 0.9rem; text-align: center;
+  background: linear-gradient(160deg, #C9D9EA, #9BC0EC);
+  display: flex; flex-direction: column; gap: 0.6rem; align-items: center;
+}
+.f-flow-card { background: rgba(255, 255, 255, 0.92); border-radius: 0.8rem; padding: 0.8rem; width: 100%; color: #10314F; font-weight: 700; }
+
+.grid-fields { display: grid; grid-template-columns: repeat(auto-fit, minmax(9rem, 1fr)); gap: 0.6rem; }
+.chips { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 1rem; padding: 0; list-style: none; }
+.chips li {
+  background: var(--chip); color: var(--chip-ink); border-radius: 999px;
+  padding: 0.35rem 0.85rem; font-size: 0.9rem; font-weight: 700;
+}
+.chips code { background: transparent; padding: 0; font-size: 0.9em; }
+
+dl.defs { margin: 1rem 0 0; }
+dl.defs dt { font-weight: 800; margin-top: 0.9rem; }
+dl.defs dd { margin: 0.15rem 0 0; color: var(--ink-soft); }
+
+.note {
+  margin-top: 1.1rem; border-left: 4px solid var(--accent-bright);
+  padding: 0.2rem 0 0.2rem 0.9rem; color: var(--ink-soft); font-weight: 600;
+}
+
+/* ---------- the spell ---------- */
+
+.spell {
+  position: fixed; right: 1.1rem; bottom: 1.1rem; z-index: 50;
+  min-height: 52px; display: inline-flex; align-items: center; gap: 0.6rem;
+  padding: 0 1.2rem 0 0.9rem; border: 0; border-radius: 999px;
+  background: var(--card-solid); color: var(--ink);
+  font: inherit; font-weight: 800; font-size: 0.95rem; cursor: pointer;
+  box-shadow: 0 7px 0 var(--card-edge), 0 14px 34px var(--shadow);
+}
+.spell:hover { background: var(--chip); }
+.spell:active { transform: translateY(3px); box-shadow: 0 4px 0 var(--card-edge); }
+.spell[aria-pressed='true'] { background: var(--ink); color: #FFE6F3; }
+@media (prefers-color-scheme: dark) {
+  .spell[aria-pressed='true'] { background: #FF2E96; color: #240415; }
+}
+.spell svg { width: 1.5rem; height: 1.5rem; flex-shrink: 0; }
+.spell .wand { stroke: currentColor; stroke-width: 2.4; stroke-linecap: round; }
+.spell .spark { fill: #FFB13D; opacity: 0.35; transform-origin: center; }
+.spell[aria-pressed='true'] .spark { opacity: 1; animation: twinkle 1.9s ease-in-out infinite; }
+.spell[aria-pressed='true'] .spark:nth-of-type(2) { animation-delay: 0.5s; }
+.spell[aria-pressed='true'] .spark:nth-of-type(3) { animation-delay: 1s; }
+@keyframes twinkle { 0%, 100% { opacity: 0.35; } 50% { opacity: 1; } }
+@media (prefers-reduced-motion: reduce) {
+  .spell[aria-pressed='true'] .spark { animation: none; }
+}
+@media (width < 560px) { .spell .spell-words { display: none; } .spell { padding: 0 0.9rem; } }
+
+footer {
+  position: relative; z-index: 1;
+  border-top: 1px solid var(--card-edge);
+  background: var(--card);
+  backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px);
+  padding: 2.5rem 1.25rem 3rem;
+}
+.foot-in { width: min(72rem, 100%); margin-inline: auto; display: flex; flex-wrap: wrap; gap: 1.5rem; align-items: center; }
+.foot-in img { width: 3rem; height: 3rem; border-radius: 0.8rem; }
+.foot-links { margin-left: auto; display: flex; flex-wrap: wrap; gap: 1.4rem; font-weight: 700; }
+</style>
+</head>
+<body>
+
+<a class='skip' href='#content'>Skip to the components</a>
+
+<div class='goo' aria-hidden='true'>
+  <svg viewBox='0 0 1440 900' preserveAspectRatio='xMidYMid slice'>
+    <defs id='goo-defs'>
+      <filter id='gloss' x='-50%' y='-50%' width='200%' height='200%'>
+        <feGaussianBlur stdDeviation='7'/>
+      </filter>
+      <filter id='cast' x='-50%' y='-50%' width='200%' height='200%'>
+        <feGaussianBlur stdDeviation='18'/>
+      </filter>
+    </defs>
+    <g id='orbs'></g>
+  </svg>
+</div>
+
+<header class='hero'>
+  <div class='hero-in'>
+    <div>
+      <p class='kicker'><span aria-hidden='true'>✻</span> The Earl of Bubblehum presents <span aria-hidden='true'>✻</span></p>
+      <h1 class='wordmark'>Bootstrap<br>Helpers</h1>
+      <p class='lede'>Bootstrap&nbsp;6 in a Rails app, with the markup already written. A form builder that dresses every field, the components Bootstrap ships behavior for and no markup, and the one stylesheet and script that carry them.</p>
+      <div class='cta'>
+        <a class='btn btn-solid' href='#install'>gem install bh</a>
+        <a class='btn btn-ghost' href='https://github.com/claudiob/bh'>Source</a>
       </div>
     </div>
 
-    <div class="container bs-docs-container">
-      <div class="row">
-        <div class="col-md-9" role="main">
-          {% include overview.html %}
-          {% include alerts.html %}
-          {% include panels.html %}
-          {% include panel_rows.html %}
-          {% include modals.html %}
-          {% include navs.html %}
-          {% include navbars.html %}
-          {% include dropdowns.html %}
-          {% include progress_bars.html %}
-          {% include icons.html %}
-          {% include buttons.html %}
-          {% include button_forms.html %}
-          {% include links.html %}
-          {% include forms.html %}
-          {% include cdn.html %}
+    <svg class='earl' viewBox='0 0 280 380' role='img' aria-labelledby='earl-title'>
+      <title id='earl-title'>The Earl of Bubblehum, a magician in a tall hat with a gumball beard, raising a wand.</title>
+      <defs>
+        <linearGradient id='coat' x1='0' y1='0' x2='0' y2='1'>
+          <stop offset='0' stop-color='#FFFFFF'/>
+          <stop offset='1' stop-color='#FFC2E6'/>
+        </linearGradient>
+      </defs>
+      <ellipse cx='140' cy='366' rx='104' ry='14' fill='#B4157A' opacity='0.3'/>
+      <path d='M84 370 Q74 258 104 222 L180 222 Q210 258 200 370 Z' fill='url(#coat)'/>
+      <path d='M126 222 L142 314 L158 222 Z' fill='#FF6FC6' opacity='0.5'/>
+      <circle cx='142' cy='256' r='7' fill='#FF2E96'/>
+      <circle cx='142' cy='284' r='6' fill='#2FD3CB'/>
+      <circle cx='142' cy='310' r='5' fill='#FFE23D'/>
+      <path d='M180 228 Q222 216 230 156' stroke='#FFFFFF' stroke-width='20' fill='none' stroke-linecap='round'/>
+      <rect x='218' y='88' width='10' height='70' rx='5' transform='rotate(12 223 123)' fill='#4A0A2C'/>
+      <circle class='twinkle' cx='230' cy='82' r='9' fill='#FFE23D'/>
+      <circle class='twinkle' cx='256' cy='62' r='5' fill='#9DE93F'/>
+      <circle class='twinkle' cx='208' cy='52' r='4' fill='#2FD3CB'/>
+      <circle cx='140' cy='182' r='47' fill='#FFF0F8'/>
+      <circle cx='106' cy='202' r='22' fill='#FF9BD8'/>
+      <circle cx='174' cy='202' r='22' fill='#FF9BD8'/>
+      <circle cx='140' cy='215' r='26' fill='#FF9BD8'/>
+      <circle cx='125' cy='173' r='5.5' fill='#4A0A2C'/>
+      <circle cx='156' cy='173' r='5.5' fill='#4A0A2C'/>
+      <circle cx='123' cy='171' r='2' fill='#FFFFFF'/>
+      <circle cx='154' cy='171' r='2' fill='#FFFFFF'/>
+      <path d='M110 191 Q125 204 140 191 Q155 204 172 191' stroke='#E0509E' stroke-width='8' fill='none' stroke-linecap='round'/>
+      <path d='M62 150 Q140 128 218 150 Q216 164 140 166 Q64 164 62 150 Z' fill='#FF2E96'/>
+      <path d='M94 152 Q110 30 158 4 Q178 68 182 152 Z' fill='#FF2E96'/>
+      <path d='M98 133 Q140 122 180 133 L179 152 Q140 142 96 152 Z' fill='#4A0A2C'/>
+      <path d='M158 4 L164 22 L183 24 L168 37 L174 56 L156 44 L139 55 L145 36 L130 23 L149 21 Z' fill='#FFE23D'/>
+    </svg>
+  </div>
+</header>
+
+<div class='shell' id='content'>
+
+  <nav class='rail' aria-label='Components'>
+    <h2>The bill</h2>
+    <ul>
+      <li><a href='#install'><span class='gum' style='background:#FF2E96'></span> How to install</a></li>
+      <li><a href='#form'><span class='gum' style='background:#FF6FC6'></span> The form</a></li>
+      <li><a href='#fields'><span class='gum' style='background:#E86FFF'></span> Every field</a></li>
+      <li><a href='#combobox'><span class='gum' style='background:#9D6BFF'></span> Combobox</a></li>
+      <li><a href='#pin'><span class='gum' style='background:#6B8BFF'></span> The 6-digit code</a></li>
+      <li><a href='#phone'><span class='gum' style='background:#2FD3CB'></span> Phone numbers</a></li>
+      <li><a href='#dialog'><span class='gum' style='background:#3FD98E'></span> Dialogs</a></li>
+      <li><a href='#toasts'><span class='gum' style='background:#9DE93F'></span> Toasts</a></li>
+      <li><a href='#chat'><span class='gum' style='background:#D8E63C'></span> Chat</a></li>
+      <li><a href='#flow'><span class='gum' style='background:#FFE23D'></span> Flow</a></li>
+      <li><a href='#controllers'><span class='gum' style='background:#FFB13D'></span> The controllers</a></li>
+      <li><a href='#dummy'><span class='gum' style='background:#FF7A3D'></span> Trying it out</a></li>
+    </ul>
+  </nav>
+
+  <main>
+
+    <section id='install'>
+      <div class='panel'>
+        <h2>How to install</h2>
+        <p>Bh is a Rails engine. It brings Bootstrap&nbsp;6 with it, so nothing else goes in the Gemfile.</p>
+<pre><code><span class='c'># Gemfile</span>
+<span class='k'>gem</span> <span class='s'>'bh'</span>, <span class='s'>'6.2.0.alpha'</span></code></pre>
+        <p style='margin-top:1rem'>Spelled out, because <code>~&gt;</code> does not reach a prerelease: Bundler would pass over <code>6.2.0.alpha</code> for the 6.1.4 standing behind it. Once a final 6.2 is cut the pin is <code>~&gt; 6.2.0</code>, which stops short of <code>6.3</code> — this line breaks on a minor rather than on a major, so a minor is what to hold. Rails&nbsp;8.1 and Ruby&nbsp;3.2 are the minimum.</p>
+        <div class='note'>6.0 and 6.1 are a different gem wearing this name: Bootstrap&nbsp;3 wrappers with a Bootstrap&nbsp;6 stopgap over them, and not one of their helpers survives here. They could not be withdrawn — RubyGems keeps anything published over thirty days ago — so pin on purpose.</div>
+
+        <h3>In the head</h3>
+        <p>With the gem in the bundle an app serves <code>/bh/css/bh.css</code> and <code>/bh/js/bh.js</code> itself. One helper puts both in the head, along with everything Bootstrap and Turbo read.</p>
+<pre><code><span class='k'>&lt;%=</span> bh_head_tags <span class='k'>%&gt;</span></code></pre>
+        <p style='margin-top:1rem'>Bh links no icon font of its own: which glyphs a page draws is the host's business, and a gem reaching for somebody else's CDN unasked is not. A combobox's chevron and a bookmark's star are Bootstrap Icons, so a page that wants them says where they come from.</p>
+
+        <h3>From npm</h3>
+        <p>For a host that bundles the sources itself rather than serving the built tree. The package is <code>bh6</code>, since <code>bh</code> on npm is somebody else's.</p>
+<pre><code>npm install bh6
+
+<span class='c'>// esbuild: Bootstrap 6 is not on npm, so its bundle ships inside the package</span>
+alias: { bootstrap: <span class='s'>'bh6/bootstrap'</span> }</code></pre>
+      </div>
+    </section>
+
+    <section id='form'>
+      <div class='panel'>
+        <h2>The form</h2>
+        <p>Given to one form as <code>builder:</code>, or to every form of a controller through <code>default_form_builder</code>. What a view passes is kept: its classes join the builder's, its <code>data</code> is merged key by key with the builder's, and any other option of its overrides.</p>
+<pre><code><span class='k'>class</span> ApplicationController &lt; ActionController::Base
+  default_form_builder Bh::FormBuilder
+<span class='k'>end</span></code></pre>
+        <div class='split'>
+          <div>
+<pre><code><span class='k'>&lt;%=</span> form.fieldset <span class='s'>'Your code'</span> <span class='k'>do %&gt;</span>
+  <span class='k'>&lt;%=</span> form.label <span class='s'>:pin</span>, <span class='s'>'6-digit code'</span> <span class='k'>%&gt;</span>
+  <span class='k'>&lt;%=</span> form.pin_field <span class='s'>:pin</span> <span class='k'>%&gt;</span>
+  <span class='k'>&lt;%=</span> form.submit <span class='s'>'Confirm'</span> <span class='k'>%&gt;</span>
+  <span class='k'>&lt;%=</span> form.button <span class='s'>'Call us'</span>, type: <span class='s'>:button</span> <span class='k'>%&gt;</span>
+<span class='k'>&lt;% end %&gt;</span></code></pre>
+          </div>
+          <div class='demo'>
+            <p class='demo-label'>What it draws</p>
+            <p class='f-label' style='font-size:1.05rem;font-weight:800'>Your code</p>
+            <label class='f-label' for='d-pin'>6-digit code</label>
+            <div class='f-slots' id='d-pin'>
+              <div class='f-slot'>4</div><div class='f-slot'>8</div><div class='f-slot'>2</div>
+              <div class='f-slot'>9</div><div class='f-slot'>1</div><div class='f-slot on'>3</div>
+            </div>
+            <button type='button' class='f-pill'>Confirm</button>
+            <button type='button' class='f-pill out'>Call us</button>
+          </div>
         </div>
-        <div class="col-md-3">
-          <div class="bs-docs-sidebar hidden-print hidden-xs hidden-sm" role="complementary">
-            <ul class="nav bs-docs-sidenav">
-              <li>
-                <a href="#overview">Overview</a>
-                <ul class="nav">
-                  <li><a href="#overview-install">How to install</a></li>
-                </ul>
-              </li>
-              <li>
-                <a href="#alerts">Alerts</a>
-                <ul class="nav">
-                  <li><a href="#basic-alerts">Basic example</a></li>
-                  <li><a href="#dismissible-alerts">Dismissible</a></li>
-                  <li><a href="#contextual-alerts">Context</a></li>
-                  <li><a href="#advanced-alerts">Advanced example</a></li>
-                </ul>
-              </li>
-              <li>
-                <a href="#panels">Panels</a>
-                <ul class="nav">
-                  <li><a href="#basic-panels">Basic example</a></li>
-                  <li><a href="#panels-with-heading">Heading</a></li>
-                  <li><a href="#panels-with-title">Title</a></li>
-                  <li><a href="#contextual-panels">Context</a></li>
-                  <li><a href="#tag-panels">Tag</a></li>
-                  <li><a href="#advanced-panels">Advanced example</a></li>
-                </ul>
-              </li>
-              <li>
-                <a href="#panel_rows">Panel rows</a>
-                <ul class="nav">
-                  <li><a href="#basic-row-of-panels">Basic example</a></li>
-                  <li><a href="#complex-row-of-panels">Advanced example</a></li>
-                </ul>
-              </li>
-              <li>
-                <a href="#modals">Modals</a>
-                <ul class="nav">
-                  <li><a href="#modal-basic">Basic example</a></li>
-                  <li><a href="#modal-size">Size</a></li>
-                  <li><a href="#modal-title">Title</a></li>
-                  <li><a href="#modal-caption">Button caption</a></li>
-                  <li><a href="#modal-button-context">Button context</a></li>
-                  <li><a href="#modal-button-size">Button size</a></li>
-                  <li><a href="#modal-advanced">Advanced example</a></li>
-                </ul>
-              </li>
-              <li>
-                <a href="#navs">Navs</a>
-                <ul class="nav">
-                  <li><a href="#basic-navs">Basic example</a></li>
-                  <li><a href="#justified-navs">Justified tabs</a></li>
-                  <li><a href="#pills">Pills</a></li>
-                  <li><a href="#stacked-pills">Stacked pills</a></li>
-                  <li><a href="#advanced-navs">Advanced example</a></li>
-                </ul>
-              </li>
-              <li>
-                <a href="#navbars">Navbars</a>
-                <ul class="nav">
-                  <li><a href="#navbar-basic">Basic example</a></li>
-                  <li><a href="#navbar-inverted">Inverted colors</a></li>
-                  <li><a href="#navbar-fluid">Fluid container</a></li>
-                  <li><a href="#navbar-static">Static</a></li>
-                  <li><a href="#navbar-top">Fixed to top</a></li>
-                  <li><a href="#navbar-bottom">Fixed to bottom</a></li>
-                  <li><a href="#navbar-advanced">Advanced example</a></li>
-                </ul>
-              </li>
-              <li>
-                <a href="#dropdowns">Dropdowns</a>
-                <ul class="nav">
-                  <li><a href="#dropdown-basic">Basic example</a></li>
-                  <li><a href="#dropdown-align">Right-aligned</a></li>
-                  <li><a href="#dropdown-grouped">Grouped</a></li>
-                  <li><a href="#dropdown-dropup">Dropup</a></li>
-                  <li><a href="#dropdown-context">Button context</a></li>
-                  <li><a href="#dropdown-size">Button size</a></li>
-                  <li><a href="#dropdown-split">Split button</a></li>
-                  <li><a href="#dropdown-advanced">Advanced example</a></li>
-                </ul>
-              </li>
-              <li>
-                <a href="#progress_bars">Progress bars</a>
-                <ul class="nav">
-                  <li><a href="#progress_bar-basic">Basic example</a></li>
-                  <li><a href="#progress_bar-label">Label</a></li>
-                  <li><a href="#progress_bar-context">Context</a></li>
-                  <li><a href="#progress_bar-striped">Striped</a></li>
-                  <li><a href="#progress_bar-animated">Animated</a></li>
-                  <li><a href="#progress_bar-stacked">Stacked</a></li>
-                  <li><a href="#progress_bar-advanced">Advanced example</a></li>
-                </ul>
-              </li>
-              <li>
-                <a href="#icons">Icons</a>
-                <ul class="nav">
-                  <li><a href="#glyphicon-icon">Basic example</a></li>
-                  <li><a href="#font-awesome-icon">Font Awesome example</a></li>
-                </ul>
-              </li>
-              <li>
-                <a href="#buttons">Buttons</a>
-                <ul class="nav">
-                  <li><a href="#button-basic">Basic example</a></li>
-                  <li><a href="#button-context">Context</a></li>
-                  <li><a href="#button-size">Size</a></li>
-                  <li><a href="#button-layout">Block-level</a></li>
-                  <li><a href="#button-advanced">Advanced example</a></li>
-                </ul>
-              </li>
-              <li>
-                <a href="#button_forms">Single-button forms</a>
-              </li>
-              <li>
-                <a href="#links">Links</a>
-              </li>
-              <li>
-                <a href="#forms">Forms (Rails only)</a>
-                <ul class="nav">
-                  <li><a href="#form-basic">Basic forms</a></li>
-                  <li><a href="#form-horizontal">Horizontal forms</a></li>
-                  <li><a href="#form-inline">Inline forms</a></li>
-                  <li><a href="#form-navbar">Navbar forms</a></li>
-                  <li><a href="#form-labels">Labels</a></li>
-                  <li><a href="#form-placeholders">Placeholders</a></li>
-                  <li><a href="#form-input-groups">Input groups</a></li>
-                  <li><a href="#form-errors">Errors</a></li>
-                  <li><a href="#form-help">Help text</a></li>
-                  <li><a href="#form-fieldsets">Fieldsets</a></li>
-                </ul>
-              </li>
-              <li>
-                <a href="#cdn">Bootstrap CDN</a>
-                <ul class="nav">
-                  <li><a href="#cdn-css">Bootstrap CSS</a></li>
-                  <li><a href="#cdn-theme-css">Bootstrap Theme CSS</a></li>
-                  <li><a href="#cdn-font-awesome-css">Font Awesome CSS</a></li>
-                  <li><a href="#cdn-js">Bootstrap JS</a></li>
-                  <li><a href="#cdn-older">Older versions</a></li>
-                  <li><a href="#cdn-non-minified">Non-minified</a></li>
-                  <li><a href="#cdn-uri-scheme">URI scheme</a></li>
-                </ul>
-              </li>
-            </ul>
-            <a href="#" class="bs-docs-theme-toggle">Preview theme</a>
+        <p style='margin-top:1.2rem'><code>fieldset</code> is a one-column grid with a legend where one is given. A <code>label</code> is Bootstrap's <code>form-label</code>; given both words and a block it wraps the control the words name, so a form laid out in two columns has one cell to place rather than a pair to bind. <code>submit</code> and <code>button</code> are the large pill — solid where they submit, outlined where <code>type: :button</code> says they do not — and a disabled one given a <code>title</code> says why on hover, from a wrapper that hears the mouse for it.</p>
+      </div>
+    </section>
+
+    <section id='fields'>
+      <div class='panel'>
+        <h2>Every field</h2>
+        <p>A page says which kind of field it wants and nothing about how it looks. Rails hands an undressed control to whatever the builder has no method for, which is how a Bootstrap class ends up written in a view.</p>
+        <div class='split'>
+          <div>
+<pre><code><span class='k'>&lt;%=</span> form.email_field <span class='s'>:email</span> <span class='k'>%&gt;</span>
+<span class='k'>&lt;%=</span> form.number_field <span class='s'>:size</span> <span class='k'>%&gt;</span>
+<span class='k'>&lt;%=</span> form.date_field <span class='s'>:day</span> <span class='k'>%&gt;</span>
+<span class='k'>&lt;%=</span> form.text_area <span class='s'>:notes</span> <span class='k'>%&gt;</span>
+<span class='k'>&lt;%=</span> form.select <span class='s'>:state</span>, states <span class='k'>%&gt;</span>
+<span class='k'>&lt;%=</span> form.check <span class='s'>:agreed</span>, <span class='s'>'I agree'</span> <span class='k'>%&gt;</span></code></pre>
+          </div>
+          <div class='demo'>
+            <p class='demo-label'>What it draws</p>
+            <div class='grid-fields'>
+              <div class='f-control dim'>ada@example.com</div>
+              <div class='f-control dim'>12</div>
+              <div class='f-control dim'>2026-09-18</div>
+              <div class='f-control dim'>California ▾</div>
+            </div>
+            <div class='f-control dim' style='min-height:64px;align-items:flex-start;padding-top:0.6rem'>Notes…</div>
+            <p style='margin:0;font-weight:700;font-size:0.95rem'><span style='color:var(--accent-bright)'>☑</span> I agree</p>
+          </div>
+        </div>
+        <ul class='chips'>
+          <li><code>text_field</code></li><li><code>email_field</code></li><li><code>number_field</code></li>
+          <li><code>password_field</code></li><li><code>search_field</code></li><li><code>url_field</code></li>
+          <li><code>date_field</code></li><li><code>time_field</code></li><li><code>datetime_field</code></li>
+          <li><code>text_area</code></li><li><code>select</code></li><li><code>check_box</code></li>
+          <li><code>radio_button</code></li><li><code>check</code></li>
+        </ul>
+      </div>
+    </section>
+
+    <section id='combobox'>
+      <div class='panel'>
+        <h2>Combobox</h2>
+        <p>A <code>&lt;select&gt;</code> drawn as a searchable menu, which stays the one thing the form submits. Its <code>:prompt</code> is what the toggle says before anything is picked; every other argument is the select's, and <code>multiple:</code> gives each row a check.</p>
+        <div class='split'>
+          <div>
+<pre><code><span class='k'>&lt;%=</span> form.combobox <span class='s'>:county</span>, counties,
+      { prompt: <span class='s'>'Pick a county'</span> },
+      multiple: <span class='k'>true</span> <span class='k'>%&gt;</span></code></pre>
+            <p style='margin-top:1rem;font-size:0.95rem'>The same thing by hand is a select carrying <code>data-controller='combobox'</code> and nothing else in the markup.</p>
+          </div>
+          <div class='demo'>
+            <p class='demo-label'>What it draws</p>
+            <div class='f-control'>Alameda + 2 more <span style='margin-left:auto;color:var(--accent)'>▾</span></div>
+            <div class='f-menu'>
+              <div class='f-menu-row'><span class='f-tick'>✓</span> Alameda <span class='f-count'>38,405</span></div>
+              <div class='f-menu-row'><span class='f-tick'>✓</span> Marin <span class='f-count'>9,120</span></div>
+              <div class='f-menu-row'><span style='opacity:0.25'>✓</span> Sonoma <span class='f-count'>4,067</span></div>
+              <div class='f-menu-row' style='color:var(--accent);font-weight:800'>All</div>
+            </div>
+          </div>
+        </div>
+        <p style='margin-top:1.2rem'>On a multiple menu <code>data-combobox-all-value</code> names an <em>All</em> row that puts held-back options on the menu, and <code>data-combobox-more-value</code> words the toggle when several are picked. On an option, <code>data-count</code> puts a figure beside it and <code>data-hidden</code> holds it back until <em>All</em> asks. A pick is announced as the select's own <code>change</code>.</p>
+      </div>
+    </section>
+
+    <section id='pin'>
+      <div class='panel'>
+        <h2>The 6-digit code</h2>
+        <p>One real field rendered by Bootstrap as six slots: digits only, exactly six, and <code>autocomplete='one-time-code'</code> so a phone offers the code from the text that brought it. A pasted or autofilled code is a whole one and sends itself; a typed one waits, since the sixth digit may be a typo.</p>
+        <div class='split'>
+          <div>
+<pre><code><span class='k'>&lt;%=</span> form.pin_field <span class='s'>:pin_confirmation</span>,
+      required: <span class='k'>true</span> <span class='k'>%&gt;</span></code></pre>
+          </div>
+          <div class='demo'>
+            <p class='demo-label'>What it draws</p>
+            <div class='f-slots'>
+              <div class='f-slot'>4</div><div class='f-slot'>8</div><div class='f-slot'>2</div>
+              <div class='f-slot'>9</div><div class='f-slot'>1</div><div class='f-slot on'>3</div>
+            </div>
+          </div>
+        </div>
+        <div class='note'>Refused, the slots redden from the container rather than a red box being drawn around all six — the field itself never wears <code>form-control</code>. The slots are held back until the controller draws them, so a page without the script still keeps a field a code can be typed into.</div>
+      </div>
+    </section>
+
+    <section id='phone'>
+      <div class='panel'>
+        <h2>Phone numbers</h2>
+        <p>A North American number reads <code>555-555-5555</code>, decided in the browser and nowhere in Ruby. The server hands over ten digits; the controller formats a cell's text and a field's value on connect, keeps the separators as it is typed, and gives the field <code>pattern</code>, <code>placeholder</code>, <code>title</code> and <code>inputmode</code> where the markup left them blank.</p>
+        <div class='split'>
+          <div>
+<pre><code><span class='k'>&lt;%=</span> form.phone_field <span class='s'>:phone</span> <span class='k'>%&gt;</span></code></pre>
+          </div>
+          <div class='demo'>
+            <p class='demo-label'>What it draws</p>
+            <div class='f-control'>415-555-0000</div>
+          </div>
+        </div>
+        <p style='margin-top:1.2rem'>Storage stays ten bare digits. The shape is the browser's business.</p>
+      </div>
+    </section>
+
+    <section id='dialog'>
+      <div class='panel'>
+        <h2>Dialogs</h2>
+        <p>A link and the dialog it opens: headed, with an X, holding the block, and closed by an <em>Okay</em> too — <code>okay:</code> words it otherwise, <code>okay: false</code> leaves it out. The two share an id made from the link's own words, so a page invents none. The browser's own element brings the backdrop, the focus trap and Esc; nothing is scripted.</p>
+        <div class='split'>
+          <div>
+<pre><code><span class='k'>&lt;%=</span> dialog <span class='s'>'I’m not on Google Business'</span>,
+      title: <span class='s'>'Not a problem'</span> <span class='k'>do %&gt;</span>
+  We will look your business up ourselves.
+<span class='k'>&lt;% end %&gt;</span></code></pre>
+          </div>
+          <div class='demo'>
+            <p class='demo-label'>What it draws</p>
+            <p style='margin:0;font-weight:700'><a href='#dialog'>I’m not on Google Business</a></p>
+            <div class='f-dialog'>
+              <div class='f-dialog-h'>Not a problem <span class='f-x'>✕</span></div>
+              <div class='f-dialog-b'>We will look your business up ourselves.</div>
+              <div class='f-dialog-f'><button type='button' class='f-pill' style='min-height:38px;font-size:0.9rem'>Okay</button></div>
+            </div>
+          </div>
+        </div>
+        <p style='margin-top:1.2rem'>Any link or form with <code>data-turbo-confirm</code> asks through a dialog the bundle draws on the first ask: the first line of the message is the question, the rest are paragraphs, and the answer wears the words of the button that asked. A host in another language names the other word in <code>&lt;meta name='bh-cancel'&gt;</code>.</p>
+      </div>
+    </section>
+
+    <section id='toasts'>
+      <div class='panel'>
+        <h2>Toasts</h2>
+        <p>What the flash says, as a fixed stack at the bottom right: green for a <code>notice</code>, red for an <code>alert</code>, the primary for any other key. Visible at first paint so a message stands before any script runs, and <code>data-turbo-temporary</code> so it never replays from a Back.</p>
+        <div class='split'>
+          <div>
+<pre><code><span class='k'>&lt;%=</span> notices <span class='k'>%&gt;</span></code></pre>
+            <p style='margin-top:1rem;font-size:0.95rem'>The hide is two seconds, held while a reader hovers or focuses a toast, with an X for whoever will not wait. Only words are shown: a value in the flash that is not a string is another part of the host's data and is passed over.</p>
+          </div>
+          <div class='demo'>
+            <p class='demo-label'>What it draws</p>
+            <div class='f-toast ok'>Blue Crew was updated. <span class='f-x'>✕</span></div>
+            <div class='f-toast bad'>The team could not be reached. <span class='f-x'>✕</span></div>
           </div>
         </div>
       </div>
-    </div>
-    <footer class="bs-docs-footer" role="contentinfo">
-      <div class="container">
-        <div class="bs-docs-social">
-          <ul class="bs-docs-social-buttons">
-            <li>
-              <iframe class="github-btn" src="http://ghbtns.com/github-btn.html?user=Fullscreen&amp;repo=bh&amp;type=watch&amp;count=true" width="100" height="20" title="Star on GitHub"></iframe>
-            </li>
-            <li>
-              <iframe class="github-btn" src="http://ghbtns.com/github-btn.html?user=Fullscreen&amp;repo=bh&amp;type=fork&amp;count=true" width="102" height="20" title="Fork on GitHub"></iframe>
-            </li>
-          </ul>
+    </section>
+
+    <section id='chat'>
+      <div class='panel'>
+        <h2>Chat</h2>
+        <p>A thread of messages, newest at the foot, and — where <code>url</code> is given — the field that posts the next one there, suggesting <code>hints</code> one at a time. Any object answering <code>side</code>, <code>text</code>, <code>sender</code>, <code>at</code>, <code>delivery</code> and <code>cost</code> is a message; <code>Bh::Message</code> is for a host that has the facts and no model to hang them on.</p>
+        <div class='split'>
+          <div>
+<pre><code><span class='k'>&lt;%=</span> chat_with url: questions_path,
+      hints: Chat::HINTS,
+      messages: messages <span class='k'>%&gt;</span></code></pre>
+          </div>
+          <div class='demo'>
+            <p class='demo-label'>What it draws</p>
+            <p class='f-aside' style='margin:0'>Claude · 5 minutes ago</p>
+            <div class='f-bubble f-in'>Data loaded! What can I help with?</div>
+            <p class='f-aside r' style='margin:0'>you · 4 minutes ago <span style='color:#1E8A5A'>✓</span></p>
+            <div class='f-bubble f-out'>How much did I bill last month?</div>
+            <p class='f-aside' style='margin:0'>Claude · just now · $0.0123</p>
+            <div class='f-bubble f-in f-typing'><span></span><span></span><span></span></div>
+          </div>
         </div>
-
-        <p>Designed by <a href="http://claudiob.github.io">claudiob</a> at <a href="http://fullscreen.com">Fullscreen</a>.</p>
-        <p>Code licensed under <a href="https://github.com/Fullscreen/bh/blob/master/MIT-LICENSE" target="_blank">MIT</a>, documentation under <a href="http://creativecommons.org/licenses/by/3.0/">CC BY 3.0</a>.</p>
-        <p>Based on the original <a href="http://getbootstrap.com/">Bootstrap documentation</a>, built by <a href="http://twitter.com/mdo" target="_blank">@mdo</a> and <a href="http://twitter.com/fat" target="_blank">@fat</a>.</p>
+        <p style='margin-top:1.2rem'>A bubble is 85% wide at most, with the corner nearest the speaker squared. Over each one, small and on its side: who, how long ago, a tick for delivered or sent, a cross for failed, and what the turn cost where anything did. A turn with nothing said yet is three dots, still under reduced motion.</p>
       </div>
-    </footer>
+    </section>
 
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-    <script src="//netdna.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js" type="text/javascript"></script>
-    <script src="assets/js/holder.js"></script>
-    <script src="assets/js/ZeroClipboard.min.js"></script>
-    <script src="assets/js/bh.js"></script>
-  </body>
+    <section id='flow'>
+      <div class='panel'>
+        <h2>Flow</h2>
+        <p>The page of a signup flow: <code>header</code> over the title and line the view set in <code>content_for</code>, one card as wide as <code>:width</code> says, and the pieces of <code>footer</code> under it joined by a middot. Every other option is an attribute of the column, which is where a host names the controller that paints what the page stands on.</p>
+        <div class='split'>
+          <div>
+<pre><code><span class='k'>&lt;%=</span> flow header: logo,
+      footer: [sign_out_button],
+      data: { controller: <span class='s'>'wall'</span> } <span class='k'>do %&gt;</span>
+  <span class='k'>&lt;%=</span> yield <span class='k'>%&gt;</span>
+<span class='k'>&lt;% end %&gt;</span></code></pre>
+          </div>
+          <div class='demo'>
+            <p class='demo-label'>What it draws</p>
+            <div class='f-flow'>
+              <p style='margin:0;font-weight:800;color:#10314F'>▲ your mark</p>
+              <p style='margin:0;font-weight:800;font-size:1.05rem;color:#10314F'>Verify your business</p>
+              <div class='f-flow-card'>one card, as wide as you said</div>
+              <p style='margin:0;font-size:0.8rem;color:#10314F'>Disconnect · Sign out</p>
+            </div>
+          </div>
+        </div>
+        <p style='margin-top:1.2rem'>A card 40rem across or wider lays its fields out in two columns, measured on the card rather than on the window, so the narrow card of a sign-in page stays in one on the widest screen. Anything that runs long earns a scroll by putting <code>flow-scroll</code> on the part that scrolls.</p>
+      </div>
+    </section>
+
+    <section id='controllers'>
+      <div class='panel'>
+        <h2>The controllers</h2>
+        <p>Twenty-two Stimulus controllers, registered by the bundle under these names, for markup to call by <code>data-controller</code>. Nothing has to be imported or registered by a host.</p>
+        <dl class='defs'>
+          <dt>bookmark</dt><dd>keeps a row and says so before the server does</dd>
+          <dt>combobox</dt><dd>draws the searchable menu above from a plain select</dd>
+          <dt>otp</dt><dd>draws the six slots a code is typed into</dd>
+          <dt>phone</dt><dd>shapes a number as it is typed</dd>
+          <dt>sortable</dt><dd>drags a row of an arranged table into another place</dd>
+          <dt>thread</dt><dd>opens a chat at its newest message and keeps it there</dd>
+          <dt>toast</dt><dd>hides a notice, held while a reader is on it</dd>
+          <dt>scheme</dt><dd>moves a page between palettes</dd>
+        </dl>
+        <ul class='chips'>
+          <li><code>clear</code></li><li><code>density</code></li><li><code>deselect</code></li><li><code>limit</code></li>
+          <li><code>map</code></li><li><code>placeholder</code></li><li><code>relative-time</code></li><li><code>require</code></li>
+          <li><code>reveal</code></li><li><code>search</code></li><li><code>shortcuts</code></li><li><code>timezone</code></li>
+          <li><code>tooltip</code></li><li><code>written</code></li>
+        </ul>
+      </div>
+    </section>
+
+    <section id='dummy'>
+      <div class='panel'>
+        <h2>Trying it out</h2>
+        <p>The gem carries a dummy app that draws every helper on one page, and a <code>bin/rails</code> at the root, so there is no <code>cd</code> first. From the root of a clone:</p>
+<pre><code>bin/setup
+rails s</code></pre>
+        <p style='margin-top:1rem'><code>localhost:3000</code> is every component at once, <code>?flash=1</code> adds the toasts, and <code>/flow</code> is the signup page.</p>
+      </div>
+    </section>
+
+  </main>
+</div>
+
+<button class='spell' id='spell' type='button' aria-pressed='false'>
+  <svg viewBox='0 0 24 24' aria-hidden='true'>
+    <line class='wand' x1='4' y1='20' x2='15' y2='9'/>
+    <path class='spark' d='M17 2l1.1 3.1L21 6l-2.9 1L17 10l-1.1-3L13 6l2.9-0.9z'/>
+    <path class='spark' d='M20.5 12l0.7 1.9 1.8 0.6-1.8 0.6-0.7 1.9-0.7-1.9-1.8-0.6 1.8-0.6z'/>
+    <path class='spark' d='M11 2l0.6 1.6 1.4 0.5-1.4 0.5L11 6.2l-0.6-1.6L9 4.1l1.4-0.5z'/>
+  </svg>
+  <span class='spell-words'>Hear the waves</span>
+</button>
+
+<footer>
+  <div class='foot-in'>
+    <img src='icon.svg' alt='' width='48' height='48'>
+    <p style='margin:0;font-weight:700'>Bh · Bootstrap Helpers<br><span style='font-weight:500;color:var(--ink-soft)'>MIT licensed. Drawn by the Earl of Bubblehum.</span></p>
+    <div class='foot-links'>
+      <a href='https://github.com/claudiob/bh'>Source on GitHub</a>
+      <a href='https://rubydoc.info/gems/bh'>API reference</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function () {
+  'use strict'
+
+  var TAU = Math.PI * 2
+  var still = window.matchMedia('(prefers-reduced-motion: reduce)')
+
+  // Every orb is one path whose outline zigzags between the surface and a spike tip, so a
+  // whole studded sculpture is a single `d` to rewrite per frame rather than two hundred
+  // polygons. The clip path takes the same `d`, which is what keeps the gloss inside it.
+  //
+  // `sag` is what makes it goo rather than a star: the lower half of the radius is
+  // stretched by a power of how far down the angle points, so the form hangs into a
+  // tapering drip the way the sculpture it is borrowed from does.
+  function spiked(s, phase) {
+    var steps = 78
+    var step = TAU / steps
+    var breathe = 1 + 0.04 * Math.sin(phase * 0.8 + s.seed)
+    var d = ''
+    for (var i = 0; i < steps; i++) {
+      var t = i * step
+      var m = t + step / 2
+      d += (i ? 'L' : 'M') + pt(s, t, phase, breathe, false)
+      d += 'L' + pt(s, m, phase, breathe, true)
+    }
+    return d + 'Z'
+  }
+
+  function pt(s, t, phase, breathe, tip) {
+    var lump = 1 + s.wob * Math.sin(3 * t + phase) + s.wob * 0.62 * Math.sin(5 * t - phase * 0.7)
+    // The lower half is stretched by a high power of how far down the angle points, so the
+    // form hangs into one narrow tapering drip rather than swelling all round.
+    var down = Math.max(0, Math.sin(t))
+    var r = s.r * breathe * lump * (1 + s.sag * Math.pow(down, 3.4))
+    // Every cone a slightly different length, which is what keeps the rim from reading as
+    // the teeth of a gear.
+    if (tip) { r += s.r * s.spike * (0.82 + 0.42 * Math.abs(Math.sin(7 * t + s.seed))) }
+    return (s.cx + r * Math.cos(t)).toFixed(1) + ',' + (s.cy + r * Math.sin(t)).toFixed(1)
+  }
+
+  // The full ramp across every orb's own box, each turned a different way, so a small one
+  // is as much of a rainbow as a large one — a single sheet-wide gradient left each orb
+  // holding one flat slice of the ramp.
+  var STOPS = [
+    [0, '#FF2E96'], [0.22, '#FF6FC6'], [0.42, '#9D6BFF'],
+    [0.62, '#2FD3CB'], [0.82, '#9DE93F'], [1, '#FFE23D']
+  ]
+
+  function ramp(id, turn) {
+    var g = document.createElementNS(SVG, 'linearGradient')
+    g.setAttribute('id', id)
+    g.setAttribute('x1', (0.5 - 0.5 * Math.cos(turn)).toFixed(3))
+    g.setAttribute('y1', (0.5 - 0.5 * Math.sin(turn)).toFixed(3))
+    g.setAttribute('x2', (0.5 + 0.5 * Math.cos(turn)).toFixed(3))
+    g.setAttribute('y2', (0.5 + 0.5 * Math.sin(turn)).toFixed(3))
+    STOPS.forEach(function (stop) {
+      var s = document.createElementNS(SVG, 'stop')
+      s.setAttribute('offset', stop[0])
+      s.setAttribute('stop-color', stop[1])
+      g.appendChild(s)
+    })
+    return g
+  }
+
+  var SVG = 'http://www.w3.org/2000/svg'
+  var field = document.getElementById('orbs')
+  if (!field) { return }
+
+  // cx, cy in the 1440x900 box the sheet is sliced from; depth is how much of the scroll
+  // the orb takes, so the near ones sweep past and the far ones barely stir. Nothing sits
+  // behind the wordmark or the first panel: the ramp is loud, and prose has to win.
+  var specs = [
+    { cx: 1290, cy: 120, r: 168, wob: 0.09, spike: 0.105, sag: 0.55, seed: 0.4, depth: 0.42, op: 0.92, turn: 1.1 },
+    { cx: 78, cy: 168, r: 122, wob: 0.10, spike: 0.115, sag: 0.78, seed: 2.1, depth: 0.30, op: 0.85, turn: 2.4 },
+    { cx: 1392, cy: 612, r: 132, wob: 0.09, spike: 0.10, sag: 0.42, seed: 1.2, depth: 0.15, op: 0.88, turn: 4.0 },
+    { cx: 44, cy: 690, r: 148, wob: 0.095, spike: 0.10, sag: 0.60, seed: 5.6, depth: 0.09, op: 0.9, turn: 0.3 },
+    { cx: 1180, cy: 872, r: 74, wob: 0.13, spike: 0.14, sag: 1.15, seed: 3.1, depth: 0.62, op: 0.75, turn: 3.2 },
+    { cx: 214, cy: 880, r: 58, wob: 0.14, spike: 0.15, sag: 1.35, seed: 0.9, depth: 0.74, op: 0.7, turn: 5.1 },
+    { cx: 740, cy: -40, r: 88, wob: 0.12, spike: 0.13, sag: 1.05, seed: 4.3, depth: 0.52, op: 0.8, turn: 1.8 }
+  ]
+
+  var defs = document.getElementById('goo-defs')
+
+  var orbs = specs.map(function (s, i) {
+    defs.appendChild(ramp('gum' + i, s.turn))
+
+    var clip = document.createElementNS(SVG, 'clipPath')
+    clip.setAttribute('id', 'gooclip' + i)
+    var clipped = document.createElementNS(SVG, 'path')
+    clip.appendChild(clipped)
+    defs.appendChild(clip)
+
+    var g = document.createElementNS(SVG, 'g')
+    g.setAttribute('opacity', s.op)
+
+    // A cast shadow under the form, so it sits over the ground instead of on it.
+    var cast = document.createElementNS(SVG, 'path')
+    cast.setAttribute('fill', '#8E0B52')
+    cast.setAttribute('opacity', '0.30')
+    cast.setAttribute('filter', 'url(#cast)')
+    cast.setAttribute('transform', 'translate(10 18)')
+
+    // Drawn like a cartoon cel: a hard line round the whole studded silhouette, which is
+    // what tells the form from the ground it floats over — without it the ramp's own pinks
+    // dissolve straight into the page.
+    var body = document.createElementNS(SVG, 'path')
+    body.setAttribute('fill', 'url(#gum' + i + ')')
+    body.setAttribute('stroke', '#7A0A48')
+    body.setAttribute('stroke-width', '1.8')
+    body.setAttribute('stroke-linejoin', 'round')
+
+    // One tight highlight where a glossy thing catches the light, not a wash over it, and
+    // a pool of shade in the belly so the form turns away from you.
+    var inner = document.createElementNS(SVG, 'g')
+    inner.setAttribute('clip-path', 'url(#gooclip' + i + ')')
+    var shade = document.createElementNS(SVG, 'ellipse')
+    shade.setAttribute('cx', s.cx + s.r * 0.3)
+    shade.setAttribute('cy', s.cy + s.r * 0.7)
+    shade.setAttribute('rx', s.r * 0.95)
+    shade.setAttribute('ry', s.r * 0.7)
+    shade.setAttribute('fill', '#3F0526')
+    shade.setAttribute('opacity', '0.24')
+    shade.setAttribute('filter', 'url(#cast)')
+    var gloss = document.createElementNS(SVG, 'ellipse')
+    gloss.setAttribute('cx', s.cx - s.r * 0.36)
+    gloss.setAttribute('cy', s.cy - s.r * 0.56)
+    gloss.setAttribute('rx', s.r * 0.2)
+    gloss.setAttribute('ry', s.r * 0.11)
+    gloss.setAttribute('fill', '#FFFFFF')
+    gloss.setAttribute('opacity', '0.8')
+    gloss.setAttribute('filter', 'url(#gloss)')
+    inner.appendChild(shade)
+    inner.appendChild(gloss)
+
+    g.appendChild(cast)
+    g.appendChild(body)
+    g.appendChild(inner)
+    field.appendChild(g)
+
+    return { s: s, g: g, body: body, cast: cast, clip: clipped }
+  })
+
+  function draw(phase, scrolled) {
+    for (var i = 0; i < orbs.length; i++) {
+      var o = orbs[i]
+      var d = spiked(o.s, phase + o.s.seed)
+      o.body.setAttribute('d', d)
+      o.cast.setAttribute('d', d)
+      o.clip.setAttribute('d', d)
+      o.g.setAttribute('transform', 'translate(0 ' + (-scrolled * o.s.depth).toFixed(1) + ')')
+    }
+  }
+
+  var scrolled = 0
+  var wanted = 0
+  var phase = 0
+  var running = false
+
+  function onScroll() {
+    wanted = window.scrollY || window.pageYOffset || 0
+    if (still.matches) { scrolled = wanted; draw(phase, scrolled) }
+  }
+
+  function frame() {
+    phase += 0.0055
+    // Eased, so a flicked scroll lands the goo a beat after the text — which is the whole
+    // of the parallax on a short page.
+    scrolled += (wanted - scrolled) * 0.08
+    draw(phase, scrolled)
+    if (running) { window.requestAnimationFrame(frame) }
+  }
+
+  function settle() {
+    if (still.matches) {
+      running = false
+      scrolled = window.scrollY || 0
+      draw(0, scrolled)
+    } else if (!running) {
+      running = true
+      window.requestAnimationFrame(frame)
+    }
+  }
+
+  window.addEventListener('scroll', onScroll, { passive: true })
+  if (still.addEventListener) { still.addEventListener('change', settle) }
+  settle()
+
+  // The rail says which section is being read, from the one nearest the top of the window.
+  var links = Array.prototype.slice.call(document.querySelectorAll('.rail a'))
+  var seen = links.map(function (a) { return document.querySelector(a.getAttribute('href')) })
+  if ('IntersectionObserver' in window) {
+    var spy = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        if (!e.isIntersecting) { return }
+        links.forEach(function (a, i) {
+          if (seen[i] === e.target) { a.setAttribute('aria-current', 'true') }
+          else { a.removeAttribute('aria-current') }
+        })
+      })
+    }, { rootMargin: '0px 0px -72% 0px' })
+    seen.forEach(function (el) { if (el) { spy.observe(el) } })
+  }
+}())
+
+// The Earl's one spell: an ocean that is not a recording. Noise is generated once, looped,
+// and then swelled and darkened wave by wave with a fresh set of random numbers each time,
+// so it never repeats and nothing is downloaded. Off until it is asked for — a page that
+// makes a sound nobody asked for is a page nobody keeps open.
+(function () {
+  'use strict'
+
+  var button = document.getElementById('spell')
+  if (!button || !(window.AudioContext || window.webkitAudioContext)) {
+    if (button) { button.hidden = true }
+    return
+  }
+
+  var ctx = null
+  var gain = null
+  var tone = null
+  var timer = null
+  var on = false
+
+  // Pink-ish rather than white: the high end of white noise reads as a hiss, and surf is
+  // mostly low. Kellet's filter, the cheap one everybody uses, over four seconds of it.
+  function surf(context) {
+    var length = context.sampleRate * 4
+    var buffer = context.createBuffer(1, length, context.sampleRate)
+    var out = buffer.getChannelData(0)
+    var b0 = 0, b1 = 0, b2 = 0, b3 = 0, b4 = 0, b5 = 0, b6 = 0
+    for (var i = 0; i < length; i++) {
+      var white = Math.random() * 2 - 1
+      b0 = 0.99886 * b0 + white * 0.0555179
+      b1 = 0.99332 * b1 + white * 0.0750759
+      b2 = 0.96900 * b2 + white * 0.1538520
+      b3 = 0.86650 * b3 + white * 0.3104856
+      b4 = 0.55000 * b4 + white * 0.5329522
+      b5 = -0.7616 * b5 - white * 0.0168980
+      out[i] = (b0 + b1 + b2 + b3 + b4 + b5 + b6 + white * 0.5362) * 0.09
+      b6 = white * 0.115926
+    }
+    return buffer
+  }
+
+  // One wave: a slow gather, a brighter crest as it breaks, a long draw back. Every figure
+  // is drawn afresh, so no two waves are the same length or height.
+  function wave() {
+    var now = ctx.currentTime
+    var rise = 2.2 + Math.random() * 2.6
+    var fall = 3.4 + Math.random() * 3.8
+    var peak = 0.055 + Math.random() * 0.055
+    var crest = 780 + Math.random() * 760
+
+    gain.gain.cancelScheduledValues(now)
+    gain.gain.setValueAtTime(gain.gain.value, now)
+    gain.gain.linearRampToValueAtTime(peak, now + rise)
+    gain.gain.linearRampToValueAtTime(0.011, now + rise + fall)
+
+    tone.frequency.cancelScheduledValues(now)
+    tone.frequency.setValueAtTime(tone.frequency.value, now)
+    tone.frequency.linearRampToValueAtTime(crest, now + rise)
+    tone.frequency.linearRampToValueAtTime(300, now + rise + fall)
+
+    timer = window.setTimeout(wave, (rise + fall + Math.random() * 2.4) * 1000)
+  }
+
+  function begin() {
+    if (!ctx) {
+      var Ctx = window.AudioContext || window.webkitAudioContext
+      ctx = new Ctx()
+      var source = ctx.createBufferSource()
+      source.buffer = surf(ctx)
+      source.loop = true
+      tone = ctx.createBiquadFilter()
+      tone.type = 'lowpass'
+      tone.frequency.value = 320
+      tone.Q.value = 0.6
+      gain = ctx.createGain()
+      gain.gain.value = 0
+      source.connect(tone)
+      tone.connect(gain)
+      gain.connect(ctx.destination)
+      source.start()
+    }
+    if (ctx.state === 'suspended') { ctx.resume() }
+    wave()
+  }
+
+  function end() {
+    window.clearTimeout(timer)
+    var now = ctx.currentTime
+    gain.gain.cancelScheduledValues(now)
+    gain.gain.setValueAtTime(gain.gain.value, now)
+    gain.gain.linearRampToValueAtTime(0, now + 0.9)
+  }
+
+  button.addEventListener('click', function () {
+    on = !on
+    button.setAttribute('aria-pressed', on ? 'true' : 'false')
+    button.querySelector('.spell-words').textContent = on ? 'Waves on' : 'Hear the waves'
+    if (on) { begin() } else { end() }
+  })
+}())
+</script>
+</body>
 </html>
