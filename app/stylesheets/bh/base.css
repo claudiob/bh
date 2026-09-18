@@ -1,0 +1,27 @@
+/* Body text is Bootstrap's own: the system face at 16px. A host wanting another sets
+   `--bs-body-font-family` and `--bs-body-font-size` on `:root` after this stylesheet. */
+
+/* Bootstrap reserves the scrollbar's column on every page, scrolling or not, so pages line
+   up whether they grow or not; a browser with classic scrollbars then paints an empty track
+   down the right of a page that fits. The column comes and goes with the scrollbar here. */
+:root { scrollbar-gutter: auto }
+
+/* A dialog reads from the start whatever centers the text around the link that opened it:
+   `dialog` draws the two side by side, so the element inherits from the link's place. */
+.dialog { text-align: start }
+
+/* Bootstrap's .15s fade reads as vanishing. Only the hide ever transitions here
+   — the toast is born visible — and reduced-motion still wins, because its rule
+   sets `transition: none` outright rather than through this variable. */
+.toast { --bs-transition-fade: opacity 1s linear; }
+
+/* A marked match is part of the word it sits in, so it carries no padding of
+   its own: 'Nash' in 'Nashville' must not read as a word standing apart. */
+mark { padding: 0; }
+
+/* The icon font drops every glyph an eighth of an em to sit on a text
+   baseline, which inside an icon link reads as the arrow resting on the
+   line. A sixteenth up clears the baseline without floating — on the
+   ::before, so the hover transform on the .bi box itself is untouched. */
+.icon-link > .bi::before { vertical-align: .0625em; }
+

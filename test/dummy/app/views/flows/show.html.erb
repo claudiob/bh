@@ -1,0 +1,17 @@
+<% content_for :title, 'Verify your business' %>
+<% content_for :subtitle, 'We texted a code to 415-555-0000' %>
+<% content_for :width, '40rem' %>
+<% content_for :footer, button_to('Disconnect Jobber', '/integration', method: :delete, class: 'btn btn-link') %>
+
+<%= form_with url: '/verify', scope: :contact do |form| %>
+  <%= form.fieldset 'Your code', class: 'gap-2' do %>
+    <%= form.label :pin_confirmation, '6-digit code' %>
+    <%= form.pin_field :pin_confirmation, required: true, class: 'text-center' %>
+    <%= form.label :phone, 'Mobile number' do %>
+      <%= form.phone_field :phone, class: 'text-center', autocomplete: 'off', data: { places_target: 'phone' } %>
+    <% end %>
+    <%= form.submit 'Confirm' %>
+    <%= form.button do %><b>Text</b> us<% end %>
+    <%= form.button 'Call us', type: :button, disabled: true, title: 'Available soon' %>
+  <% end %>
+<% end %>

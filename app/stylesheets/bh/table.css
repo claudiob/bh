@@ -1,0 +1,130 @@
+/* An action column is as wide as a row is tall — an icon in a square — and a
+   counter column starts at the same square, widening only when a figure like
+   38,405 needs the room: a table laying out to 100% reads the width as a
+   preference, never crushes content into it, and hands what these cells do
+   not use to the columns carrying text. Not while the table is stacked, where
+   every cell is a block and a square one is a squashed one — the query
+   matches `.sm:table-stacked`'s. */
+@container (width >= 576px) {
+  .recourse-actions, .recourse-counter {
+    width: calc(1em * var(--bs-body-line-height) + 2 * var(--bs-table-cell-padding-y));
+    white-space: nowrap;
+    text-align: center;
+  }
+}
+
+/* Stacked, a cell reads as one line — `Estimate hi: 600`, the heading semibold
+   and the value after it — where Bootstrap puts the heading on a line of its own
+   and leaves the row's first cell with no heading at all, bold in its place: a
+   status opening a row would be a bare badge. Every cell is headed here. And a
+   value with no space in it — an address, a token — breaks rather than widening
+   the row past the phone. */
+@container (width < 576px) {
+  .sm\:table-stacked > tbody > tr > td[data-cell]::before {
+    content: attr(data-cell) ': ';
+    display: inline;
+    font-weight: var(--bs-font-weight-semibold);
+  }
+  .sm\:table-stacked > tbody > tr > td:first-child { font-weight: inherit; }
+  /* A counter's heading goes inside its link, so the whole `Franchises: 21` is
+     one thing to tap; the cell's own heading steps aside for it. */
+  .sm\:table-stacked > tbody > tr > td.recourse-counter::before { content: none; }
+  .sm\:table-stacked > tbody > tr > td.recourse-counter > [data-cell]::before {
+    content: attr(data-cell) ': ';
+    font-weight: var(--bs-font-weight-semibold);
+  }
+  .sm\:table-stacked > tbody > tr > td:not(:first-child) + td::before { margin-block-start: 0; }
+  .sm\:table-stacked > tbody > tr > td { overflow-wrap: anywhere; }
+}
+
+/* A counter says what it counts in one of two ways, and the table's own width is
+   what picks: the icon and a bare figure where the column is a square, the
+   counted model's words where there is room to read them. Bootstrap's `xl`, so
+   words arrive on a wide monitor and nowhere narrower — the width above is a
+   preference a table never crushes content into, so the column simply widens to
+   take them. Against `.table-responsive` like every query here, which is the
+   table's width rather than the window's: a sidebar takes a few hundred pixels
+   the window knows nothing about. */
+.recourse-counter-word { display: none; }
+@container (width >= 1280px) {
+  .recourse-counter-icon, .recourse-counter-figure { display: none; }
+  .recourse-counter-word { display: inline; }
+}
+
+/* A row the viewer has kept, and the only report a click ever gets, so it has to
+   be seen. A twelfth of the primary mixed into the page rather than
+   `--bs-primary-bg-subtle`: that token is a fixed step of the ramp, far enough
+   from the page on a low-contrast palette to cost the text a point of contrast
+   it has not got — mixing into the page keeps the tint the same distance from it
+   whatever the palette. A background rather than `.table-active`, which sets the
+   very variable `.table-hover` sets and would read as the row under the cursor,
+   and lose its tint the moment it became one; a background lets the hover shadow
+   lay over it. */
+.table > tbody > .recourse-kept > * {
+  background-color: color-mix(in srgb, var(--bs-primary-fg) 12%, var(--bs-bg-body));
+}
+
+/* The row a write just landed on, tinted for as long as the message saying so
+   stands. On the cells rather than on the row, like the kept tint beside it: the
+   table collapses its borders, so the cells are what paint, and one tint across
+   all of them is what reads as a single row — where anything drawn per cell reads
+   as a box around each of them instead.
+   A background rather than a border. A border on a collapsing table is a width
+   the table then measures around, and taking it away again leaves the line it
+   drew sitting between two rows that no longer want one.
+   Mixed into the page exactly as the kept tint below is, and never
+   `--bs-success-bg-subtle`: that token is `light-dark(--bs-green-100,
+   --bs-green-900)`, and a palette builds those steps by mixing toward white or
+   black rather than toward the page — so how far it lands from the page is the
+   palette's business and not ours. Mixing here keeps it the same distance on all
+   nine. The success family rather than the primary one is what tells it apart
+   from the kept tint it may land on top of: a different hue reads as a different
+   thing, where a second shade of the primary would read as more of the same. */
+.table > tbody > .recourse-written > *,
+.table > tbody > .recourse-written-out > * {
+  --recourse-written: color-mix(in srgb, var(--bs-success-fg) 12%, var(--bs-bg-body));
+}
+.table > tbody > .recourse-written > * {
+  background-color: var(--recourse-written);
+}
+/* Let go of over the second the toast beside it takes to fade, and started by the
+   same event. The class above comes off as this one goes on, so the animation is
+   the only thing painting the row while it runs and nothing paints it afterwards
+   — which hands a kept row back its own tint rather than leaving it wearing this
+   one. */
+.table > tbody > .recourse-written-out > * {
+  animation: recourse-written-out 1s linear;
+}
+@keyframes recourse-written-out {
+  from { background-color: var(--recourse-written); }
+  to { background-color: var(--bs-bg-body); }
+}
+/* The tint itself is not motion; only its going is. */
+@media (prefers-reduced-motion: reduce) {
+  .table > tbody > .recourse-written-out > * { animation: none; }
+}
+
+/* The grip a row of an arranged table is taken hold of by. The cursor is the whole of
+   the affordance — the icon says what it is and the pointer says it can be picked up —
+   and `grabbing` while it is held, which is what tells a drag from a click that has not
+   moved yet. `touch-action: none` on this square alone: a phone scrolls the page by
+   dragging anywhere on a table, and only the grip is taken away from that. */
+.recourse-handle {
+  cursor: grab;
+  touch-action: none;
+}
+.recourse-handle:active { cursor: grabbing; }
+
+/* The space the row will land in, which Sortable leaves standing where it would go.
+   The same tint a kept row wears, mixed into the page the same way and for the same
+   reason: a fixed step of the ramp lands a different distance from the page on every
+   palette. On the cells rather than the row, since the table collapses its borders and
+   the cells are what paint. */
+.table > tbody > tr.sortable-ghost > * {
+  background-color: color-mix(in srgb, var(--bs-primary-fg) 12%, var(--bs-bg-body));
+}
+
+/* And the row itself while it is off the ground. Sortable fades it to 0.8; a row under
+   the cursor reads as lifted from the tint standing where it left, so nothing here has
+   to make it translucent as well. */
+.table > tbody > tr.sortable-drag { opacity: 1; }

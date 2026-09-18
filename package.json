@@ -1,0 +1,32 @@
+{
+  "name": "bh6",
+  "version": "6.2.0-alpha",
+  "description": "Bootstrap 6 in a Rails app: the form builder that dresses every field, the components Bootstrap ships behavior for and no markup, and the Stimulus controllers behind them.",
+  "license": "MIT",
+  "type": "module",
+  "repository": "github:claudiob/bh",
+  "files": [
+    "app/javascript",
+    "app/stylesheets",
+    "public/bh",
+    "vendor",
+    "MIT-LICENSE"
+  ],
+  "exports": {
+    ".": "./app/javascript/bh.js",
+    "./controllers/*": "./app/javascript/bh/*",
+    "./bh.css": "./app/stylesheets/bh.css",
+    "./bootstrap": "./vendor/bootstrap.bundle.min.js"
+  },
+  "scripts": {
+    "build": "node build.mjs"
+  },
+  "dependencies": {
+    "@hotwired/stimulus": ">=3.2",
+    "@hotwired/turbo-rails": ">=8.0",
+    "sortablejs": "^1.15.7"
+  },
+  "devDependencies": {
+    "esbuild": ">=0.28"
+  }
+}

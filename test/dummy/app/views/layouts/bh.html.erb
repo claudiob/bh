@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang='en'>
+  <head>
+    <meta charset='utf-8'>
+    <title><%= content_for(:title) || 'bh' %></title>
+    <%- if protect_against_forgery? -%>
+    <meta name='csrf-param' content='<%= request_forgery_protection_token %>'>
+    <meta name='csrf-token' content='<%= form_authenticity_token %>'>
+    <%- end -%>
+    <%= bh_head_tags %>
+    <%# The glyphs a combobox and a bookmark draw. The gem links no CDN of its own, so a
+        page that wants icons says where they come from — here, jsDelivr. %>
+    <link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css'>
+    <%- if content_for?(:head) -%>
+    <%= yield :head %>
+    <%- end -%>
+  </head>
+  <body class='d-flex flex-column' style='min-height: 100svh'>
+    <main class='container-fluid py-4 flex-grow-1 d-flex flex-column'>
+      <%= content_for?(:content) ? yield(:content) : yield %>
+    </main>
+    <%= notices %>
+  </body>
+</html>

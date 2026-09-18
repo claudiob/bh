@@ -1,0 +1,13 @@
+/* Everything a page built on Bootstrap 6 is styled by, in one file: Bootstrap as upstream
+   ships it, and then this gem's own rules, each in a file named for what it draws.
+   Built by esbuild into /css/bh.css; the imports are the reading order. */
+@import '../../vendor/bootstrap.min.css';
+@import 'bh/base.css';
+@import 'bh/shell.css';
+@import 'bh/table.css';
+@import 'bh/map.css';
+@import 'bh/search.css';
+@import 'bh/values.css';
+@import 'bh/chat.css';
+@import 'bh/pin.css';
+@import 'bh/flow.css';

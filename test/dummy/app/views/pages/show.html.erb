@@ -1,0 +1,39 @@
+<% at = Time.zone.local 2026, 9, 13, 12, 0 %>
+<% content_for :title, 'Every helper once' %>
+<% content_for :head, tag.meta(name: 'dummy', content: 'yes') %>
+<h1>Every helper once</h1>
+<div><%= dialog 'I’m not on Google Business', title: 'Not a problem', class: 'small' do %>
+  We will look your business up ourselves.
+<% end %></div>
+<%= dialog 'Just words', title: 'Nothing to press', okay: false do %>None.<% end %>
+<%= form_with url: '/verify', scope: :contact do |form| %>
+  <%= form.pin_field :pin_confirmation, required: true %>
+  <%= form.fieldset 'Every control the builder dresses' do %>
+    <%= form.label :email, 'Email' do %><%= form.email_field :email %><% end %>
+    <%= form.number_field :size %>
+    <%= form.password_field :secret %>
+    <%= form.search_field :term %>
+    <%= form.url_field :site %>
+    <%= form.date_field :day %>
+    <%= form.time_field :hour %>
+    <%= form.datetime_field :moment %>
+    <%= form.text_area :notes %>
+    <%= form.select :state, %w[ California Oregon ] %>
+    <%= form.combobox :county, %w[ Alameda Marin ], { prompt: 'Pick a county' }, multiple: true %>
+    <%= form.check :agreed, 'I agree to the terms' %>
+    <%= form.radio_button :size, 'big' %>
+  <% end %>
+<% end %>
+
+<%= chat_with url: '/questions', hints: ['How much did I bill last month?', 'Which ZIP codes book me most?'],
+      messages: [
+        Bh::Message.new(side: :left, text: 'Data loaded! What can I help with?', sender: 'Claude', at:),
+        Bh::Message.new(side: :right, text: 'How much did I bill last month?', sender: 'you', at:,
+                        delivery: :delivered),
+        Bh::Message.new(side: :left, text: tag.span('$12,400', class: 'fs-4'), sender: 'Claude', at:,
+                        cost: 0.0123),
+        Bh::Message.new(side: :right, text: 'And the month before?', delivery: 'failed'),
+        Bh::Message.new(side: :left),
+      ] %>
+
+<%= chat_with url: '/questions', messages: [Bh::Message.new(side: :right, text: 'Read only')] %>

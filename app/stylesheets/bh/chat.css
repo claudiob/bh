@@ -1,0 +1,77 @@
+/* A conversation as a column of bubbles: what the reader said on the right in the
+   primary's tint, what was said to them on the left in the page's second surface. A
+   chat is drawn by the `chat_with` helper and wears these. */
+.chat { display: flex; flex-direction: column; gap: 0.75rem; margin-bottom: 1.25rem }
+/* Sits at the foot of its box while short, so the first turn lands just above the field
+   that sends the next. An auto margin and not `align-content: end`, which once the thread
+   overflows pushes its first message clean out of the top with no way to scroll back. */
+.chat > :first-child { margin-block-start: auto }
+
+/* Who said it and when, small, over the bubble it belongs to and on its side. */
+.chat-aside { font-size: var(--bs-font-size-sm); color: var(--bs-fg-2); margin: 0 0.75rem }
+.chat-aside-out { align-self: flex-end; margin-inline-end: 1.25rem }
+.chat-aside-in { align-self: flex-start }
+.chat-aside .fg-success, .chat-aside .fg-danger, .chat-aside .fg-secondary { font-weight: var(--bs-font-weight-semibold) }
+
+.chat-bubble {
+  max-width: 85%;
+  margin: 0;
+  /* A conversation is prose, so it reads at its own size whatever scale the host
+     set for itself: an admin page compacts its body type for tables dense with figures,
+     and a sentence somebody typed is not one of those. */
+  font-size: 1rem;
+  padding: 0.625rem 0.875rem;
+  border: 1px solid;
+  border-radius: 1rem;
+  /* The same sheen a message thread's bubbles wear. Set as an image so the two sides below
+     can name their own color without wiping it, which the `background` shorthand would. */
+  background-image: var(--bs-gradient);
+  /* An unbroken token wraps rather than widening the bubble past the phone. Whitespace is
+     collapsed as anywhere else: a host's line breaks arrive as markup, and the newlines and
+     indentation a template leaves around its words must not become room in the bubble. */
+  overflow-wrap: anywhere;
+}
+/* The reader's own turn, tinted with the primary rather than filled with it: a solid fill
+   under white text is what a button wears, and a question that reads as a button invites a
+   press. Squared at the corner nearest them, which tells the two sides apart at a glance. */
+.chat-out {
+  align-self: flex-end;
+  /* Clear of the scrollbar a long thread puts down the same edge. */
+  margin-inline-end: 0.5rem;
+  color: var(--bs-primary-fg-emphasis);
+  background-color: var(--bs-primary-bg-subtle);
+  border-color: var(--bs-primary-border);
+  border-end-end-radius: 0.25rem;
+}
+/* The other side's: the page's second surface, squared at its own corner. */
+.chat-in {
+  align-self: flex-start;
+  color: var(--bs-fg-1);
+  background-color: var(--bs-bg-2);
+  border-color: var(--bs-border-color);
+  border-end-start-radius: 0.25rem;
+}
+
+/* An answer on its way reads as one being typed. */
+.chat-typing { display: flex; gap: 0.25rem; align-items: center }
+.chat-typing span {
+  width: 0.375rem;
+  height: 0.375rem;
+  border-radius: 50%;
+  background: var(--bs-fg-2);
+  animation: chat-dot 1.2s ease-in-out infinite;
+}
+.chat-typing span:nth-child(2) { animation-delay: 0.15s }
+.chat-typing span:nth-child(3) { animation-delay: 0.3s }
+@keyframes chat-dot { 0%, 60%, 100% { opacity: 0.25 } 30% { opacity: 1 } }
+@media (prefers-reduced-motion: reduce) {
+  .chat-typing span { animation: none; opacity: 0.5 }
+}
+
+/* The field's suggestion fades rather than cutting, so a swap mid-read is not a flicker;
+   the `placeholder` controller adds the class while it swaps the words. */
+.chat-ask::placeholder { opacity: 1; transition: opacity 0.3s ease-in-out }
+.chat-ask.is-fading::placeholder { opacity: 0 }
+@media (prefers-reduced-motion: reduce) {
+  .chat-ask::placeholder { transition: none }
+}

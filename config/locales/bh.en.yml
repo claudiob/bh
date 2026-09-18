@@ -1,0 +1,13 @@
+en:
+  bh:
+    ago: '%{time} ago'
+    all: All
+    ask: Ask a question
+    clear: Clear
+    close: Close
+    more: '%{first} + %{count} more'
+    no_results: Nothing matches that
+    okay: Okay
+    search: Search
+    send: Send
+    typing: Typing

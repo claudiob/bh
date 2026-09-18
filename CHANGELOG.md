@@ -6,6 +6,33 @@ For more information about changelogs, check
 [Keep a Changelog](http://keepachangelog.com) and
 [Vandamme](http://tech-angels.github.io/vandamme).
 
+## [Unreleased]
+
+## 6.2.0.alpha - 2026-09-18
+
+* [BREAKING CHANGE] Everything. Bh is now Bootstrap 6 components rather than Bootstrap 3
+  wrappers, and no helper of 1.x or 6.1.x survives: `head_tags`, `script_tags`, `navbar`,
+  `navbar_brand`, `navbar_nav`, `navbar_toggler`, `navbar_collapse`, `navbar_collapsable`,
+  `card`, `nav`, `nav_link_to`, `nav_link_options_for`, `table`, `column`, `grid`, `grid_row`,
+  `grid_column`, `turbo_link_to` and `edit_link_to` are all gone, along with the `bh/_table`
+  and `bh/_grid` partials and the loose `phone`, `require`, `submit` and `bh--theme`
+  controllers.
+* [FEATURE] `Bh::FormBuilder`, which dresses every field Rails draws and adds the two it has
+  none of: `phone_field`, shaped as it is typed, and `pin_field`, the six slots a 6-digit code
+  is typed into.
+* [FEATURE] `combobox`, a `<select>` drawn as a searchable menu that stays the one thing the
+  form submits.
+* [FEATURE] `dialog`, `notices`, `chat_with` and `flow`.
+* [FEATURE] `bh_head_tags`, and an engine that serves `/bh/css/bh.css` and `/bh/js/bh.js` — one
+  stylesheet and one script, Bootstrap 6 included, built by esbuild and shipped in the gem.
+* [FEATURE] Twenty-two Stimulus controllers, registered by the bundle, and a Bootstrap dialog
+  standing in for the browser's `confirm()`.
+* [FEATURE] A dummy app under `test/dummy` drawing every helper on one page, which `rails s`
+  from the root of a clone runs.
+
+  The number skips 6.0 and 6.1, which are taken and cannot be withdrawn, and this line breaks
+  on a minor rather than on a major: pin `~> 6.2.0`, not `~> 6`.
+
 ## 6.1.5 - 2026-06-29
 
 * [FEATURE] Point to main boostrap v6 CSS

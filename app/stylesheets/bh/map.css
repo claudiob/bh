@@ -1,0 +1,3 @@
+/* A map takes the height a table of a page would: tall enough to read the places
+   on, and short enough to leave the footer under it in view. */
+.recourse-map { height: 60vh; }
