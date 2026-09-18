@@ -529,6 +529,12 @@ footer {
 .foot-in img { width: 3rem; height: 3rem; border-radius: 0.8rem; }
 .foot-links { display: flex; flex-wrap: wrap; gap: 1.4rem; font-weight: 700; }
 .foot-line { display: inline; }
+/* Out at the right edge of the page, where the eye ends up. The wand button is fixed over
+   that corner, so the footer keeps enough room beside them for it to sit clear. */
+@media (width >= 860px) {
+  .foot-links { margin-left: auto; }
+  footer { padding-right: 9rem; }
+}
 @media (width < 860px) {
   .foot-in { flex-direction: column; align-items: flex-start; gap: 1rem; }
   .foot-line { display: block; }
