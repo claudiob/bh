@@ -1,6 +1,6 @@
 {
   "name": "bh6",
-  "version": "6.2.0-alpha",
+  "version": "6.2.0",
   "description": "Bootstrap 6 in a Rails app: the form builder that dresses every field, the components Bootstrap ships behavior for and no markup, and the Stimulus controllers behind them.",
   "license": "MIT",
   "type": "module",
