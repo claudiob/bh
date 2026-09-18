@@ -16,9 +16,10 @@
 <meta name='theme-color' content='#1A0412' media='(prefers-color-scheme: dark)'>
 <link rel='preconnect' href='https://fonts.googleapis.com'>
 <link rel='preconnect' href='https://fonts.gstatic.com' crossorigin>
-<link rel='stylesheet' href='https://fonts.googleapis.com/css2?family=Modak&family=Baloo+2:wght@500;600;700;800&display=swap'>
+<link rel='stylesheet' href='https://fonts.googleapis.com/css2?family=Modak&family=Baloo+2:wght@500;600;700;800&family=Quicksand:wght@500&display=swap'>
 <style>
 :root {
+  color-scheme: light dark;
   --ground-1: #FFC2E6;
   --ground-2: #FF8AD2;
   --ground-3: #F056B4;
@@ -365,6 +366,25 @@ dl.defs dd { margin: 0.15rem 0 0; color: var(--ink-soft); }
 /* The sprite the two of him are stamped from, which draws nothing itself. */
 .sprite { position: absolute; width: 0; height: 0; overflow: hidden; }
 
+/* The house's own lockup, as the design gem draws it: its two blues rather than this
+   page's, so the mark reads the same here as in every HouseAccount app. */
+.quicksand { font-family: 'Quicksand', 'Trebuchet MS', sans-serif; font-weight: 500; letter-spacing: 0.01em; }
+.lockup {
+  white-space: nowrap;
+  line-height: 1;
+  font-size: 19px;
+  color: light-dark(#1B5288, #9cc0ec);
+  text-decoration: none;
+}
+.lockup .house { color: #3b8ae8; }
+/* Under the cursor the whole logo is one blue, the name, `house` and the mark's strokes
+   alike, which says the whole word is the link. A presentation attribute loses to a rule,
+   which is what lets the stroke written into the drawing give way here. */
+.lockup:hover { color: light-dark(#3b8ae8, #bcd6f4); }
+.lockup:hover .house { color: inherit; }
+.lockup:hover svg [stroke] { stroke: currentColor; }
+.lockup svg { position: relative; vertical-align: baseline; margin-right: 0.29em; }
+
 /* ---------- the spell ---------- */
 
 .spell {
@@ -399,6 +419,8 @@ dl.defs dd { margin: 0.15rem 0 0; color: var(--ink-soft); }
 
 footer {
   position: relative; z-index: 1;
+  /* The same size the lockup is set at, so the mark sits in the line rather than over it. */
+  font-size: 19px;
   border-top: 1px solid var(--card-edge);
   background: var(--card);
   backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px);
@@ -514,9 +536,9 @@ footer {
         <h2>How to install</h2>
         <p>Bh is a Rails engine. It brings Bootstrap&nbsp;6 with it, so nothing else goes in the Gemfile.</p>
 <pre><code><span class='c'># Gemfile</span>
-<span class='k'>gem</span> <span class='s'>'bh'</span>, <span class='s'>'6.2.0.alpha'</span></code></pre>
-        <p style='margin-top:1rem'>Spelled out, because <code>~&gt;</code> does not reach a prerelease: Bundler would pass over <code>6.2.0.alpha</code> for the 6.1.4 standing behind it. Once a final 6.2 is cut the pin is <code>~&gt; 6.2.0</code>, which stops short of <code>6.3</code> — this line breaks on a minor rather than on a major, so a minor is what to hold. Rails&nbsp;8.1 and Ruby&nbsp;3.2 are the minimum.</p>
-        <div class='note'>6.0 and 6.1 are a different gem wearing this name: Bootstrap&nbsp;3 wrappers with a Bootstrap&nbsp;6 stopgap over them, and not one of their helpers survives here. They could not be withdrawn — RubyGems keeps anything published over thirty days ago — so pin on purpose.</div>
+<span class='k'>gem</span> <span class='s'>'bh'</span>, <span class='s'>'~&gt; 6.2.0'</span></code></pre>
+        <p style='margin-top:1rem'><code>~&gt; 6.2.0</code> stops short of <code>6.3</code>, and that is the pin to hold: until this line settles it breaks on a minor, not on a major. Rails&nbsp;8.1 and Ruby&nbsp;3.2 are the minimum.</p>
+        <div class='note'>6.2.0 breaks everything before it and keeps its major anyway. 6.0 through 6.1.4 were an alpha in everything but the number — Bootstrap&nbsp;3 wrappers with a Bootstrap&nbsp;6 stopgap bolted on, cut while Bootstrap&nbsp;6 was itself pre-release — so there was no settled API to break. Those numbers are taken and cannot be withdrawn, RubyGems keeping anything published over thirty days ago, so this release steps over them.</div>
 
         <h3>In the head</h3>
         <p>With the gem in the bundle an app serves <code>/bh/css/bh.css</code> and <code>/bh/js/bh.js</code> itself. One helper puts both in the head, along with everything Bootstrap and Turbo read.</p>
@@ -806,7 +828,7 @@ rails s</code></pre>
 <footer>
   <div class='foot-in'>
     <img src='icon.svg' alt='' width='48' height='48'>
-    <p style='margin:0;font-weight:700'>Bh · Bootstrap Helpers<br><span style='font-weight:500;color:var(--ink-soft)'>MIT licensed. Drawn by the Earl of Bubblehum.</span></p>
+    <p style='margin:0;font-weight:700'>Bh · Bootstrap Helpers<br><span style='font-weight:500;color:var(--ink-soft)'>MIT licensed. Drawn for <a class='lockup quicksand' href='https://houseaccount.com/'><svg style='width: 0.8117em; height: 0.8117em; top: 0.0358em' aria-hidden='true' xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'><g fill='none' stroke='#3b8ae8' stroke-width='28' stroke-linecap='round' stroke-linejoin='round'><path d='M256 302Q256 256 295.8 233L406.2 169.3Q446 146.3 446 192.3V319.7Q446 365.7 406.2 388.7L295.8 452.4Q256 475.4 256 429.4Z' fill='#1B5288'/><path d='M216.2 59.6Q256 36.6 295.8 59.6L406.2 123.3Q446 146.3 446 192.3V319.7Q446 365.7 406.2 388.7L295.8 452.4Q256 475.4 216.2 452.4L105.8 388.7Q66 365.7 66 319.7V192.3Q66 146.3 105.8 123.3Z'/><path d='M256 256 95.4 163.3'/><path d='M256 256 416.6 163.3'/><path d='M256 256V441.4'/></g></svg><span class='house'>house</span>account</a> by the Earl of Bubblehum.</span></p>
     <div class='foot-links'>
       <a href='https://github.com/claudiob/bh'>Source on GitHub</a>
       <a href='https://rubydoc.info/gems/bh'>API reference</a>

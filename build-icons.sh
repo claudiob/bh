@@ -8,16 +8,14 @@ set -e
 
 png() { rsvg-convert -w "$1" -h "$1" "$3" -o "$2"; }
 
-# iOS masks the home-screen icon itself, and every service showing an avatar crops it
-# round, so those two are rendered square-cornered: a corner rounded twice reads as a
-# mistake.
-sed "s/rx='14'/rx='0'/" icon.svg > /tmp/bh-square.svg
-
-png 180 apple-touch-icon.png /tmp/bh-square.svg
+# The hat carries no ground of its own, so there is no corner to round and every size is
+# the one drawing: iOS lays the home-screen icon over black and every avatar is cropped
+# round, and a pink hat sits happily on either.
+png 180 apple-touch-icon.png icon.svg
 
 # One avatar for GitHub and for every social network that asks for a picture: each crops
 # its own square, and 1024 is the largest any of them wants.
-png 1024 avatar.png /tmp/bh-square.svg
+png 1024 avatar.png icon.svg
 png 96 favicon-96x96.png icon.svg
 png 192 web-app-manifest-192x192.png icon.svg
 png 512 web-app-manifest-512x512.png icon.svg
