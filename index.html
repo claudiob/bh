@@ -167,13 +167,16 @@ p:last-child { margin-bottom: 0; }
 
 .earl { width: clamp(11rem, 26vw, 19rem); height: auto; display: block; }
 /* His hat is the one thing on him you can press: the brim and the cone catch the pointer
-   without being drawn, and the star over them turns and swells when they do. The star the
-   symbol carries is put out here alone, so there is nothing left standing behind this one
-   as it grows — every other Earl on the page keeps theirs. */
-.earl { --hat-star: 0; }
+   without being drawn, and the star over them turns and swells when they do. Wherever a hat
+   is a link, the star the symbol carries is put out, so nothing is left standing behind the
+   one that grows.
+   The star sits four units from the top of its own box, so any growth at all would be cut
+   off there — the drawings let it spill instead, which costs nothing: there is only ground
+   above him. */
+.earl, .understudy svg { --hat-star: 0; overflow: visible; }
 .star { cursor: pointer; }
 .star-shape { transform-box: view-box; transform-origin: 156px 30px; transition: transform 0.22s ease; }
-.star:hover .star-shape, .star:focus-visible .star-shape { transform: scale(1.75) rotate(72deg); }
+.star:hover .star-shape, .star:focus-visible .star-shape { transform: scale(1.5) rotate(72deg); }
 @media (prefers-reduced-motion: reduce) { .star-shape { transition: none; } }
 @media (width < 860px) {
   .hero-in { grid-template-columns: 1fr; }
@@ -374,7 +377,9 @@ dl.defs dd { margin: 0.15rem 0 0; color: var(--ink-soft); }
    anchored at the floor, so growing and rising are the one gesture. */
 .understudy {
   flex: 1 1 0; min-height: 0;
-  overflow: hidden;
+  /* Visible, so the star on his hat can grow past the top of the pocket. His own size is
+     the drawing's height, so there is nothing else here that would spill. */
+  overflow: visible;
   display: flex;
   align-items: flex-end;
   justify-content: center;
@@ -671,7 +676,14 @@ footer {
       <li><a href='#dummy'><span class='gum' style='background:#FF7A3D'></span><span class='full'>Trying it out</span><span class='brief'>Try it</span></a></li>
     </ul>
     <div class='understudy understudy-rail' aria-hidden='true'>
-      <svg viewBox='0 0 280 380'><use href='#earl'/></svg>
+      <svg viewBox='0 0 280 380'>
+        <use href='#earl'/>
+        <a class='star' href='https://github.com/claudiob/bh' target='_blank' rel='noopener' tabindex='-1'>
+      <path d='M62 150 Q140 128 218 150 Q216 164 140 166 Q64 164 62 150 Z' fill='transparent'/>
+      <path d='M94 152 Q110 30 158 4 Q178 68 182 152 Z' fill='transparent'/>
+      <path class='star-shape' d='M158 4 L164 22 L183 24 L168 37 L174 56 L156 44 L139 55 L145 36 L130 23 L149 21 Z' fill='#FFE23D'/>
+        </a>
+      </svg>
     </div>
   </nav>
 
@@ -966,8 +978,15 @@ rails s</code></pre>
 
   </main>
 
-  <div class='understudy understudy-foot' aria-hidden='true'>
-    <svg viewBox='0 0 280 380'><use href='#earl'/></svg>
+<div class='understudy understudy-foot' aria-hidden='true'>
+    <svg viewBox='0 0 280 380'>
+      <use href='#earl'/>
+      <a class='star' href='https://github.com/claudiob/bh' target='_blank' rel='noopener' tabindex='-1'>
+    <path d='M62 150 Q140 128 218 150 Q216 164 140 166 Q64 164 62 150 Z' fill='transparent'/>
+    <path d='M94 152 Q110 30 158 4 Q178 68 182 152 Z' fill='transparent'/>
+    <path class='star-shape' d='M158 4 L164 22 L183 24 L168 37 L174 56 L156 44 L139 55 L145 36 L130 23 L149 21 Z' fill='#FFE23D'/>
+      </a>
+    </svg>
   </div>
 </div>
 
@@ -1198,7 +1217,10 @@ rails s</code></pre>
   settle()
 
   // The rail says which section is being read, from the one nearest the top of the window.
-  var links = Array.prototype.slice.call(document.querySelectorAll('.rail a'))
+  // The list alone: the rail also holds the Earl, whose hat is a link to GitHub, and a whole
+  // URL is not a selector.
+  var links = Array.prototype.slice.call(document.querySelectorAll('.rail ul a'))
+    .filter(function (a) { return a.getAttribute('href').charAt(0) === '#' })
   var seen = links.map(function (a) { return document.querySelector(a.getAttribute('href')) })
   if ('IntersectionObserver' in window) {
     var spy = new IntersectionObserver(function (entries) {
