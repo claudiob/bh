@@ -1,0 +1,39 @@
+# Every guestbook entry is a discussion, and the Earl answers it the moment it lands.
+# Discussion events only reach workflows on the default branch, so this file lives here
+# rather than beside the page it points at.
+name: Guestbook
+
+on:
+  discussion:
+    types: [created]
+
+# The only thing this needs, and the least it can be given.
+permissions:
+  discussions: write
+
+jobs:
+  thank:
+    # General is where the bubble on the page posts. A discussion opened anywhere else is
+    # somebody asking a real question, and is not owed a form letter.
+    if: github.event.discussion.category.slug == 'general'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Say it arrived
+        uses: actions/github-script@v7
+        with:
+          script: |
+            await github.graphql(
+              `mutation($id: ID!, $body: String!) {
+                 addDiscussionComment(input: { discussionId: $id, body: $body }) {
+                   comment { id }
+                 }
+               }`,
+              {
+                id: context.payload.discussion.node_id,
+                body: [
+                  'Your message was received!',
+                  '',
+                  '## [Guestbook →](https://claudiob.github.io/bh/guestbook/)',
+                ].join('\n'),
+              }
+            )
