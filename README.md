@@ -76,18 +76,6 @@ rails s
 `localhost:3000` is every component at once, `?flash=1` adds the toasts, and `/flow` is the
 signup page.
 
-## From npm
-
-For a host that bundles the sources itself rather than serving the built tree. The package is
-`bh6`, since `bh` on npm is somebody else's.
-
-```bash
-npm install bh6
-```
-
-Bootstrap 6 is not on npm at all, so its bundle ships inside the package and a bundler has to
-send the bare `bootstrap` specifier there — `alias: { bootstrap: 'bh6/bootstrap' }`.
-
 ## Elsewhere
 
 - [The page](https://claudiob.github.io/bh/) — every component, and how to reach it
