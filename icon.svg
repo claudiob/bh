@@ -1,31 +1,14 @@
-<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64' role='img' aria-labelledby='icon-title'>
-<title id='icon-title'>The Earl of Bubblehum: a magician's hat on a bubblegum field.</title>
+<svg xmlns='http://www.w3.org/2000/svg' viewBox='52 -3 176 176' role='img' aria-labelledby='icon-title'>
+<title id='icon-title'>The Earl of Bubblehum's hat.</title>
 <!--
-  The Earl's hat, the one piece of him a 16-pixel tab can carry: the brim, the leaning
-  cone, the band and the star. His face, beard, wand and the goo behind him are dropped,
-  and the silhouette is widened so it survives the scale. Set `rx` to 0 for the Apple
-  touch icon and the avatar: iOS masks its own corner, every social network crops round,
-  and a corner rounded twice reads as a mistake.
+  The Earl's hat and nothing else: the brim, the leaning cone and the band, at exactly the
+  coordinates they have in the drawing on the page, cropped to them by the viewBox so the
+  two cannot drift. The star he wears on it and the face under it are dropped — a 16-pixel
+  tab carries one shape, and this is the one. No ground behind it: on a tab it takes the
+  browser's own, and iOS lays a transparent home-screen icon over black, which a pink hat
+  is happy on.
 -->
-<defs>
-  <linearGradient id='field' x1='0' y1='0' x2='0.55' y2='1'>
-    <stop offset='0%' stop-color='#FFC2E6'/>
-    <stop offset='55%' stop-color='#FF8AD2'/>
-    <stop offset='100%' stop-color='#F056B4'/>
-  </linearGradient>
-  <linearGradient id='band' x1='0' y1='0' x2='1' y2='1'>
-    <stop offset='0%' stop-color='#FF2E96'/>
-    <stop offset='100%' stop-color='#C01274'/>
-  </linearGradient>
-</defs>
-
-<rect width='64' height='64' rx='14' fill='url(#field)'/>
-
-<!-- The cone leans, the way a hat worn at an angle does; the brim is drawn over it. -->
-<path d='M17 48 Q23 16 41 5 Q50 27 51 48 Z' fill='#4A0A2C'/>
-<path d='M18 39 Q33 33 50 39 L51 49 Q33 43 17 49 Z' fill='url(#band)'/>
-<path d='M5 47 Q32 38 59 47 Q58 53 32 54 Q6 53 5 47 Z' fill='#4A0A2C'/>
-
-<!-- The star at the point, which is what says magician rather than gnome. -->
-<path d='M41 2 L44 10 L52 11 L46 17 L48 25 L41 20 L34 25 L36 17 L30 11 L38 10 Z' fill='#FFE23D'/>
+<path d='M62 150 Q140 128 218 150 Q216 164 140 166 Q64 164 62 150 Z' fill='#FF2E96'/>
+<path d='M94 152 Q110 30 158 4 Q178 68 182 152 Z' fill='#FF2E96'/>
+<path d='M98 133 Q140 122 180 133 L179 152 Q140 142 96 152 Z' fill='#4A0A2C'/>
 </svg>
