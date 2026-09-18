@@ -15,9 +15,13 @@ module Bh
         #{javascript_importmap_tags}
         <link rel='icon' href="/favicon#{'-dev' if Rails.env.development?}.png" type='image/png'>
         <link rel="apple-touch-icon" href="/apple-touch-icon.png">
-        <link href='https://assets.houseaccount.com/css/bootstrap.min.css' rel='stylesheet'>
+        <link href='https://v6-dev--twbs-bootstrap.netlify.app/docs/6.0/dist/css/bootstrap.min.css' rel='stylesheet'>
         <!-- once it's live: <link href="https://cdn.jsdelivr.net/npm/bootstrap@6.0.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-VuYVTUAUbEW1A1EgqVmiLTxfqmvVgsV8yG3KeYZmz8aLednYx2pzlYdT4NS041oo" crossorigin="anonymous"> -->
         <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css" rel="stylesheet">
+        <style>
+          .app-sidebar { border-bottom: 1px solid var(--bs-border-color); }
+          @media (min-width: 768px) { .app-sidebar { width: auto; flex-shrink: 0; border-bottom: 0; min-height: 100vh; }; :root { scrollbar-gutter: auto; }}
+        </style>
         #{stylesheet_link_tag :app, 'data-turbo-track': 'reload'}
         #{stylesheet_link_tag :bh, 'data-turbo-track': 'reload'}
       HEAD
