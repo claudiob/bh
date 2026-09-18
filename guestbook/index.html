@@ -92,7 +92,8 @@ h1 {
 }
 .entry p { margin: 0 0 0.5rem; font-size: 1.05rem; overflow-wrap: anywhere; white-space: pre-wrap; }
 .entry footer { font-size: 0.85rem; font-weight: 700; color: var(--ink-soft); display: flex; flex-wrap: wrap; gap: 0.5rem; align-items: center; }
-.entry img { width: 1.4rem; height: 1.4rem; border-radius: 50%; }
+.entry footer a { display: inline-flex; border-radius: 50%; }
+.entry img { width: 1.4rem; height: 1.4rem; border-radius: 50%; display: block; }
 .empty, .broke { text-align: center; font-weight: 600; list-style: none; padding: 1.5rem; }
 .btn {
   min-height: 52px; display: inline-flex; align-items: center; padding: 0 1.7rem;
@@ -209,25 +210,36 @@ h1 {
     var name = signed && signed[2].trim()
     p.textContent = signed ? signed[1].trim() : said
     var foot = document.createElement('footer')
-    if (d.user && d.user.avatar_url) {
-      var img = document.createElement('img')
-      img.src = d.user.avatar_url
-      img.alt = ''
-      img.loading = 'lazy'
-      foot.appendChild(img)
-    }
-    var who = document.createElement('span')
-    who.textContent = name || (d.user && d.user.login) || 'someone'
-    if (name && d.user && d.user.login) { who.title = '@' + d.user.login }
-    var dot = document.createElement('span')
-    dot.textContent = '·'
+
     var at = document.createElement('time')
     at.dateTime = d.created_at
     at.textContent = new Date(d.created_at).toLocaleDateString(undefined,
       { year: 'numeric', month: 'long', day: 'numeric' })
-    foot.appendChild(who)
-    foot.appendChild(dot)
     foot.appendChild(at)
+
+    var dot = document.createElement('span')
+    dot.textContent = '·'
+    foot.appendChild(dot)
+
+    if (d.user && d.user.avatar_url && d.user.html_url) {
+      // The face is the link to whoever wore it. Named out loud, since a picture on its own
+      // tells a screen reader nothing about where it goes.
+      var portrait = document.createElement('a')
+      portrait.href = d.user.html_url
+      portrait.rel = 'noopener'
+      portrait.setAttribute('aria-label', '@' + d.user.login + ' on GitHub')
+      var img = document.createElement('img')
+      img.src = d.user.avatar_url
+      img.alt = ''
+      img.loading = 'lazy'
+      portrait.appendChild(img)
+      foot.appendChild(portrait)
+    }
+
+    var who = document.createElement('span')
+    who.textContent = name || (d.user && d.user.login) || 'someone'
+    if (name && d.user && d.user.login) { who.title = '@' + d.user.login }
+    foot.appendChild(who)
     li.appendChild(p)
     li.appendChild(foot)
     return li
