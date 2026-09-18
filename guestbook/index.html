@@ -1,0 +1,241 @@
+<!doctype html>
+<html lang='en'>
+<head>
+<meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'>
+<title>The Earl's guestbook — Bh</title>
+<meta name='description' content='Messages left for the Earl of Bubblehum by everyone who found the door.'>
+<link rel='icon' href='../icon.svg' type='image/svg+xml'>
+<link rel='icon' href='../favicon-96x96.png' type='image/png' sizes='96x96'>
+<link rel='icon' href='../favicon.ico' sizes='16x16 32x32 48x48'>
+<link rel='apple-touch-icon' href='../apple-touch-icon.png' sizes='180x180'>
+<meta name='theme-color' content='#F056B4' media='(prefers-color-scheme: light)'>
+<meta name='theme-color' content='#1A0412' media='(prefers-color-scheme: dark)'>
+<link rel='preconnect' href='https://fonts.googleapis.com'>
+<link rel='preconnect' href='https://fonts.gstatic.com' crossorigin>
+<link rel='stylesheet' href='https://fonts.googleapis.com/css2?family=Modak&family=Baloo+2:wght@500;600;700;800&display=swap'>
+<style>
+:root {
+  color-scheme: light dark;
+  --ground-1: #FFC2E6; --ground-2: #FF8AD2; --ground-3: #F056B4;
+  --ink: #4A0A2C; --ink-soft: #7A2A54;
+  --card: rgba(255, 255, 255, 0.93); --card-edge: rgba(74, 10, 44, 0.12); --card-solid: #FFFFFF;
+  --accent: #C01274; --accent-bright: #FF2E96; --shadow: rgba(74, 10, 44, 0.20);
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --ground-1: #4A0E38; --ground-2: #2A0620; --ground-3: #160310;
+    --ink: #FFE6F3; --ink-soft: #E3AFCE;
+    --card: rgba(44, 6, 30, 0.90); --card-edge: rgba(255, 143, 210, 0.22); --card-solid: #34081F;
+    --accent: #FF8AD2; --accent-bright: #FF6FC6; --shadow: rgba(0, 0, 0, 0.5);
+  }
+}
+* { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; overflow-x: clip; }
+body {
+  margin: 0; min-height: 100svh;
+  background: radial-gradient(120% 85% at 50% 8%, var(--ground-1) 0%, var(--ground-2) 46%, var(--ground-3) 100%);
+  background-attachment: fixed;
+  color: var(--ink);
+  font: 500 1rem/1.65 'Baloo 2', system-ui, -apple-system, sans-serif;
+}
+a { color: var(--accent); }
+:focus-visible { outline: 3px solid var(--accent-bright); outline-offset: 3px; border-radius: 0.5rem; }
+.wrap { width: min(54rem, 100% - 2.5rem); margin-inline: auto; padding-block: clamp(1.5rem, 5vw, 3rem) 4rem; }
+
+/* The Earl and the rainbow his wand throws are one drawing, so the arc can start exactly at
+   the wand's tip however wide the page is. */
+.stage { position: relative; }
+.stage svg { display: block; width: 100%; height: auto; }
+.arc { fill: none; stroke-width: 13; stroke-linecap: round; }
+.arc-draw { stroke-dasharray: 1400; stroke-dashoffset: 1400; animation: throw 1.6s 0.3s ease-out forwards; }
+@keyframes throw { to { stroke-dashoffset: 0; } }
+@media (prefers-reduced-motion: reduce) { .arc-draw { animation: none; stroke-dashoffset: 0; } }
+
+.said {
+  position: absolute; left: 4%; top: 2%;
+  background: var(--card-solid); color: #FFFFFF;
+  border-radius: 1.4rem; padding: 0.5rem 1.3rem; margin: 0;
+  font-family: Modak, system-ui, cursive; font-size: clamp(1.4rem, 4.4vw, 2.1rem); line-height: 1.25;
+  -webkit-text-stroke: 2px var(--ink);
+  box-shadow: 0 8px 0 var(--card-edge), 0 16px 34px var(--shadow);
+  white-space: nowrap;
+}
+.said::after {
+  content: ''; position: absolute; left: 22%; bottom: -0.7rem;
+  border: 0.75rem solid transparent; border-top-color: var(--card-solid); border-bottom: 0;
+}
+@media (prefers-color-scheme: dark) { .said { color: #2A0620; -webkit-text-stroke-color: #FFC2E6; } }
+
+h1 {
+  font-family: Modak, system-ui, cursive; font-weight: 400;
+  font-size: clamp(2.2rem, 8vw, 3.6rem); line-height: 1; margin: 0 0 0.4rem;
+  color: #FFFFFF; -webkit-text-stroke: 3px var(--ink); text-shadow: 4px 4px 0 var(--accent);
+  text-align: center;
+}
+@media (prefers-color-scheme: dark) { h1 { color: #2A0620; -webkit-text-stroke-color: #FFC2E6; text-shadow: 4px 4px 0 #FF2E96; } }
+.lede { text-align: center; font-weight: 600; margin: 0 0 2rem; }
+
+.book { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 0.9rem; }
+.entry {
+  background: var(--card); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px);
+  border: 1px solid var(--card-edge); border-radius: 1.3rem;
+  padding: 1.1rem 1.3rem; box-shadow: 0 14px 34px var(--shadow);
+}
+.entry p { margin: 0 0 0.5rem; font-size: 1.05rem; overflow-wrap: anywhere; white-space: pre-wrap; }
+.entry footer { font-size: 0.85rem; font-weight: 700; color: var(--ink-soft); display: flex; flex-wrap: wrap; gap: 0.5rem; align-items: center; }
+.entry img { width: 1.4rem; height: 1.4rem; border-radius: 50%; }
+.empty, .broke { text-align: center; font-weight: 600; list-style: none; padding: 1.5rem; }
+.btn {
+  min-height: 52px; display: inline-flex; align-items: center; padding: 0 1.7rem;
+  border-radius: 999px; background: var(--ink); color: #FFE6F3;
+  font-weight: 800; font-size: 1.05rem; text-decoration: none; box-shadow: 0 6px 0 var(--accent);
+}
+@media (prefers-color-scheme: dark) { .btn { background: #FF2E96; color: #240415; box-shadow: 0 6px 0 #8E0B52; } }
+.ways { display: flex; flex-wrap: wrap; gap: 1.2rem; justify-content: center; align-items: center; margin-top: 2.5rem; }
+</style>
+</head>
+<body>
+
+<div class='wrap'>
+  <div class='stage'>
+    <p class='said' id='said' hidden>Thank you</p>
+    <svg viewBox='0 0 760 346' role='img' aria-labelledby='stage-title'>
+      <title id='stage-title'>The Earl of Bubblehum throwing a rainbow from his wand over the guestbook</title>
+      <defs>
+        <linearGradient id='bow' gradientUnits='userSpaceOnUse' x1='191' y1='104' x2='726' y2='300'>
+          <stop offset='0' stop-color='#FF2E96'/><stop offset='0.22' stop-color='#FF6FC6'/>
+          <stop offset='0.44' stop-color='#9D6BFF'/><stop offset='0.64' stop-color='#2FD3CB'/>
+          <stop offset='0.84' stop-color='#9DE93F'/><stop offset='1' stop-color='#FFE23D'/>
+        </linearGradient>
+      </defs>
+      <!-- Every band leaves the tip of the wand at the same point and fans out on the way
+           down, so the arc reads as thrown rather than as standing beside him. -->
+      <g class='arc-draw'>
+        <path class='arc' d='M191 104 A 392 392 0 0 1 726 258' stroke='url(#bow)' opacity='1'/>
+        <path class='arc' d='M191 104 A 410 410 0 0 1 723 274' stroke='url(#bow)' opacity='0.82'/>
+        <path class='arc' d='M191 104 A 430 430 0 0 1 720 290' stroke='url(#bow)' opacity='0.62'/>
+        <path class='arc' d='M191 104 A 452 452 0 0 1 717 306' stroke='url(#bow)' opacity='0.44'/>
+        <path class='arc' d='M191 104 A 476 476 0 0 1 714 322' stroke='url(#bow)' opacity='0.28'/>
+      </g>
+      <g transform='translate(30 44) scale(0.7)'>
+    <defs>
+      <linearGradient id='coat' x1='0' y1='0' x2='0' y2='1'>
+        <stop offset='0' stop-color='#FFFFFF'/>
+        <stop offset='1' stop-color='#FFC2E6'/>
+      </linearGradient>
+    </defs>
+    <ellipse cx='140' cy='366' rx='104' ry='14' fill='#B4157A' opacity='0.3'/>
+    <path d='M84 370 Q74 258 104 222 L180 222 Q210 258 200 370 Z' fill='url(#coat)'/>
+    <path d='M126 222 L142 314 L158 222 Z' fill='#FF6FC6' opacity='0.5'/>
+    <circle cx='142' cy='256' r='7' fill='#FF2E96'/>
+    <circle cx='142' cy='284' r='6' fill='#2FD3CB'/>
+    <circle cx='142' cy='310' r='5' fill='#FFE23D'/>
+    <g style='transform-box: view-box; transform-origin: 182px 228px; animation: wave 4.5s ease-in-out infinite; animation-play-state: var(--wave, paused);'>
+      <path d='M180 228 Q222 216 230 156' stroke='#FFFFFF' stroke-width='20' fill='none' stroke-linecap='round'/>
+      <rect x='218' y='88' width='10' height='70' rx='5' transform='rotate(12 223 123)' fill='#4A0A2C'/>
+      <circle cx='230' cy='82' r='9' fill='#FFE23D'/>
+      <circle cx='256' cy='62' r='5' fill='#9DE93F'/>
+      <circle cx='208' cy='52' r='4' fill='#2FD3CB'/>
+    </g>
+    <circle cx='140' cy='182' r='47' fill='#FFF0F8'/>
+    <circle cx='106' cy='202' r='22' fill='#FF9BD8'/>
+    <circle cx='174' cy='202' r='22' fill='#FF9BD8'/>
+    <circle cx='140' cy='215' r='26' fill='#FF9BD8'/>
+    <circle cx='125' cy='173' r='5.5' fill='#4A0A2C'/>
+    <circle cx='156' cy='173' r='5.5' fill='#4A0A2C'/>
+    <circle cx='123' cy='171' r='2' fill='#FFFFFF'/>
+    <circle cx='154' cy='171' r='2' fill='#FFFFFF'/>
+    <path d='M110 191 Q125 204 140 191 Q155 204 172 191' stroke='#E0509E' stroke-width='8' fill='none' stroke-linecap='round'/>
+    <path d='M62 150 Q140 128 218 150 Q216 164 140 166 Q64 164 62 150 Z' fill='#FF2E96'/>
+    <path d='M94 152 Q110 30 158 4 Q178 68 182 152 Z' fill='#FF2E96'/>
+    <path d='M98 133 Q140 122 180 133 L179 152 Q140 142 96 152 Z' fill='#4A0A2C'/>
+    <path d='M158 4 L164 22 L183 24 L168 37 L174 56 L156 44 L139 55 L145 36 L130 23 L149 21 Z' fill='#FFE23D'/>
+      </g>
+    </svg>
+  </div>
+
+  <h1>The guestbook</h1>
+  <p class='lede'>Everything anyone has said to the Earl, newest first.</p>
+
+  <ul class='book' id='book'><li class='empty'>Opening the book…</li></ul>
+
+  <div class='ways'>
+    <a class='btn' href='https://github.com/claudiob/bh/discussions/new?category=general'>Leave a message</a>
+    <a href='../'>Back to Bh</a>
+  </div>
+</div>
+
+<script>
+(function () {
+  'use strict'
+
+  // Repository Discussions read publicly over REST, so the book opens with no token in the
+  // page and nothing to keep secret. Sixty reads an hour from one address is the ceiling.
+  var BOOK = 'https://api.github.com/repos/claudiob/bh/discussions?per_page=100'
+  var book = document.getElementById('book')
+
+  if (new URLSearchParams(location.search).has('thanks')) {
+    document.getElementById('said').hidden = false
+  }
+
+  function note(text, kind) {
+    var li = document.createElement('li')
+    li.className = kind
+    li.textContent = text
+    book.innerHTML = ''
+    book.appendChild(li)
+  }
+
+  function entry(d) {
+    var li = document.createElement('li')
+    li.className = 'entry'
+    var p = document.createElement('p')
+    // Every word here was written by somebody else, so it goes in as text and never as markup.
+    p.textContent = (d.body && d.body.trim()) || d.title
+    var foot = document.createElement('footer')
+    if (d.user && d.user.avatar_url) {
+      var img = document.createElement('img')
+      img.src = d.user.avatar_url
+      img.alt = ''
+      img.loading = 'lazy'
+      foot.appendChild(img)
+    }
+    var who = document.createElement('span')
+    who.textContent = (d.user && d.user.login) || 'someone'
+    var dot = document.createElement('span')
+    dot.textContent = '·'
+    var at = document.createElement('time')
+    at.dateTime = d.created_at
+    at.textContent = new Date(d.created_at).toLocaleDateString(undefined,
+      { year: 'numeric', month: 'long', day: 'numeric' })
+    foot.appendChild(who)
+    foot.appendChild(dot)
+    foot.appendChild(at)
+    li.appendChild(p)
+    li.appendChild(foot)
+    return li
+  }
+
+  fetch(BOOK, { headers: { Accept: 'application/vnd.github+json' } })
+    .then(function (r) {
+      if (r.status === 410) { throw new Error('closed') }
+      if (!r.ok) { throw new Error(String(r.status)) }
+      return r.json()
+    })
+    .then(function (all) {
+      if (!all.length) { note('Nobody has said anything yet. Be the first.', 'empty'); return }
+      all.sort(function (a, b) { return new Date(b.created_at) - new Date(a.created_at) })
+      book.innerHTML = ''
+      all.forEach(function (d) { book.appendChild(entry(d)) })
+    })
+    .catch(function (e) {
+      note(e.message === 'closed'
+        ? 'The book is not open yet — Discussions are switched off on the repository.'
+        : 'The book would not open just now. GitHub allows sixty reads an hour from one address; try again shortly.',
+        'broke')
+    })
+}());
+</script>
+</body>
+</html>

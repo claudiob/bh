@@ -409,6 +409,52 @@ dl.defs dd { margin: 0.15rem 0 0; color: var(--ink-soft); }
 .lockup:hover svg [stroke] { stroke: currentColor; }
 .lockup svg { position: relative; vertical-align: baseline; margin-right: 0.29em; }
 
+/* ---------- the Earl's guestbook ---------- */
+
+/* Found the code: every wand on the page goes at it, and the one in the hero wakes up. */
+.frenzy { --wave-time: 0.3s; }
+.frenzy .earl, .frenzy .understudy { --wave: running; }
+
+.bubble {
+  border: 0; padding: 0; max-width: min(30rem, 100% - 2rem);
+  background: transparent; color: var(--ink);
+}
+.bubble::backdrop { background: rgba(74, 10, 44, 0.55); backdrop-filter: blur(3px); }
+.bubble-in {
+  position: relative;
+  background: var(--card-solid);
+  border-radius: 1.8rem; padding: 1.5rem;
+  box-shadow: 0 12px 0 var(--card-edge), 0 26px 60px var(--shadow);
+}
+.bubble-in::after {
+  content: ''; position: absolute; left: 2.5rem; bottom: -1.1rem;
+  border: 1.15rem solid transparent; border-top-color: var(--card-solid); border-bottom: 0;
+}
+.bubble h2 { font-size: 1.5rem; font-weight: 800; margin: 0 0 0.9rem; }
+.bubble textarea {
+  width: 100%; min-height: 8rem; resize: vertical;
+  border: 2px solid var(--card-edge); border-radius: 1rem;
+  background: var(--card); color: var(--ink);
+  font: inherit; font-weight: 600; font-size: 1.02rem; padding: 0.8rem 0.9rem;
+}
+.tally {
+  display: block; text-align: right; margin-top: 0.4rem;
+  font-weight: 800; font-size: 0.92rem; color: var(--ink-soft);
+}
+.tally.full { color: #D40B3F; animation: nought 0.5s ease-in-out 3; }
+@media (prefers-color-scheme: dark) { .tally.full { color: #FF7A9C; } }
+@keyframes nought { 50% { opacity: 0.15; transform: scale(1.25); } }
+@media (prefers-reduced-motion: reduce) { .tally.full { animation: none; } }
+.bubble-ways { display: flex; gap: 0.7rem; justify-content: flex-end; margin-top: 1rem; }
+.bubble button {
+  min-height: 48px; padding: 0 1.5rem; border-radius: 999px; border: 0;
+  font: inherit; font-weight: 800; font-size: 1rem; cursor: pointer;
+}
+.bubble .send { background: var(--ink); color: #FFE6F3; box-shadow: 0 5px 0 var(--accent); }
+@media (prefers-color-scheme: dark) { .bubble .send { background: #FF2E96; color: #240415; box-shadow: 0 5px 0 #8E0B52; } }
+.bubble .never { background: transparent; color: var(--ink-soft); }
+.bubble small { display: block; margin-top: 0.9rem; color: var(--ink-soft); font-weight: 600; font-size: 0.85rem; }
+
 /* ---------- the spell ---------- */
 
 .spell {
@@ -480,7 +526,7 @@ footer {
     <circle cx='142' cy='256' r='7' fill='#FF2E96'/>
     <circle cx='142' cy='284' r='6' fill='#2FD3CB'/>
     <circle cx='142' cy='310' r='5' fill='#FFE23D'/>
-    <g style='transform-box: view-box; transform-origin: 182px 228px; animation: wave 4.5s ease-in-out infinite; animation-play-state: var(--wave, paused);'>
+    <g style='transform-box: view-box; transform-origin: 182px 228px; animation: wave var(--wave-time, 4.5s) ease-in-out infinite; animation-play-state: var(--wave, paused);'>
       <path d='M180 228 Q222 216 230 156' stroke='#FFFFFF' stroke-width='20' fill='none' stroke-linecap='round'/>
       <rect x='218' y='88' width='10' height='70' rx='5' transform='rotate(12 223 123)' fill='#4A0A2C'/>
       <circle cx='230' cy='82' r='9' fill='#FFE23D'/>
@@ -874,6 +920,20 @@ rails s</code></pre>
   </div>
 </div>
 
+<dialog class='bubble' id='bubble' aria-labelledby='bubble-title'>
+  <form class='bubble-in' method='dialog' id='bubble-form'>
+    <h2 id='bubble-title'>Your message for the Earl</h2>
+    <label class='vh' for='say'>Your message for the Earl</label>
+    <textarea id='say' maxlength='200' placeholder='Your message for the Earl…' required></textarea>
+    <span class='tally' id='tally' aria-live='polite'>200</span>
+    <div class='bubble-ways'>
+      <button type='button' class='never' id='never'>Not now</button>
+      <button type='submit' class='send'>Send</button>
+    </div>
+    <small>Sending opens GitHub, where the message is posted as a discussion under your own name. That is what lets the guestbook be everyone's without this page holding a secret.</small>
+  </form>
+</dialog>
+
 <button class='spell' id='spell' type='button' aria-pressed='false'>
   <svg viewBox='0 0 24 24' aria-hidden='true'>
     <line class='wand' x1='4' y1='20' x2='15' y2='9'/>
@@ -1157,6 +1217,68 @@ rails s</code></pre>
   window.addEventListener('resize', place)
   if (still.addEventListener) { still.addEventListener('change', place) }
   place()
+}());
+
+// The Earl's guestbook, behind the code everyone knows. The wand goes wild, a bubble opens,
+// and what is typed into it is posted as a repository discussion under the visitor's own
+// GitHub name — which is what lets the book be everyone's while this page keeps no secret.
+(function () {
+  'use strict'
+
+  var bubble = document.getElementById('bubble')
+  var form = document.getElementById('bubble-form')
+  var say = document.getElementById('say')
+  var tally = document.getElementById('tally')
+  if (!bubble || !form || !say || !tally || !bubble.showModal) { return }
+
+  var MOST = 200
+  var CODE = ['arrowup', 'arrowup', 'arrowdown', 'arrowdown', 'arrowleft', 'arrowright',
+              'arrowleft', 'arrowright', 'b', 'a']
+  var at = 0
+
+  window.addEventListener('keydown', function (e) {
+    if (bubble.open) { return }
+    var key = e.key.toLowerCase()
+    at = (key === CODE[at]) ? at + 1 : (key === CODE[0] ? 1 : 0)
+    if (at < CODE.length) { return }
+    at = 0
+    open()
+  })
+
+  function open() {
+    document.documentElement.classList.add('frenzy')
+    // A beat of wand before the bubble, so the one plainly causes the other.
+    window.setTimeout(function () {
+      bubble.showModal()
+      say.focus()
+    }, 900)
+  }
+
+  function shut() {
+    document.documentElement.classList.remove('frenzy')
+  }
+
+  bubble.addEventListener('close', shut)
+  document.getElementById('never').addEventListener('click', function () { bubble.close() })
+
+  say.addEventListener('input', function () {
+    var left = MOST - say.value.length
+    tally.textContent = left
+    // `maxlength` stops the typing; the nought saying so is what tells them why.
+    tally.classList.toggle('full', left === 0)
+  })
+
+  form.addEventListener('submit', function (e) {
+    e.preventDefault()
+    var said = say.value.trim()
+    if (!said) { return }
+    var title = said.length > 60 ? said.slice(0, 57) + '…' : said
+    var where = 'https://github.com/claudiob/bh/discussions/new?category=general' +
+      '&title=' + encodeURIComponent(title) + '&body=' + encodeURIComponent(said)
+    window.open(where, '_blank', 'noopener')
+    bubble.close()
+    window.location.href = 'guestbook/?thanks'
+  })
 }());
 
 // The Earl's one spell: an ocean that is not a recording. Noise is generated once, looped,
