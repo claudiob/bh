@@ -166,12 +166,15 @@ p:last-child { margin-bottom: 0; }
 .btn-ghost:active { box-shadow: 0 2px 0 var(--btn-edge-ghost); }
 
 .earl { width: clamp(11rem, 26vw, 19rem); height: auto; display: block; }
-/* The star on his hat is the one thing on him you can press. It is drawn over the one the
-   symbol carries, so it is the same star, and it leans when you reach for it. */
+/* His hat is the one thing on him you can press: the brim and the cone catch the pointer
+   without being drawn, and the star over them turns and swells when they do. The star the
+   symbol carries is put out here alone, so there is nothing left standing behind this one
+   as it grows — every other Earl on the page keeps theirs. */
+.earl { --hat-star: 0; }
 .star { cursor: pointer; }
-.star path { transform-box: view-box; transform-origin: 156px 30px; transition: transform 0.18s ease; }
-.star:hover path, .star:focus-visible path { transform: scale(1.22) rotate(-12deg); }
-@media (prefers-reduced-motion: reduce) { .star path { transition: none; } }
+.star-shape { transform-box: view-box; transform-origin: 156px 30px; transition: transform 0.22s ease; }
+.star:hover .star-shape, .star:focus-visible .star-shape { transform: scale(1.75) rotate(72deg); }
+@media (prefers-reduced-motion: reduce) { .star-shape { transition: none; } }
 @media (width < 860px) {
   .hero-in { grid-template-columns: 1fr; }
   .earl { width: 13rem; margin-inline: auto; }
@@ -603,7 +606,7 @@ footer {
     <path d='M62 150 Q140 128 218 150 Q216 164 140 166 Q64 164 62 150 Z' fill='#FF2E96'/>
     <path d='M94 152 Q110 30 158 4 Q178 68 182 152 Z' fill='#FF2E96'/>
     <path d='M98 133 Q140 122 180 133 L179 152 Q140 142 96 152 Z' fill='#4A0A2C'/>
-    <path d='M158 4 L164 22 L183 24 L168 37 L174 56 L156 44 L139 55 L145 36 L130 23 L149 21 Z' fill='#FFE23D'/>
+    <path d='M158 4 L164 22 L183 24 L168 37 L174 56 L156 44 L139 55 L145 36 L130 23 L149 21 Z' fill='#FFE23D' style='opacity: var(--hat-star, 1)'/>
   </symbol>
 </svg>
 
@@ -640,7 +643,9 @@ footer {
       <a class='star' id='star' href='https://github.com/claudiob/bh' target='_blank' rel='noopener'
          aria-label='Star bh on GitHub'>
         <title id='star-title'>Star bh on GitHub</title>
-        <path d='M158 4 L164 22 L183 24 L168 37 L174 56 L156 44 L139 55 L145 36 L130 23 L149 21 Z' fill='#FFE23D'/>
+        <path d='M62 150 Q140 128 218 150 Q216 164 140 166 Q64 164 62 150 Z' fill='transparent'/>
+        <path d='M94 152 Q110 30 158 4 Q178 68 182 152 Z' fill='transparent'/>
+        <path class='star-shape' d='M158 4 L164 22 L183 24 L168 37 L174 56 L156 44 L139 55 L145 36 L130 23 L149 21 Z' fill='#FFE23D'/>
       </a>
     </svg>
   </div>

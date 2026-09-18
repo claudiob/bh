@@ -77,12 +77,11 @@ a { color: var(--accent); }
 
 h1 {
   font-family: Modak, system-ui, cursive; font-weight: 400;
-  font-size: clamp(2.2rem, 8vw, 3.6rem); line-height: 1; margin: 0 0 0.4rem;
+  font-size: clamp(2.2rem, 8vw, 3.6rem); line-height: 1; margin: 0 0 2rem;
   color: #FFFFFF; -webkit-text-stroke: 3px var(--ink); text-shadow: 4px 4px 0 var(--accent);
   text-align: center;
 }
 @media (prefers-color-scheme: dark) { h1 { color: #2A0620; -webkit-text-stroke-color: #FFC2E6; text-shadow: 4px 4px 0 #FF2E96; } }
-.lede { text-align: center; font-weight: 600; margin: 0 0 2rem; }
 
 .book { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 0.9rem; }
 .entry {
@@ -170,7 +169,6 @@ h1 {
   </div>
 
   <h1>The guestbook</h1>
-  <p class='lede'>Everything anyone has said to the Earl, newest first.</p>
 
   <ul class='book' id='book'><li class='empty'>Opening the book…</li></ul>
 
