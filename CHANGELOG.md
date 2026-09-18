@@ -8,6 +8,18 @@ For more information about changelogs, check
 
 ## [Unreleased]
 
+## 6.3.0 - 2026-09-18
+
+* [FEATURE] The nine palettes, served at `/bh/theme/<name>.css`
+
+  `bootstrap`, `dawn`, `dracula`, `gruvbox`, `monokai`, `nord`, `one_dark`, `solarized` and
+  `tokyo_night`, each restating all thirteen steps of every Bootstrap family it repaints. They
+  arrived with the `scheme` controller in 6.2.0 and the controller had nothing to swap: it
+  reads `${path}/${theme}.css`, and no such file shipped. Now it does.
+
+  They are copied beside the stylesheet rather than bundled into it, because a page links one
+  at a time and swaps it for another, which is the whole point of them.
+
 ## 6.2.0 - 2026-09-18
 
 A breaking change that keeps its major on purpose. 6.0 through 6.1.4 were an alpha in

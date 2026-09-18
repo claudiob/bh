@@ -1,0 +1,189 @@
+/* One Dark, Atom — https://github.com/atom/atom/tree/master/packages/one-dark-ui
+   One Light's page is the light one and One Dark's the dark one. One Dark
+   carries no pink, so its purple serves both, and its orange serves
+   brown. The mid neutral is derived.
+
+   Bootstrap builds a family by mixing one base toward `--bs-white` below
+   the 500 step and toward `--bs-black` above it, and inlines that base
+   into all thirteen — so a palette restates the thirteen rather than the
+   one. Upstream's order and upstream's shapes with only the base swapped,
+   so a later Bootstrap diffs against this file. */
+:root {
+  /* The page, and the two colors every ramp below is mixed with.
+     `--bs-bg-body` reads `--bs-white` in light mode and `--bs-gray-975` in
+     dark, so repainting these two is what moves the page itself. */
+  --bs-white: #fafafa;
+  --bs-black: #282c34;
+
+  /* The neutrals, which every surface, border and text token Bootstrap ships
+     derives from. */
+  --bs-gray-025: color-mix(in lab, var(--bs-white) 94%, #8b91a0);
+  --bs-gray-050: color-mix(in lab, var(--bs-white) 90%, #8b91a0);
+  --bs-gray-100: color-mix(in lab, var(--bs-white) 80%, #8b91a0);
+  --bs-gray-200: color-mix(in lab, var(--bs-white) 60%, #8b91a0);
+  --bs-gray-300: color-mix(in lab, var(--bs-white) 40%, #8b91a0);
+  --bs-gray-400: color-mix(in lab, var(--bs-white) 20%, #8b91a0);
+  --bs-gray-500: #8b91a0;
+  --bs-gray-600: color-mix(in lab, var(--bs-black) 16%, #8b91a0);
+  --bs-gray-700: color-mix(in lab, var(--bs-black) 32%, #8b91a0);
+  --bs-gray-800: color-mix(in lab, var(--bs-black) 48%, #8b91a0);
+  --bs-gray-900: color-mix(in lab, var(--bs-black) 64%, #8b91a0);
+  --bs-gray-950: color-mix(in lab, var(--bs-black) 76%, #8b91a0);
+  --bs-gray-975: color-mix(in lab, var(--bs-black) 88%, #8b91a0);
+
+  --bs-blue-025: color-mix(in lab, var(--bs-white) 94%, #61afef);
+  --bs-blue-050: color-mix(in lab, var(--bs-white) 90%, #61afef);
+  --bs-blue-100: color-mix(in lab, var(--bs-white) 80%, #61afef);
+  --bs-blue-200: color-mix(in lab, var(--bs-white) 60%, #61afef);
+  --bs-blue-300: color-mix(in lab, var(--bs-white) 40%, #61afef);
+  --bs-blue-400: color-mix(in lab, var(--bs-white) 20%, #61afef);
+  --bs-blue-500: #61afef;
+  --bs-blue-600: color-mix(in lab, var(--bs-black) 16%, #61afef);
+  --bs-blue-700: color-mix(in lab, var(--bs-black) 32%, #61afef);
+  --bs-blue-800: color-mix(in lab, var(--bs-black) 48%, #61afef);
+  --bs-blue-900: color-mix(in lab, var(--bs-black) 64%, #61afef);
+  --bs-blue-950: color-mix(in lab, var(--bs-black) 76%, #61afef);
+  --bs-blue-975: color-mix(in lab, var(--bs-black) 88%, #61afef);
+
+  --bs-brown-025: color-mix(in lab, var(--bs-white) 94%, #d19a66);
+  --bs-brown-050: color-mix(in lab, var(--bs-white) 90%, #d19a66);
+  --bs-brown-100: color-mix(in lab, var(--bs-white) 80%, #d19a66);
+  --bs-brown-200: color-mix(in lab, var(--bs-white) 60%, #d19a66);
+  --bs-brown-300: color-mix(in lab, var(--bs-white) 40%, #d19a66);
+  --bs-brown-400: color-mix(in lab, var(--bs-white) 20%, #d19a66);
+  --bs-brown-500: #d19a66;
+  --bs-brown-600: color-mix(in lab, var(--bs-black) 16%, #d19a66);
+  --bs-brown-700: color-mix(in lab, var(--bs-black) 32%, #d19a66);
+  --bs-brown-800: color-mix(in lab, var(--bs-black) 48%, #d19a66);
+  --bs-brown-900: color-mix(in lab, var(--bs-black) 64%, #d19a66);
+  --bs-brown-950: color-mix(in lab, var(--bs-black) 76%, #d19a66);
+  --bs-brown-975: color-mix(in lab, var(--bs-black) 88%, #d19a66);
+
+  --bs-cyan-025: color-mix(in lab, var(--bs-white) 94%, #56b6c2);
+  --bs-cyan-050: color-mix(in lab, var(--bs-white) 90%, #56b6c2);
+  --bs-cyan-100: color-mix(in lab, var(--bs-white) 80%, #56b6c2);
+  --bs-cyan-200: color-mix(in lab, var(--bs-white) 60%, #56b6c2);
+  --bs-cyan-300: color-mix(in lab, var(--bs-white) 40%, #56b6c2);
+  --bs-cyan-400: color-mix(in lab, var(--bs-white) 20%, #56b6c2);
+  --bs-cyan-500: #56b6c2;
+  --bs-cyan-600: color-mix(in lab, var(--bs-black) 16%, #56b6c2);
+  --bs-cyan-700: color-mix(in lab, var(--bs-black) 32%, #56b6c2);
+  --bs-cyan-800: color-mix(in lab, var(--bs-black) 48%, #56b6c2);
+  --bs-cyan-900: color-mix(in lab, var(--bs-black) 64%, #56b6c2);
+  --bs-cyan-950: color-mix(in lab, var(--bs-black) 76%, #56b6c2);
+  --bs-cyan-975: color-mix(in lab, var(--bs-black) 88%, #56b6c2);
+
+  --bs-green-025: color-mix(in lab, var(--bs-white) 94%, #98c379);
+  --bs-green-050: color-mix(in lab, var(--bs-white) 90%, #98c379);
+  --bs-green-100: color-mix(in lab, var(--bs-white) 80%, #98c379);
+  --bs-green-200: color-mix(in lab, var(--bs-white) 60%, #98c379);
+  --bs-green-300: color-mix(in lab, var(--bs-white) 40%, #98c379);
+  --bs-green-400: color-mix(in lab, var(--bs-white) 20%, #98c379);
+  --bs-green-500: #98c379;
+  --bs-green-600: color-mix(in lab, var(--bs-black) 16%, #98c379);
+  --bs-green-700: color-mix(in lab, var(--bs-black) 32%, #98c379);
+  --bs-green-800: color-mix(in lab, var(--bs-black) 48%, #98c379);
+  --bs-green-900: color-mix(in lab, var(--bs-black) 64%, #98c379);
+  --bs-green-950: color-mix(in lab, var(--bs-black) 76%, #98c379);
+  --bs-green-975: color-mix(in lab, var(--bs-black) 88%, #98c379);
+
+  --bs-orange-025: color-mix(in lab, var(--bs-white) 94%, #d19a66);
+  --bs-orange-050: color-mix(in lab, var(--bs-white) 90%, #d19a66);
+  --bs-orange-100: color-mix(in lab, var(--bs-white) 80%, #d19a66);
+  --bs-orange-200: color-mix(in lab, var(--bs-white) 60%, #d19a66);
+  --bs-orange-300: color-mix(in lab, var(--bs-white) 40%, #d19a66);
+  --bs-orange-400: color-mix(in lab, var(--bs-white) 20%, #d19a66);
+  --bs-orange-500: #d19a66;
+  --bs-orange-600: color-mix(in lab, var(--bs-black) 16%, #d19a66);
+  --bs-orange-700: color-mix(in lab, var(--bs-black) 32%, #d19a66);
+  --bs-orange-800: color-mix(in lab, var(--bs-black) 48%, #d19a66);
+  --bs-orange-900: color-mix(in lab, var(--bs-black) 64%, #d19a66);
+  --bs-orange-950: color-mix(in lab, var(--bs-black) 76%, #d19a66);
+  --bs-orange-975: color-mix(in lab, var(--bs-black) 88%, #d19a66);
+
+  --bs-pink-025: color-mix(in lab, var(--bs-white) 94%, #c678dd);
+  --bs-pink-050: color-mix(in lab, var(--bs-white) 90%, #c678dd);
+  --bs-pink-100: color-mix(in lab, var(--bs-white) 80%, #c678dd);
+  --bs-pink-200: color-mix(in lab, var(--bs-white) 60%, #c678dd);
+  --bs-pink-300: color-mix(in lab, var(--bs-white) 40%, #c678dd);
+  --bs-pink-400: color-mix(in lab, var(--bs-white) 20%, #c678dd);
+  --bs-pink-500: #c678dd;
+  --bs-pink-600: color-mix(in lab, var(--bs-black) 16%, #c678dd);
+  --bs-pink-700: color-mix(in lab, var(--bs-black) 32%, #c678dd);
+  --bs-pink-800: color-mix(in lab, var(--bs-black) 48%, #c678dd);
+  --bs-pink-900: color-mix(in lab, var(--bs-black) 64%, #c678dd);
+  --bs-pink-950: color-mix(in lab, var(--bs-black) 76%, #c678dd);
+  --bs-pink-975: color-mix(in lab, var(--bs-black) 88%, #c678dd);
+
+  --bs-purple-025: color-mix(in lab, var(--bs-white) 94%, #c678dd);
+  --bs-purple-050: color-mix(in lab, var(--bs-white) 90%, #c678dd);
+  --bs-purple-100: color-mix(in lab, var(--bs-white) 80%, #c678dd);
+  --bs-purple-200: color-mix(in lab, var(--bs-white) 60%, #c678dd);
+  --bs-purple-300: color-mix(in lab, var(--bs-white) 40%, #c678dd);
+  --bs-purple-400: color-mix(in lab, var(--bs-white) 20%, #c678dd);
+  --bs-purple-500: #c678dd;
+  --bs-purple-600: color-mix(in lab, var(--bs-black) 16%, #c678dd);
+  --bs-purple-700: color-mix(in lab, var(--bs-black) 32%, #c678dd);
+  --bs-purple-800: color-mix(in lab, var(--bs-black) 48%, #c678dd);
+  --bs-purple-900: color-mix(in lab, var(--bs-black) 64%, #c678dd);
+  --bs-purple-950: color-mix(in lab, var(--bs-black) 76%, #c678dd);
+  --bs-purple-975: color-mix(in lab, var(--bs-black) 88%, #c678dd);
+
+  --bs-red-025: color-mix(in lab, var(--bs-white) 94%, #e06c75);
+  --bs-red-050: color-mix(in lab, var(--bs-white) 90%, #e06c75);
+  --bs-red-100: color-mix(in lab, var(--bs-white) 80%, #e06c75);
+  --bs-red-200: color-mix(in lab, var(--bs-white) 60%, #e06c75);
+  --bs-red-300: color-mix(in lab, var(--bs-white) 40%, #e06c75);
+  --bs-red-400: color-mix(in lab, var(--bs-white) 20%, #e06c75);
+  --bs-red-500: #e06c75;
+  --bs-red-600: color-mix(in lab, var(--bs-black) 16%, #e06c75);
+  --bs-red-700: color-mix(in lab, var(--bs-black) 32%, #e06c75);
+  --bs-red-800: color-mix(in lab, var(--bs-black) 48%, #e06c75);
+  --bs-red-900: color-mix(in lab, var(--bs-black) 64%, #e06c75);
+  --bs-red-950: color-mix(in lab, var(--bs-black) 76%, #e06c75);
+  --bs-red-975: color-mix(in lab, var(--bs-black) 88%, #e06c75);
+
+  --bs-yellow-025: color-mix(in lab, var(--bs-white) 94%, #e5c07b);
+  --bs-yellow-050: color-mix(in lab, var(--bs-white) 90%, #e5c07b);
+  --bs-yellow-100: color-mix(in lab, var(--bs-white) 80%, #e5c07b);
+  --bs-yellow-200: color-mix(in lab, var(--bs-white) 60%, #e5c07b);
+  --bs-yellow-300: color-mix(in lab, var(--bs-white) 40%, #e5c07b);
+  --bs-yellow-400: color-mix(in lab, var(--bs-white) 20%, #e5c07b);
+  --bs-yellow-500: #e5c07b;
+  --bs-yellow-600: color-mix(in lab, var(--bs-black) 16%, #e5c07b);
+  --bs-yellow-700: color-mix(in lab, var(--bs-black) 32%, #e5c07b);
+  --bs-yellow-800: color-mix(in lab, var(--bs-black) 48%, #e5c07b);
+  --bs-yellow-900: color-mix(in lab, var(--bs-black) 64%, #e5c07b);
+  --bs-yellow-950: color-mix(in lab, var(--bs-black) 76%, #e5c07b);
+  --bs-yellow-975: color-mix(in lab, var(--bs-black) 88%, #e5c07b);
+
+  /* Text, stated rather than left to the ramp. Bootstrap pairs a low step as
+     a light surface with that same step as dark-mode text, which a palette
+     built for its own contrast does not agree with. */
+  --bs-fg-1: light-dark(#202126, #ffffff);
+  --bs-fg-body: light-dark(#383a42, #abb2bf);
+  --bs-fg-2: light-dark(#5c6370, #939aa8);
+
+  /* The label a solid fill carries, for the four families Bootstrap has
+     spent on a meaning and this palette has repainted. Upstream's own shape:
+     it gives warning and info a dark label for the same reason. */
+  --bs-danger-contrast: var(--bs-gray-975);
+  --bs-success-contrast: var(--bs-gray-975);
+  --bs-warning-contrast: var(--bs-gray-975);
+  --bs-info-contrast: var(--bs-gray-975);
+
+  /* The accent this palette leads with, as the primary color: the same nine
+     `_color.html.erb` writes, from blue and the label that reads on it. Here
+     rather than only in the page because a reader may swap this file for
+     another one, and the primary has to travel with it. A host naming its
+     own color still wins, its block coming after this file. */
+  --bs-primary-base: var(--bs-blue-500);
+  --bs-primary-fg: light-dark(var(--bs-blue-600), var(--bs-blue-400));
+  --bs-primary-fg-emphasis: light-dark(var(--bs-blue-800), var(--bs-blue-200));
+  --bs-primary-bg: var(--bs-blue-500);
+  --bs-primary-bg-subtle: light-dark(var(--bs-blue-100), var(--bs-blue-900));
+  --bs-primary-bg-muted: light-dark(var(--bs-blue-200), var(--bs-blue-800));
+  --bs-primary-border: light-dark(var(--bs-blue-300), var(--bs-blue-600));
+  --bs-primary-focus-ring: light-dark(color-mix(in oklch, var(--bs-blue-500) 50%, var(--bs-bg-body)), color-mix(in oklch, var(--bs-blue-500) 75%, var(--bs-bg-body)));
+  --bs-primary-contrast: var(--bs-gray-975);
+}

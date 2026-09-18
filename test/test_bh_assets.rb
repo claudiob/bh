@@ -15,6 +15,15 @@ class TestBhAssets < IntegrationCase
     assert_includes body, 'register("phone"'
     assert_includes body, 'register("combobox"'
     assert_equal 'no-cache', header('cache-control')
+    # A palette is linked one at a time and swapped for another, so the nine are served
+    # beside the stylesheet rather than bundled into it.
+    visit '/bh/theme/dracula.css'
+
+    assert_includes body, '--bs-white: #f8f8f2;'
+    # Bootstrap's own declares nothing: dropping the link is how upstream comes back.
+    visit '/bh/theme/bootstrap.css'
+
+    refute_includes body, '--bs-white:'
   end
 
   def test_the_head_helper_links_what_the_engine_serves
@@ -30,6 +39,7 @@ class TestBhAssets < IntegrationCase
 
     assert_includes files, 'public/bh/css/bh.css'
     assert_includes files, 'public/bh/js/bh.js'
+    assert_includes files, 'public/bh/theme/nord.css'
     assert_includes files, 'config/locales/bh.en.yml'
     # And the sources, which the gem layering its own brand over these bundles itself.
     assert_includes files, 'app/stylesheets/bh.css'

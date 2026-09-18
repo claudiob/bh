@@ -21,10 +21,10 @@ gem install bh
 
 ```ruby
 # Gemfile
-gem 'bh', '~> 6.2.0'
+gem 'bh', '~> 6.3.0'
 ```
 
-`~> 6.2.0` stops short of `6.3`, and that is the pin to hold: **until this line settles it
+`~> 6.3.0` stops short of `6.4`, and that is the pin to hold: **until this line settles it
 breaks on a minor, not on a major.** Rails 8.1 and Ruby 3.2 are the minimum.
 
 6.2.0 breaks everything before it and keeps its major anyway. 6.0 through 6.1.4 were an alpha
@@ -39,6 +39,33 @@ puts both in the head, along with everything Bootstrap and Turbo read:
 ```erb
 <%= bh_head_tags %>
 ```
+
+## The palettes
+
+Nine of them, served at `/bh/theme/<name>.css` and linked one at a time, after the stylesheet:
+`bootstrap`, `dawn`, `dracula`, `gruvbox`, `monokai`, `nord`, `one_dark`, `solarized`,
+`tokyo_night`. Each restates all thirteen steps of every Bootstrap family it repaints, plus
+`--bs-white`, `--bs-black` and the three text tones. Every accent clears 3:1 against its label
+and every text tone 4:1, in both modes.
+
+`bootstrap` declares nothing: upstream's palette comes back by dropping the others' block
+rather than by writing one, and it is named so a toggle can reach it — a reader who rotates
+through nine and never finds the one the pages started in has been shown a door with no handle
+on the inside.
+
+The `scheme` controller does the swapping, and the choice belongs to the reader:
+
+```erb
+<button type='button' data-controller='scheme' data-action='scheme#rotate'
+        data-scheme-themes-value='["bootstrap","dawn","dracula","gruvbox","monokai","nord","one_dark","solarized","tokyo_night"]'
+        data-scheme-path-value='/bh/theme' data-scheme-storage-value='scheme'>
+  Another palette
+</button>
+```
+
+A click moves to another palette and into the mode it is not in. Put the stored choice back
+before the first paint, from the layout's own script: a controller connects far too late for
+that, and the page would otherwise flash the palette the server chose.
 
 ## What you get
 
@@ -60,6 +87,7 @@ end
 | `chat_with` | a thread of bubbles, and the field that posts the next one |
 | `flow` | the page of a signup flow: a header, a title, one card, a footer |
 | 22 Stimulus controllers | registered by the bundle, called by `data-controller` |
+| 9 palettes | served at `/bh/theme/`, swapped by the `scheme` controller |
 
 The page above draws every one of them beside the line of Ruby that produces it.
 
