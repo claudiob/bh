@@ -418,6 +418,10 @@ dl.defs dd { margin: 0.15rem 0 0; color: var(--ink-soft); }
 .bubble {
   border: 0; padding: 0; max-width: min(30rem, 100% - 2rem);
   background: transparent; color: var(--ink);
+  /* A dialog is `overflow: auto` by default, and since this one is transparent the track
+     showed as a bar beside the card — and clipped the bubble's tail with it. Nothing here
+     is long enough to need it; the textarea scrolls on its own. */
+  overflow: visible;
 }
 .bubble::backdrop { background: rgba(74, 10, 44, 0.55); backdrop-filter: blur(3px); }
 .bubble-in {
@@ -453,6 +457,12 @@ dl.defs dd { margin: 0.15rem 0 0; color: var(--ink-soft); }
 .bubble .send { background: var(--ink); color: #FFE6F3; box-shadow: 0 5px 0 var(--accent); }
 @media (prefers-color-scheme: dark) { .bubble .send { background: #FF2E96; color: #240415; box-shadow: 0 5px 0 #8E0B52; } }
 .bubble .never { background: transparent; color: var(--ink-soft); }
+/* A short window has no room for the note, and the textarea gives up half its height
+   before the card would outgrow the screen. */
+@media (height < 660px) {
+  .bubble textarea { min-height: 4.5rem; }
+  .bubble small { display: none; }
+}
 .bubble small { display: block; margin-top: 0.9rem; color: var(--ink-soft); font-weight: 600; font-size: 0.85rem; }
 
 /* ---------- the spell ---------- */
@@ -924,7 +934,7 @@ rails s</code></pre>
   <form class='bubble-in' method='dialog' id='bubble-form'>
     <h2 id='bubble-title'>Your message for the Earl</h2>
     <label class='vh' for='say'>Your message for the Earl</label>
-    <textarea id='say' maxlength='200' placeholder='Your message for the Earl…' required></textarea>
+    <textarea id='say' maxlength='200' placeholder='Your hat is so sharp 💖' required></textarea>
     <span class='tally' id='tally' aria-live='polite'>200</span>
     <div class='bubble-ways'>
       <button type='button' class='never' id='never'>Not now</button>
