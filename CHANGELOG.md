@@ -8,6 +8,23 @@ For more information about changelogs, check
 
 ## [Unreleased]
 
+## 6.4.0 - 2026-09-18
+
+* [FEATURE] A message carries its `photos`, drawn in the bubble under its words
+
+  `Bh::Message` takes a list of addresses beside its text. Each is drawn under the words in
+  the same bubble, linking to itself in a tab of its own: what fits beside words is rarely
+  what somebody wants to look at. A message carrying pictures and no words is a message all
+  the same, rather than one still being typed.
+
+* [FEATURE] `chat_with` takes a `note:`, said over the thread rather than in it
+
+  What the conversation is about, or the other way to reach whoever is on the far end of it.
+  Over rather than in, because nobody in the conversation said it and a bubble would claim
+  somebody had. It holds the top while the thread scrolls under it, and carries the page's
+  own background for that reason: a tint would read as somebody's turn, and without one the
+  bubbles would show through.
+
 ## 6.3.0 - 2026-09-18
 
 * [FEATURE] The nine palettes, served at `/bh/theme/<name>.css`
