@@ -8,6 +8,14 @@ For more information about changelogs, check
 
 ## [Unreleased]
 
+## 6.5.1 - 2026-09-18
+
+* [FIX] A thread's note is opaque and centred
+
+  It named a background variable this bundle does not define, so it drew none and the
+  message it holds the top over read through it. And it lost its centring when it gained
+  its stickiness.
+
 ## 6.5.0 - 2026-09-18
 
 * [FIX] The shell fills the screen in whole pixels
