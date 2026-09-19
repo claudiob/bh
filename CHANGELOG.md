@@ -8,6 +8,16 @@ For more information about changelogs, check
 
 ## [Unreleased]
 
+## 6.5.0 - 2026-09-18
+
+* [FIX] The shell fills the screen in whole pixels
+
+  `100dvh` computes to a fraction on a scaled display -- 415.455px against a viewport
+  reporting 415 -- and the tenths over are enough for a browser to draw a scrollbar the
+  page cannot use, beside the one the content it holds already has. The shell takes a
+  percentage of a document given a height instead, which is the same whole number the
+  viewport reports.
+
 ## 6.4.0 - 2026-09-18
 
 * [FEATURE] A message carries its `photos`, drawn in the bubble under its words

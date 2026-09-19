@@ -21,6 +21,9 @@ span.breadcrumb-link.active {
    page whose table had no rows to be taller than the menu. `clip` leaves the
    other axis alone. */
 html { overflow-x: hidden; }
+/* And a height for the shell below to take a percentage of, so the one screen it
+   fills is measured in whole pixels rather than in a unit that carries a fraction. */
+html, body { height: 100%; }
 .recourse-shell { overflow-x: clip; }
 
 /* A finger does not hover. The tint a pointer leaves on the row under it, or on
@@ -65,7 +68,10 @@ html { overflow-x: hidden; }
     grid-template-columns: auto minmax(0, 1fr);
     grid-template-rows: auto minmax(0, 1fr);
     grid-template-areas: 'nav nav' 'aside main';
-    height: 100dvh;
+    /* A percentage of the block a viewport unit would have measured: `100dvh` carries
+       the fraction a scaled display computes it to -- 415.455px against a viewport
+       reporting 415 -- and the tenths over are a scrollbar the page cannot use. */
+    height: 100%;
   }
   .recourse-shell > nav { grid-area: nav; }
   .recourse-sidebar { grid-area: aside; }
