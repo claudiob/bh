@@ -8,6 +8,15 @@ For more information about changelogs, check
 
 ## [Unreleased]
 
+## 6.6.0 - 2026-09-18
+
+* [CHANGE] A picture in a bubble is a thumbnail
+
+  Drawn at the height every other picture on these screens is, since what fits beside
+  words is a thing to recognise and click rather than a thing to look at -- and narrower
+  than the bubble whatever shape it is, so a portrait photograph does not make a column
+  of one message.
+
 ## 6.5.1 - 2026-09-18
 
 * [FIX] A thread's note is opaque and centred

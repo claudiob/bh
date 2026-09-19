@@ -24,11 +24,15 @@
   padding-block: 0.25rem 0.75rem;
 }
 
-/* A picture a message carries, under its words and no wider than the bubble holding it. */
+/* A picture a message carries, under its words: a thumbnail of the height every other
+   picture on these screens is drawn at, since what fits beside words is a thing to
+   recognise and click rather than a thing to look at. Narrower than the bubble whatever
+   shape it is, so a portrait photograph does not make a column of one message. */
 .chat-photo {
   display: block;
+  height: 6.25rem;
+  width: auto;
   max-width: 100%;
-  height: auto;
   border-radius: 0.5rem;
   margin-block-start: 0.5rem;
 }
