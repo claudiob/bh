@@ -357,6 +357,13 @@ dl.defs dd { margin: 0.15rem 0 0; color: var(--ink-soft); }
   display: block; text-align: center; margin-top: 1.4rem;
   font-weight: 800; font-size: 0.95rem;
 }
+/* Both links on one line where there is room for them, one under the other where
+   there is not, and neither carrying the margin the single one does. */
+.refs {
+  display: flex; flex-wrap: wrap; justify-content: center;
+  gap: 0.3rem 1.4rem; margin-top: 1.4rem;
+}
+.refs .ref { margin-top: 0; }
 .note {
   margin-top: 1.1rem; border-left: 4px solid var(--accent-bright);
   padding: 0.2rem 0 0.2rem 0.9rem; color: var(--ink-soft); font-weight: 600;
@@ -681,23 +688,21 @@ footer {
     <section id='overview'>
       <div class='panel'>
         <h2>Overview</h2>
-        <p>Combine the beauty of Bootstrap's design and the expressiveness of Ruby, and get both for the fewest keystrokes.</p>
-        <p>Bootstrap is a great framework, but it asks for <strong>many lines of HTML</strong> even for simple components. A dialog that opens from a link, closes on its X, on its button, on Esc and on the backdrop, and tells a screen reader what it is called, is all of this:</p>
-<pre><code><span class='k'>&lt;a</span> class=<span class='s'>'small'</span> data-bs-toggle=<span class='s'>'dialog'</span>
-   data-bs-target=<span class='s'>'#not-on-google'</span> href=<span class='s'>'#not-on-google'</span><span class='k'>&gt;</span>
-  What is in the hat?
-<span class='k'>&lt;/a&gt;</span>
-<span class='k'>&lt;dialog</span> class=<span class='s'>'dialog dialog-slide-down'</span> id=<span class='s'>'not-on-google'</span>
-        aria-labelledby=<span class='s'>'in-the-hat-title'</span><span class='k'>&gt;</span>
-  <span class='k'>&lt;div</span> class=<span class='s'>'dialog-header'</span><span class='k'>&gt;</span>
-    <span class='k'>&lt;h2</span> class=<span class='s'>'dialog-title'</span> id=<span class='s'>'in-the-hat-title'</span><span class='k'>&gt;</span>A gumball, mostly<span class='k'>&lt;/h2&gt;</span>
-    <span class='k'>&lt;button</span> type=<span class='s'>'button'</span> class=<span class='s'>'btn-close ms-auto'</span>
-            data-bs-dismiss=<span class='s'>'dialog'</span> aria-label=<span class='s'>'Close'</span><span class='k'>&gt;&lt;/button&gt;</span>
+        <p>Bootstrap&nbsp;6 is a great framework, but <strong>many lines of HTML</strong> are needed even for simple components. A <a href='https://v6-dev--twbs-bootstrap.netlify.app/docs/6.0/components/dialog/#example'>basic dialog</a> requires all this:</p>
+<pre><code><span class='k'>&lt;button</span> type=<span class='s'>"button"</span> class=<span class='s'>"btn-solid theme-primary"</span> data-bs-toggle=<span class='s'>"dialog"</span> data-bs-target=<span class='s'>"#exampleDialog"</span><span class='k'>&gt;</span>
+  Open dialog
+<span class='k'>&lt;/button&gt;</span>
+<span class='k'>&lt;dialog</span> class=<span class='s'>"dialog"</span> id=<span class='s'>"exampleDialog"</span><span class='k'>&gt;</span>
+  <span class='k'>&lt;div</span> class=<span class='s'>"dialog-header"</span><span class='k'>&gt;</span>
+    <span class='k'>&lt;h1</span> class=<span class='s'>"dialog-title"</span><span class='k'>&gt;</span>Dialog title<span class='k'>&lt;/h1&gt;</span>
+    <span class='k'>&lt;button</span> type=<span class='s'>"button"</span> class=<span class='s'>"btn-close"</span> data-bs-dismiss=<span class='s'>"dialog"</span> aria-label=<span class='s'>"Close"</span><span class='k'>&gt;&lt;/button&gt;</span>
   <span class='k'>&lt;/div&gt;</span>
-  <span class='k'>&lt;div</span> class=<span class='s'>'dialog-body'</span><span class='k'>&gt;</span>And whatever the wand last turned into one.<span class='k'>&lt;/div&gt;</span>
-  <span class='k'>&lt;div</span> class=<span class='s'>'dialog-footer'</span><span class='k'>&gt;</span>
-    <span class='k'>&lt;button</span> type=<span class='s'>'button'</span> class=<span class='s'>'btn btn-solid theme-secondary'</span>
-            data-bs-dismiss=<span class='s'>'dialog'</span><span class='k'>&gt;</span>Righto<span class='k'>&lt;/button&gt;</span>
+  <span class='k'>&lt;div</span> class=<span class='s'>"dialog-body"</span><span class='k'>&gt;</span>
+    <span class='k'>&lt;p&gt;</span>This is a native dialog element. It uses the browser’s built-in modal behavior for accessibility and focus management.<span class='k'>&lt;/p&gt;</span>
+  <span class='k'>&lt;/div&gt;</span>
+  <span class='k'>&lt;div</span> class=<span class='s'>"dialog-footer"</span><span class='k'>&gt;</span>
+    <span class='k'>&lt;button</span> type=<span class='s'>"button"</span> class=<span class='s'>"btn-solid theme-secondary"</span> data-bs-dismiss=<span class='s'>"dialog"</span><span class='k'>&gt;</span>Close<span class='k'>&lt;/button&gt;</span>
+    <span class='k'>&lt;button</span> type=<span class='s'>"button"</span> class=<span class='s'>"btn-solid theme-primary"</span><span class='k'>&gt;</span>Save changes<span class='k'>&lt;/button&gt;</span>
   <span class='k'>&lt;/div&gt;</span>
 <span class='k'>&lt;/dialog&gt;</span></code></pre>
         <p style='margin-top:1.2rem'>Writing that for every dialog in a site is cumbersome, repetitive and easy to get subtly wrong — a mismatched id, a missing <code>aria-labelledby</code>, a close button with no name. With Bh it is <strong>three lines</strong>, and the id is made from the link's own words:</p>
@@ -752,7 +757,10 @@ footer {
             <button type='button' class='f-pill out'>Whisper it</button>
           </div>
         </div>
-        <a class='ref' href='https://rubydoc.info/gems/bh/Bh/FormBuilder'>Reference&nbsp;&rarr;</a>
+        <div class='refs'>
+          <a class='ref' href='https://rubydoc.info/gems/bh/Bh/FormBuilder'>Reference&nbsp;&rarr;</a>
+          <a class='ref' href='https://v6-dev--twbs-bootstrap.netlify.app/docs/6.0/forms/overview'>Forms in Bootstrap&nbsp;6</a>
+        </div>
       </div>
     </section>
 
@@ -762,9 +770,7 @@ footer {
         <p>A long <code>&lt;select&gt;</code> becomes a searchable menu — and stays a select, so the form submits exactly as before.</p>
         <div class='split'>
           <div>
-<pre><code><span class='k'>&lt;%=</span> form.combobox <span class='s'>:shape</span>, shapes,
-      { prompt: <span class='s'>'Pick a shape'</span> },
-      multiple: <span class='k'>true</span> <span class='k'>%&gt;</span></code></pre>
+<pre><code><span class='k'>&lt;%=</span> form.combobox <span class='s'>:shape</span>, shapes, { prompt: <span class='s'>'Pick a shape'</span> }, multiple: <span class='k'>true</span> <span class='k'>%&gt;</span></code></pre>
             
           </div>
           <div class='demo'>
@@ -778,7 +784,10 @@ footer {
             </div>
           </div>
         </div>
-        <a class='ref' href='https://rubydoc.info/gems/bh/Bh/FormBuilder/Comboboxes'>Reference&nbsp;&rarr;</a>
+        <div class='refs'>
+          <a class='ref' href='https://rubydoc.info/gems/bh/Bh/FormBuilder/Comboboxes'>Reference&nbsp;&rarr;</a>
+          <a class='ref' href='https://v6-dev--twbs-bootstrap.netlify.app/docs/6.0/forms/combobox'>Combobox in Bootstrap&nbsp;6</a>
+        </div>
       </div>
     </section>
 
@@ -788,8 +797,7 @@ footer {
         <p>The six slots a one-time code is typed into, drawn from one real field — so a phone can offer the code straight from the text that brought it.</p>
         <div class='split'>
           <div>
-<pre><code><span class='k'>&lt;%=</span> form.pin_field <span class='s'>:pin_confirmation</span>,
-      required: <span class='k'>true</span> <span class='k'>%&gt;</span></code></pre>
+<pre><code><span class='k'>&lt;%=</span> form.pin_field <span class='s'>:pin_confirmation</span>, required: <span class='k'>true</span> <span class='k'>%&gt;</span></code></pre>
           </div>
           <div class='demo'>
             <p class='demo-label'>What it draws</p>
@@ -799,7 +807,10 @@ footer {
             </div>
           </div>
         </div>
-        <a class='ref' href='https://rubydoc.info/gems/bh/Bh/FormBuilder/Pins'>Reference&nbsp;&rarr;</a>
+        <div class='refs'>
+          <a class='ref' href='https://rubydoc.info/gems/bh/Bh/FormBuilder/Pins'>Reference&nbsp;&rarr;</a>
+          <a class='ref' href='https://v6-dev--twbs-bootstrap.netlify.app/docs/6.0/forms/otp-input'>OTP input in Bootstrap&nbsp;6</a>
+        </div>
       </div>
     </section>
 
@@ -826,8 +837,7 @@ footer {
         <p>A link and the dialog it opens, with the backdrop, the focus trap and Esc that the browser's own element brings. Nothing is scripted, and no page invents an id.</p>
         <div class='split'>
           <div>
-<pre><code><span class='k'>&lt;%=</span> dialog <span class='s'>'What is in the hat?'</span>,
-      title: <span class='s'>'A gumball, mostly'</span> <span class='k'>do %&gt;</span>
+<pre><code><span class='k'>&lt;%=</span> dialog <span class='s'>'What is in the hat?'</span>, title: <span class='s'>'A gumball, mostly'</span> <span class='k'>do %&gt;</span>
   And whatever the wand last turned into one.
 <span class='k'>&lt;% end %&gt;</span></code></pre>
           </div>
@@ -841,7 +851,10 @@ footer {
             </div>
           </div>
         </div>
-        <a class='ref' href='https://rubydoc.info/gems/bh/Bh/Helpers/Dialogs'>Reference&nbsp;&rarr;</a>
+        <div class='refs'>
+          <a class='ref' href='https://rubydoc.info/gems/bh/Bh/Helpers/Dialogs'>Reference&nbsp;&rarr;</a>
+          <a class='ref' href='https://v6-dev--twbs-bootstrap.netlify.app/docs/6.0/components/dialog'>Dialog in Bootstrap&nbsp;6</a>
+        </div>
       </div>
     </section>
 
@@ -860,7 +873,10 @@ footer {
             <div class='f-toast bad'>The hat would not open. <span class='f-x'>✕</span></div>
           </div>
         </div>
-        <a class='ref' href='https://rubydoc.info/gems/bh/Bh/Helpers/Toasts'>Reference&nbsp;&rarr;</a>
+        <div class='refs'>
+          <a class='ref' href='https://rubydoc.info/gems/bh/Bh/Helpers/Toasts'>Reference&nbsp;&rarr;</a>
+          <a class='ref' href='https://v6-dev--twbs-bootstrap.netlify.app/docs/6.0/components/toasts'>Toasts in Bootstrap&nbsp;6</a>
+        </div>
       </div>
     </section>
 
@@ -870,9 +886,7 @@ footer {
         <p>A thread of bubbles with a field under it, drawn from anything that can say who spoke, when, and whether it arrived.</p>
         <div class='split'>
           <div>
-<pre><code><span class='k'>&lt;%=</span> chat_with url: questions_path,
-      hints: Chat::HINTS,
-      messages: messages <span class='k'>%&gt;</span></code></pre>
+<pre><code><span class='k'>&lt;%=</span> chat_with url: questions_path, hints: Chat::HINTS, messages: messages <span class='k'>%&gt;</span></code></pre>
           </div>
           <div class='demo'>
             <p class='demo-label'>What it draws</p>
