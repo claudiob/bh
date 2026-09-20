@@ -18,6 +18,11 @@ class TestBhForms < IntegrationCase
 
     assert_includes body, '<input aria-label="size" class="form-control form-control-lg" ' \
                           'type="number"'
+    # A field a browser keeps an answer for says which, and a page saying otherwise wins.
+    assert_includes body, '<input autocomplete="email" aria-label="email" ' \
+                          'class="form-control form-control-lg" type="email"'
+    assert_includes body, '<input autocomplete="off" aria-label="site" ' \
+                          'class="form-control form-control-lg" type="url"'
     assert_includes body, '<textarea aria-label="notes" class="form-control form-control-lg"'
     assert_includes body, '<input aria-label="photo" class="form-control form-control-lg" ' \
                           'type="file"'
