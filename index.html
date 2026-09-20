@@ -340,13 +340,6 @@ p code, li code, dd code, td code {
 .f-dialog-b { padding: 0.9rem; font-size: 0.94rem; color: var(--ink-soft); font-weight: 600; }
 .f-dialog-f { padding: 0.7rem 0.9rem; border-top: 1px solid var(--card-edge); text-align: right; }
 .f-x { margin-left: auto; color: var(--ink-soft); font-weight: 800; }
-.f-flow {
-  border-radius: 1rem; padding: 0.9rem; text-align: center;
-  background: linear-gradient(160deg, #C9D9EA, #9BC0EC);
-  display: flex; flex-direction: column; gap: 0.6rem; align-items: center;
-}
-.f-flow-card { background: rgba(255, 255, 255, 0.92); border-radius: 0.8rem; padding: 0.8rem; width: 100%; color: #10314F; font-weight: 700; }
-
 .chips { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 1rem; padding: 0; list-style: none; }
 .chips li {
   background: var(--chip); color: var(--chip-ink); border-radius: 999px;
@@ -667,7 +660,6 @@ footer {
       <li><a href='#dialog'><span class='gum' style='background:#3FD98E'></span><span class='full'>Dialogs</span><span class='brief'>Dialogs</span></a></li>
       <li><a href='#toasts'><span class='gum' style='background:#9DE93F'></span><span class='full'>Toasts</span><span class='brief'>Toasts</span></a></li>
       <li><a href='#chat'><span class='gum' style='background:#D8E63C'></span><span class='full'>Chat</span><span class='brief'>Chat</span></a></li>
-      <li><a href='#flow'><span class='gum' style='background:#FFE23D'></span><span class='full'>Flow</span><span class='brief'>Flow</span></a></li>
       <li><a href='#palettes'><span class='gum' style='background:#FF9B3D'></span><span class='full'>The palettes</span><span class='brief'>Themes</span></a></li>
       <li><a href='#controllers'><span class='gum' style='background:#FFB13D'></span><span class='full'>Stimulus</span><span class='brief'>Stimulus</span></a></li>
       <li><a href='#dummy'><span class='gum' style='background:#FF7A3D'></span><span class='full'>Trying it out</span><span class='brief'>Try it</span></a></li>
@@ -693,24 +685,24 @@ footer {
         <p>Bootstrap is a great framework, but it asks for <strong>many lines of HTML</strong> even for simple components. A dialog that opens from a link, closes on its X, on its button, on Esc and on the backdrop, and tells a screen reader what it is called, is all of this:</p>
 <pre><code><span class='k'>&lt;a</span> class=<span class='s'>'small'</span> data-bs-toggle=<span class='s'>'dialog'</span>
    data-bs-target=<span class='s'>'#not-on-google'</span> href=<span class='s'>'#not-on-google'</span><span class='k'>&gt;</span>
-  I’m not on Google Business
+  What is in the hat?
 <span class='k'>&lt;/a&gt;</span>
 <span class='k'>&lt;dialog</span> class=<span class='s'>'dialog dialog-slide-down'</span> id=<span class='s'>'not-on-google'</span>
-        aria-labelledby=<span class='s'>'not-on-google-title'</span><span class='k'>&gt;</span>
+        aria-labelledby=<span class='s'>'in-the-hat-title'</span><span class='k'>&gt;</span>
   <span class='k'>&lt;div</span> class=<span class='s'>'dialog-header'</span><span class='k'>&gt;</span>
-    <span class='k'>&lt;h2</span> class=<span class='s'>'dialog-title'</span> id=<span class='s'>'not-on-google-title'</span><span class='k'>&gt;</span>Not a problem<span class='k'>&lt;/h2&gt;</span>
+    <span class='k'>&lt;h2</span> class=<span class='s'>'dialog-title'</span> id=<span class='s'>'in-the-hat-title'</span><span class='k'>&gt;</span>A gumball, mostly<span class='k'>&lt;/h2&gt;</span>
     <span class='k'>&lt;button</span> type=<span class='s'>'button'</span> class=<span class='s'>'btn-close ms-auto'</span>
             data-bs-dismiss=<span class='s'>'dialog'</span> aria-label=<span class='s'>'Close'</span><span class='k'>&gt;&lt;/button&gt;</span>
   <span class='k'>&lt;/div&gt;</span>
-  <span class='k'>&lt;div</span> class=<span class='s'>'dialog-body'</span><span class='k'>&gt;</span>We will look your business up ourselves.<span class='k'>&lt;/div&gt;</span>
+  <span class='k'>&lt;div</span> class=<span class='s'>'dialog-body'</span><span class='k'>&gt;</span>And whatever the wand last turned into one.<span class='k'>&lt;/div&gt;</span>
   <span class='k'>&lt;div</span> class=<span class='s'>'dialog-footer'</span><span class='k'>&gt;</span>
     <span class='k'>&lt;button</span> type=<span class='s'>'button'</span> class=<span class='s'>'btn btn-solid theme-secondary'</span>
-            data-bs-dismiss=<span class='s'>'dialog'</span><span class='k'>&gt;</span>Okay<span class='k'>&lt;/button&gt;</span>
+            data-bs-dismiss=<span class='s'>'dialog'</span><span class='k'>&gt;</span>Righto<span class='k'>&lt;/button&gt;</span>
   <span class='k'>&lt;/div&gt;</span>
 <span class='k'>&lt;/dialog&gt;</span></code></pre>
         <p style='margin-top:1.2rem'>Writing that for every dialog in a site is cumbersome, repetitive and easy to get subtly wrong — a mismatched id, a missing <code>aria-labelledby</code>, a close button with no name. With Bh it is <strong>three lines</strong>, and the id is made from the link's own words:</p>
-<pre><code><span class='k'>&lt;%=</span> dialog <span class='s'>'I’m not on Google Business'</span>, title: <span class='s'>'Not a problem'</span> <span class='k'>do %&gt;</span>
-  We will look your business up ourselves.
+<pre><code><span class='k'>&lt;%=</span> dialog <span class='s'>'What is in the hat?'</span>, title: <span class='s'>'A gumball, mostly'</span> <span class='k'>do %&gt;</span>
+  And whatever the wand last turned into one.
 <span class='k'>&lt;% end %&gt;</span></code></pre>
         <p style='margin-top:1.2rem'>Every component below reads the same way: one helper, the facts it draws, and no classes in the view. Nothing is overwritten either, so a page can mix these with the markup it already has.</p>
       </div>
@@ -741,23 +733,23 @@ footer {
 <span class='k'>end</span></code></pre>
         <div class='split'>
           <div>
-<pre><code><span class='k'>&lt;%=</span> form.fieldset <span class='s'>'Your code'</span> <span class='k'>do %&gt;</span>
-  <span class='k'>&lt;%=</span> form.label <span class='s'>:pin</span>, <span class='s'>'6-digit code'</span> <span class='k'>%&gt;</span>
+<pre><code><span class='k'>&lt;%=</span> form.fieldset <span class='s'>'The word'</span> <span class='k'>do %&gt;</span>
+  <span class='k'>&lt;%=</span> form.label <span class='s'>:word</span>, <span class='s'>'Six letters of it'</span> <span class='k'>%&gt;</span>
   <span class='k'>&lt;%=</span> form.pin_field <span class='s'>:pin</span> <span class='k'>%&gt;</span>
-  <span class='k'>&lt;%=</span> form.submit <span class='s'>'Confirm'</span> <span class='k'>%&gt;</span>
-  <span class='k'>&lt;%=</span> form.button <span class='s'>'Call us'</span>, type: <span class='s'>:button</span> <span class='k'>%&gt;</span>
+  <span class='k'>&lt;%=</span> form.submit <span class='s'>'Say it'</span> <span class='k'>%&gt;</span>
+  <span class='k'>&lt;%=</span> form.button <span class='s'>'Whisper it'</span>, type: <span class='s'>:button</span> <span class='k'>%&gt;</span>
 <span class='k'>&lt;% end %&gt;</span></code></pre>
           </div>
           <div class='demo'>
             <p class='demo-label'>What it draws</p>
-            <p class='f-label' style='font-size:1.05rem;font-weight:800'>Your code</p>
-            <label class='f-label' for='d-pin'>6-digit code</label>
+            <p class='f-label' style='font-size:1.05rem;font-weight:800'>The word</p>
+            <label class='f-label' for='d-pin'>Six letters of it</label>
             <div class='f-slots' id='d-pin'>
               <div class='f-slot'>4</div><div class='f-slot'>8</div><div class='f-slot'>2</div>
               <div class='f-slot'>9</div><div class='f-slot'>1</div><div class='f-slot on'>3</div>
             </div>
-            <button type='button' class='f-pill'>Confirm</button>
-            <button type='button' class='f-pill out'>Call us</button>
+            <button type='button' class='f-pill'>Say it</button>
+            <button type='button' class='f-pill out'>Whisper it</button>
           </div>
         </div>
         <a class='ref' href='https://rubydoc.info/gems/bh/Bh/FormBuilder'>Reference&nbsp;&rarr;</a>
@@ -770,18 +762,18 @@ footer {
         <p>A long <code>&lt;select&gt;</code> becomes a searchable menu — and stays a select, so the form submits exactly as before.</p>
         <div class='split'>
           <div>
-<pre><code><span class='k'>&lt;%=</span> form.combobox <span class='s'>:county</span>, counties,
-      { prompt: <span class='s'>'Pick a county'</span> },
+<pre><code><span class='k'>&lt;%=</span> form.combobox <span class='s'>:shape</span>, shapes,
+      { prompt: <span class='s'>'Pick a shape'</span> },
       multiple: <span class='k'>true</span> <span class='k'>%&gt;</span></code></pre>
             
           </div>
           <div class='demo'>
             <p class='demo-label'>What it draws</p>
-            <div class='f-control'>Alameda + 2 more <span style='margin-left:auto;color:var(--accent)'>▾</span></div>
+            <div class='f-control'>Gumballs + 2 more <span style='margin-left:auto;color:var(--accent)'>▾</span></div>
             <div class='f-menu'>
-              <div class='f-menu-row'><span class='f-tick'>✓</span> Alameda <span class='f-count'>38,405</span></div>
-              <div class='f-menu-row'><span class='f-tick'>✓</span> Marin <span class='f-count'>9,120</span></div>
-              <div class='f-menu-row'><span style='opacity:0.25'>✓</span> Sonoma <span class='f-count'>4,067</span></div>
+              <div class='f-menu-row'><span class='f-tick'>✓</span> Gumballs <span class='f-count'>38,405</span></div>
+              <div class='f-menu-row'><span class='f-tick'>✓</span> Ribbons <span class='f-count'>9,120</span></div>
+              <div class='f-menu-row'><span style='opacity:0.25'>✓</span> Stars <span class='f-count'>4,067</span></div>
               <div class='f-menu-row' style='color:var(--accent);font-weight:800'>All</div>
             </div>
           </div>
@@ -834,18 +826,18 @@ footer {
         <p>A link and the dialog it opens, with the backdrop, the focus trap and Esc that the browser's own element brings. Nothing is scripted, and no page invents an id.</p>
         <div class='split'>
           <div>
-<pre><code><span class='k'>&lt;%=</span> dialog <span class='s'>'I’m not on Google Business'</span>,
-      title: <span class='s'>'Not a problem'</span> <span class='k'>do %&gt;</span>
-  We will look your business up ourselves.
+<pre><code><span class='k'>&lt;%=</span> dialog <span class='s'>'What is in the hat?'</span>,
+      title: <span class='s'>'A gumball, mostly'</span> <span class='k'>do %&gt;</span>
+  And whatever the wand last turned into one.
 <span class='k'>&lt;% end %&gt;</span></code></pre>
           </div>
           <div class='demo'>
             <p class='demo-label'>What it draws</p>
-            <p style='margin:0;font-weight:700'><a href='#dialog'>I’m not on Google Business</a></p>
+            <p style='margin:0;font-weight:700'><a href='#dialog'>What is in the hat?</a></p>
             <div class='f-dialog'>
-              <div class='f-dialog-h'>Not a problem <span class='f-x'>✕</span></div>
-              <div class='f-dialog-b'>We will look your business up ourselves.</div>
-              <div class='f-dialog-f'><button type='button' class='f-pill' style='min-height:38px;font-size:0.9rem'>Okay</button></div>
+              <div class='f-dialog-h'>A gumball, mostly <span class='f-x'>✕</span></div>
+              <div class='f-dialog-b'>And whatever the wand last turned into one.</div>
+              <div class='f-dialog-f'><button type='button' class='f-pill' style='min-height:38px;font-size:0.9rem'>Righto</button></div>
             </div>
           </div>
         </div>
@@ -859,16 +851,16 @@ footer {
         <p>The flash, as toasts at the bottom right. They stand before any script runs and leave on their own.</p>
         <div class='split'>
           <div>
-<pre><code><span class='k'>&lt;%=</span> notices <span class='k'>%&gt;</span></code></pre>
+<pre><code><span class='k'>&lt;%=</span> toasts <span class='k'>%&gt;</span></code></pre>
             
           </div>
           <div class='demo'>
             <p class='demo-label'>What it draws</p>
-            <div class='f-toast ok'>Blue Crew was updated. <span class='f-x'>✕</span></div>
-            <div class='f-toast bad'>The team could not be reached. <span class='f-x'>✕</span></div>
+            <div class='f-toast ok'>The wand was polished. <span class='f-x'>✕</span></div>
+            <div class='f-toast bad'>The hat would not open. <span class='f-x'>✕</span></div>
           </div>
         </div>
-        <a class='ref' href='https://rubydoc.info/gems/bh/Bh/Helpers/Notices'>Reference&nbsp;&rarr;</a>
+        <a class='ref' href='https://rubydoc.info/gems/bh/Bh/Helpers/Toasts'>Reference&nbsp;&rarr;</a>
       </div>
     </section>
 
@@ -884,41 +876,15 @@ footer {
           </div>
           <div class='demo'>
             <p class='demo-label'>What it draws</p>
-            <p class='f-aside' style='margin:0'>Claude · 5 minutes ago</p>
-            <div class='f-bubble f-in'>Data loaded! What can I help with?</div>
+            <p class='f-aside' style='margin:0'>the Earl · 5 minutes ago</p>
+            <div class='f-bubble f-in'>The hat is warm. Ask it something.</div>
             <p class='f-aside r' style='margin:0'>you · 4 minutes ago <span style='color:#1E8A5A'>✓</span></p>
-            <div class='f-bubble f-out'>How much did I bill last month?</div>
-            <p class='f-aside' style='margin:0'>Claude · just now · $0.0123</p>
+            <div class='f-bubble f-out'>How many gumballs in the beard?</div>
+            <p class='f-aside' style='margin:0'>the Earl · just now · one wave</p>
             <div class='f-bubble f-in f-typing'><span></span><span></span><span></span></div>
           </div>
         </div>
         <a class='ref' href='https://rubydoc.info/gems/bh/Bh/Helpers/Chats'>Reference&nbsp;&rarr;</a>
-      </div>
-    </section>
-
-    <section id='flow'>
-      <div class='panel'>
-        <h2>Flow</h2>
-        <p>The page a signup flow lives on — a header, a title, one card, a footer — so every step of one looks like the last.</p>
-        <div class='split'>
-          <div>
-<pre><code><span class='k'>&lt;%=</span> flow header: logo,
-      footer: [sign_out_button],
-      data: { controller: <span class='s'>'wall'</span> } <span class='k'>do %&gt;</span>
-  <span class='k'>&lt;%=</span> yield <span class='k'>%&gt;</span>
-<span class='k'>&lt;% end %&gt;</span></code></pre>
-          </div>
-          <div class='demo'>
-            <p class='demo-label'>What it draws</p>
-            <div class='f-flow'>
-              <p style='margin:0;font-weight:800;color:#10314F'>▲ your mark</p>
-              <p style='margin:0;font-weight:800;font-size:1.05rem;color:#10314F'>Your business</p>
-              <div class='f-flow-card'>your message</div>
-              <p style='margin:0;font-size:0.8rem;color:#10314F'>Disconnect · Sign out</p>
-            </div>
-          </div>
-        </div>
-        <a class='ref' href='https://rubydoc.info/gems/bh/Bh/Helpers/Flows'>Reference&nbsp;&rarr;</a>
       </div>
     </section>
 
@@ -985,7 +951,7 @@ footer {
         <p>The gem carries a dummy app that draws every helper on one page, and a <code>bin/rails</code> at the root, so there is no <code>cd</code> first. From the root of a clone:</p>
 <pre><code>bin/setup
 rails s</code></pre>
-        <p style='margin-top:1rem'><code>localhost:3000</code> is every component at once, <code>?flash=1</code> adds the toasts, and <code>/flow</code> is the signup page.</p>
+        <p style='margin-top:1rem'><code>localhost:3000</code> is every component at once, and <code>?flash=1</code> adds the toasts.</p>
       </div>
     </section>
 
