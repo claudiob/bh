@@ -686,7 +686,7 @@ footer {
     <section id='overview'>
       <div class='panel'>
         <h2>Overview</h2>
-        <p>Bootstrap&nbsp;6 is a great framework, but <strong>many lines of HTML</strong> are needed even for simple components. A <a href='https://v6-dev--twbs-bootstrap.netlify.app/docs/6.0/components/dialog/#example'>basic dialog</a> requires all this:</p>
+        <p>Bootstrap&nbsp;6 is a great framework that requires <a href='https://v6-dev--twbs-bootstrap.netlify.app/docs/6.0/components/dialog/#example'>many lines of HTML</a> for a simple component such as a dialog:</p>
 <pre><code><span class='k'>&lt;button</span> type=<span class='s'>"button"</span> class=<span class='s'>"btn-solid theme-primary"</span> data-bs-toggle=<span class='s'>"dialog"</span> data-bs-target=<span class='s'>"#exampleDialog"</span><span class='k'>&gt;</span>
   Open dialog
 <span class='k'>&lt;/button&gt;</span>
@@ -703,11 +703,10 @@ footer {
     <span class='k'>&lt;button</span> type=<span class='s'>"button"</span> class=<span class='s'>"btn-solid theme-primary"</span><span class='k'>&gt;</span>Save changes<span class='k'>&lt;/button&gt;</span>
   <span class='k'>&lt;/div&gt;</span>
 <span class='k'>&lt;/dialog&gt;</span></code></pre>
-        <p style='margin-top:1.2rem'>Writing that for every dialog in a site is cumbersome, repetitive and easy to get subtly wrong — a mismatched id, a missing <code>aria-labelledby</code>, a close button with no name. With Bh it is <strong>three lines</strong>, and the id is made from the link's own words:</p>
+        <p style='margin-top:1.2rem'>With Bootstrap helpers, the code above can be rendered in just three lines:</p>
 <pre><code><span class='k'>&lt;%=</span> dialog <span class='s'>'What is in the hat?'</span>, title: <span class='s'>'A gumball, mostly'</span> <span class='k'>do %&gt;</span>
   And whatever the wand last turned into one.
 <span class='k'>&lt;% end %&gt;</span></code></pre>
-        <p style='margin-top:1.2rem'>Every component below reads the same way: one helper, the facts it draws, and no classes in the view. Nothing is overwritten either, so a page can mix these with the markup it already has.</p>
       </div>
     </section>
 
@@ -716,7 +715,7 @@ footer {
         <h2>How to install</h2>
         <p>Bh is a Rails engine. It brings Bootstrap&nbsp;6 with it, so nothing else goes in the Gemfile.</p>
 <pre><code><span class='c'># Gemfile</span>
-<span class='k'>gem</span> <span class='s'>'bh'</span>, <span class='s'>'~&gt; 6.3.0'</span></code></pre>
+<span class='k'>gem</span> <span class='s'>'bh'</span>, <span class='s'>'~&gt; 6.7.0'</span></code></pre>
         <p style='margin-top:1rem'>Rails&nbsp;8.1 and Ruby&nbsp;3.2 are the minimum.</p>
       </div>
     </section>
@@ -724,7 +723,7 @@ footer {
     <section id='form'>
       <div class='panel'>
         <h2>The form <a class='doc' href='https://v6-dev--twbs-bootstrap.netlify.app/docs/6.0/forms/overview'>Bootstrap docs</a></h2>
-        <p>One builder dresses every field, so a view says what it wants and never a class. Hand it to a single form, or to a whole controller.</p>
+        <p>One builder dresses every field, so a view says what it wants and never a class.</p>
 <pre><code><span class='k'>class</span> ApplicationController &lt; ActionController::Base
   default_form_builder Bh::FormBuilder
 <span class='k'>end</span></code></pre>
