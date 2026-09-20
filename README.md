@@ -21,10 +21,10 @@ gem install bh
 
 ```ruby
 # Gemfile
-gem 'bh', '~> 6.3.0'
+gem 'bh', '~> 6.7.0'
 ```
 
-`~> 6.3.0` stops short of `6.4`, and that is the pin to hold: **until this line settles it
+`~> 6.7.0` stops short of `6.8`, and that is the pin to hold: **until this line settles it
 breaks on a minor, not on a major.** Rails 8.1 and Ruby 3.2 are the minimum.
 
 6.2.0 breaks everything before it and keeps its major anyway. 6.0 through 6.1.4 were an alpha
