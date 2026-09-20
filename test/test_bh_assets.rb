@@ -26,12 +26,11 @@ class TestBhAssets < IntegrationCase
     refute_includes body, '--bs-white:'
   end
 
-  def test_the_head_helper_links_what_the_engine_serves
+  def test_a_layout_links_what_the_engine_serves_by_the_prefix_it_is_mounted_at
     visit '/'
 
-    assert_includes body, '<link rel="stylesheet" href="/bh/css/bh.css">'
-    assert_includes body, '<script type="module" src="/bh/js/bh.js"></script>'
-    assert_includes body, '<meta name="turbo-refresh-method" content="morph">'
+    assert_includes body, "<link rel='stylesheet' href='/bh/css/bh.css'>"
+    assert_includes body, "<script type='module' src='/bh/js/bh.js'></script>"
   end
 
   def test_the_gem_ships_the_built_files_but_not_their_sources

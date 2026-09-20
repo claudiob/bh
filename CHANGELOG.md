@@ -20,6 +20,17 @@ For more information about changelogs, check
   `bh-fieldset` and `flow-field` is `bh-field`, both being the form's business rather than
   a page's, and the spacing of a fieldset stays here with them.
 
+* [CHANGE] The head is the host's to write
+
+  `bh_head_tags` bundled four metas a page decides for itself with the two files this gem
+  serves, all or nothing. `Bh::Engine::PREFIX` is where they are served, and a layout links
+  them:
+
+  ```erb
+  <link rel='stylesheet' href='<%= Bh::Engine::PREFIX %>css/bh.css'>
+  <script type='module' src='<%= Bh::Engine::PREFIX %>js/bh.js'></script>
+  ```
+
 * [CHANGE] `notices` is `toasts`
 
   It draws a stack of Bootstrap's toasts and says so. `toast` is left for the one a host
