@@ -7,7 +7,13 @@
     <meta name='csrf-param' content='<%= request_forgery_protection_token %>'>
     <meta name='csrf-token' content='<%= form_authenticity_token %>'>
     <%- end -%>
-    <%= bh_head_tags %>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <meta name='color-scheme' content='light dark'>
+    <%# A refresh Turbo is sent morphs the page in place and keeps the scroll. %>
+    <meta name='turbo-refresh-method' content='morph'>
+    <meta name='turbo-refresh-scroll' content='preserve'>
+    <link rel='stylesheet' href='<%= Bh::Engine::PREFIX %>css/bh.css'>
+    <script type='module' src='<%= Bh::Engine::PREFIX %>js/bh.js'></script>
     <%# The glyphs a combobox and a bookmark draw. The gem links no CDN of its own, so a
         page that wants icons says where they come from — here, jsDelivr. %>
     <link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css'>

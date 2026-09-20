@@ -33,11 +33,12 @@ while Bootstrap 6 was itself pre-release — so there was no settled API to brea
 are taken and cannot be withdrawn, RubyGems keeping anything published over thirty days ago, so
 this release steps over them.
 
-With the gem in the bundle an app serves `/bh/css/bh.css` and `/bh/js/bh.js` itself. One helper
-puts both in the head, along with everything Bootstrap and Turbo read:
+With the gem in the bundle an app serves `/bh/css/bh.css` and `/bh/js/bh.js` itself, at the
+prefix its engine is mounted at. A layout links both:
 
 ```erb
-<%= bh_head_tags %>
+<link rel='stylesheet' href='<%= Bh::Engine::PREFIX %>css/bh.css'>
+<script type='module' src='<%= Bh::Engine::PREFIX %>js/bh.js'></script>
 ```
 
 ## The palettes
