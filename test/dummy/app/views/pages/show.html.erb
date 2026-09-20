@@ -48,6 +48,6 @@
 
 <%= chat_with url: '/questions', messages: [Bh::Message.new(side: :right, text: 'Read only')] %>
 
-<%= bh_confirm_button 'Disconnect', '/integration', confirm: "Sure?\nThis cannot be undone.", method: :delete, class: 'btn btn-solid theme-danger' %>
+<%= confirm_button_to 'Disconnect', '/integration', confirm: "Sure?\nThis cannot be undone.", method: :delete, class: 'btn btn-solid theme-danger' %>
 
 <%= toasts(data: { written_row_value: 'row_9' }) { |key, message| key == 'notice' ? link_to(message, '/') : message } %>
