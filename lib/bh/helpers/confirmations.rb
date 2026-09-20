@@ -10,7 +10,7 @@ module Bh
       # @param confirm [String] the question, its first line the title of the dialog.
       # @param options [Hash] anything else the button takes.
       # @return [String] the form and the button in it.
-      def bh_confirm_button(words, path, confirm:, **options)
+      def confirm_button_to(words, path, confirm:, **options)
         form = { data: { turbo_confirm: confirm } }.deep_merge options.fetch(:form, {})
 
         button_to words, path, **options.except(:form), form: form

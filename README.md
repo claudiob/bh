@@ -86,7 +86,7 @@ end
 | `dialog` | a link and the `<dialog>` it opens, sharing an id made from the link's own words |
 | `toasts` | the flash as toasts, held while they are read |
 | `chat_with` | a thread of bubbles, and the field that posts the next one |
-| `bh_confirm_button` | a button whose form is sent only where the question it carries is answered yes |
+| `confirm_button_to` | a button whose form is sent only where the question it carries is answered yes |
 | `bh_tooltip` | the `data` an element wearing a tooltip takes |
 | 22 Stimulus controllers | registered by the bundle, called by `data-controller` |
 | 9 palettes | served at `/bh/theme/`, swapped by the `scheme` controller |

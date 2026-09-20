@@ -51,7 +51,7 @@ For more information about changelogs, check
 
 * [FEATURE] `file_field`, which Rails handed over undressed
 
-* [FEATURE] `bh_confirm_button` asks before it acts
+* [FEATURE] `confirm_button_to` asks before it acts
 
   The bundle draws the question as a dialog, and the form is sent only where it is answered
   yes.
