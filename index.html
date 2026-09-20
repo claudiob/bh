@@ -357,11 +357,11 @@ dl.defs dd { margin: 0.15rem 0 0; color: var(--ink-soft); }
   display: block; text-align: center; margin-top: 1.4rem;
   font-weight: 800; font-size: 0.95rem;
 }
-/* The Bootstrap page a box draws, beside the box's own name. A flex row, so the link
-   sits against the middle of the words however large the heading has grown, and drops
-   under them where the panel is too narrow to hold both. */
+/* The Bootstrap page a box draws, at the far end of the row the box's own name opens.
+   A flex row, so the link sits against the middle of the words however large the heading
+   has grown, and drops under them where the panel is too narrow to hold both. */
 .panel > h2 { display: flex; flex-wrap: wrap; align-items: center; gap: 0.2rem 0.9rem; }
-.doc { font-size: 0.85rem; font-weight: 700; letter-spacing: 0; }
+.doc { margin-left: auto; font-size: 0.85rem; font-weight: 700; letter-spacing: 0; }
 .note {
   margin-top: 1.1rem; border-left: 4px solid var(--accent-bright);
   padding: 0.2rem 0 0.2rem 0.9rem; color: var(--ink-soft); font-weight: 600;
@@ -729,7 +729,7 @@ footer {
 
     <section id='form'>
       <div class='panel'>
-        <h2>The form <a class='doc' href='https://v6-dev--twbs-bootstrap.netlify.app/docs/6.0/forms/overview'>Bootstrap&nbsp;6 documentation</a></h2>
+        <h2>The form <a class='doc' href='https://v6-dev--twbs-bootstrap.netlify.app/docs/6.0/forms/overview'>Bootstrap docs</a></h2>
         <p>One builder dresses every field, so a view says what it wants and never a class. Hand it to a single form, or to a whole controller.</p>
 <pre><code><span class='k'>class</span> ApplicationController &lt; ActionController::Base
   default_form_builder Bh::FormBuilder
@@ -761,7 +761,7 @@ footer {
 
     <section id='combobox'>
       <div class='panel'>
-        <h2>Combobox <a class='doc' href='https://v6-dev--twbs-bootstrap.netlify.app/docs/6.0/forms/combobox'>Bootstrap&nbsp;6 documentation</a></h2>
+        <h2>Combobox <a class='doc' href='https://v6-dev--twbs-bootstrap.netlify.app/docs/6.0/forms/combobox'>Bootstrap docs</a></h2>
         <p>A long <code>&lt;select&gt;</code> becomes a searchable menu — and stays a select, so the form submits exactly as before.</p>
         <div class='split'>
           <div>
@@ -785,7 +785,7 @@ footer {
 
     <section id='pin'>
       <div class='panel'>
-        <h2>The 6-digit code <a class='doc' href='https://v6-dev--twbs-bootstrap.netlify.app/docs/6.0/forms/otp-input'>Bootstrap&nbsp;6 documentation</a></h2>
+        <h2>The 6-digit code <a class='doc' href='https://v6-dev--twbs-bootstrap.netlify.app/docs/6.0/forms/otp-input'>Bootstrap docs</a></h2>
         <p>The six slots a one-time code is typed into, drawn from one real field — so a phone can offer the code straight from the text that brought it.</p>
         <div class='split'>
           <div>
@@ -822,7 +822,7 @@ footer {
 
     <section id='dialog'>
       <div class='panel'>
-        <h2>Dialogs <a class='doc' href='https://v6-dev--twbs-bootstrap.netlify.app/docs/6.0/components/dialog'>Bootstrap&nbsp;6 documentation</a></h2>
+        <h2>Dialogs <a class='doc' href='https://v6-dev--twbs-bootstrap.netlify.app/docs/6.0/components/dialog'>Bootstrap docs</a></h2>
         <p>A link and the dialog it opens, with the backdrop, the focus trap and Esc that the browser's own element brings. Nothing is scripted, and no page invents an id.</p>
         <div class='split'>
           <div>
@@ -846,7 +846,7 @@ footer {
 
     <section id='toasts'>
       <div class='panel'>
-        <h2>Toasts <a class='doc' href='https://v6-dev--twbs-bootstrap.netlify.app/docs/6.0/components/toasts'>Bootstrap&nbsp;6 documentation</a></h2>
+        <h2>Toasts <a class='doc' href='https://v6-dev--twbs-bootstrap.netlify.app/docs/6.0/components/toasts'>Bootstrap docs</a></h2>
         <p>The flash, as toasts at the bottom right. They stand before any script runs and leave on their own.</p>
         <div class='split'>
           <div>
