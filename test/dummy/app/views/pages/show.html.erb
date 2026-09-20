@@ -13,7 +13,7 @@
     <%= form.number_field :size %>
     <%= form.password_field :secret %>
     <%= form.search_field :term %>
-    <%= form.url_field :site %>
+    <%= form.url_field :site, autocomplete: 'off' %>
     <%= form.date_field :day %>
     <%= form.time_field :hour %>
     <%= form.datetime_field :moment %>

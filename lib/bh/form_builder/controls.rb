@@ -10,8 +10,10 @@ module Bh
       CHECK = 'check'
       RADIO = 'radio'
 
-      # An email address.
-      def email_field(method, options = {}) = super(method, dressed(method, options))
+      # An email address, which a browser offers the one it keeps.
+      def email_field(method, options = {})
+        super(method, { autocomplete: 'email' }.merge(dressed(method, options)))
+      end
 
       # A number, which brings the keyboard for one.
       def number_field(method, options = {}) = super(method, dressed(method, options))
@@ -22,8 +24,10 @@ module Bh
       # A term to search by.
       def search_field(method, options = {}) = super(method, dressed(method, options))
 
-      # A web address.
-      def url_field(method, options = {}) = super(method, dressed(method, options))
+      # A web address, which a browser offers the one it keeps.
+      def url_field(method, options = {})
+        super(method, { autocomplete: 'url' }.merge(dressed(method, options)))
+      end
 
       # A day.
       def date_field(method, options = {}) = super(method, dressed(method, options))

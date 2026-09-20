@@ -8,6 +8,15 @@ For more information about changelogs, check
 
 ## [Unreleased]
 
+## 6.8.0 - 2026-09-19
+
+* [FEATURE] A field a browser keeps an answer for says which
+
+  `email_field` carries `autocomplete="email"` and `url_field` `autocomplete="url"`, as
+  `phone_field` carries `tel` and `pin_field` `one-time-code`. A page saying otherwise keeps
+  what it says. A password is left alone: whether a browser should offer the one it holds or
+  make a new one is the form's business rather than the field's.
+
 ## 6.7.0 - 2026-09-19
 
 * [CHANGE] The signup page goes
