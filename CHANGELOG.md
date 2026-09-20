@@ -36,8 +36,7 @@ For more information about changelogs, check
 * [FEATURE] Money and a share of a hundred are typed into an adorned control
 
   `price_field` and `percentage_field` draw Bootstrap's adorned control: the unit in a span
-  and the field inside it wearing no border of its own. `bh_adorned` is the drawing, for a
-  caller building the field itself.
+  and the field inside it wearing no border of its own.
 
 * [FEATURE] `file_field`, which Rails handed over undressed
 
