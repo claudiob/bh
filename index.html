@@ -357,13 +357,11 @@ dl.defs dd { margin: 0.15rem 0 0; color: var(--ink-soft); }
   display: block; text-align: center; margin-top: 1.4rem;
   font-weight: 800; font-size: 0.95rem;
 }
-/* Both links on one line where there is room for them, one under the other where
-   there is not, and neither carrying the margin the single one does. */
-.refs {
-  display: flex; flex-wrap: wrap; justify-content: center;
-  gap: 0.3rem 1.4rem; margin-top: 1.4rem;
-}
-.refs .ref { margin-top: 0; }
+/* The Bootstrap page a box draws, beside the box's own name. A flex row, so the link
+   sits against the middle of the words however large the heading has grown, and drops
+   under them where the panel is too narrow to hold both. */
+.panel > h2 { display: flex; flex-wrap: wrap; align-items: center; gap: 0.2rem 0.9rem; }
+.doc { font-size: 0.85rem; font-weight: 700; letter-spacing: 0; }
 .note {
   margin-top: 1.1rem; border-left: 4px solid var(--accent-bright);
   padding: 0.2rem 0 0.2rem 0.9rem; color: var(--ink-soft); font-weight: 600;
@@ -725,13 +723,13 @@ footer {
         <p>With the gem in the bundle an app serves <code>/bh/css/bh.css</code> and <code>/bh/js/bh.js</code> itself. One helper puts both in the head, along with everything Bootstrap and Turbo read.</p>
 <pre><code><span class='k'>&lt;%=</span> bh_head_tags <span class='k'>%&gt;</span></code></pre>
         <p style='margin-top:1rem'>Icons are the host's to link — a few components draw Bootstrap Icons, so bring the font if you want them.</p>
-        <a class='ref' href='https://rubydoc.info/gems/bh/Bh/Helpers/Heads'>Reference&nbsp;&rarr;</a>
+        <a class='ref' href='https://rubydoc.info/gems/bh/Bh/Helpers/Heads'>API Reference&nbsp;&rarr;</a>
       </div>
     </section>
 
     <section id='form'>
       <div class='panel'>
-        <h2>The form</h2>
+        <h2>The form <a class='doc' href='https://v6-dev--twbs-bootstrap.netlify.app/docs/6.0/forms/overview'>Bootstrap&nbsp;6 documentation</a></h2>
         <p>One builder dresses every field, so a view says what it wants and never a class. Hand it to a single form, or to a whole controller.</p>
 <pre><code><span class='k'>class</span> ApplicationController &lt; ActionController::Base
   default_form_builder Bh::FormBuilder
@@ -757,16 +755,13 @@ footer {
             <button type='button' class='f-pill out'>Whisper it</button>
           </div>
         </div>
-        <div class='refs'>
-          <a class='ref' href='https://rubydoc.info/gems/bh/Bh/FormBuilder'>Reference&nbsp;&rarr;</a>
-          <a class='ref' href='https://v6-dev--twbs-bootstrap.netlify.app/docs/6.0/forms/overview'>Forms in Bootstrap&nbsp;6</a>
-        </div>
+        <a class='ref' href='https://rubydoc.info/gems/bh/Bh/FormBuilder'>API Reference&nbsp;&rarr;</a>
       </div>
     </section>
 
     <section id='combobox'>
       <div class='panel'>
-        <h2>Combobox</h2>
+        <h2>Combobox <a class='doc' href='https://v6-dev--twbs-bootstrap.netlify.app/docs/6.0/forms/combobox'>Bootstrap&nbsp;6 documentation</a></h2>
         <p>A long <code>&lt;select&gt;</code> becomes a searchable menu — and stays a select, so the form submits exactly as before.</p>
         <div class='split'>
           <div>
@@ -784,16 +779,13 @@ footer {
             </div>
           </div>
         </div>
-        <div class='refs'>
-          <a class='ref' href='https://rubydoc.info/gems/bh/Bh/FormBuilder/Comboboxes'>Reference&nbsp;&rarr;</a>
-          <a class='ref' href='https://v6-dev--twbs-bootstrap.netlify.app/docs/6.0/forms/combobox'>Combobox in Bootstrap&nbsp;6</a>
-        </div>
+        <a class='ref' href='https://rubydoc.info/gems/bh/Bh/FormBuilder/Comboboxes'>API Reference&nbsp;&rarr;</a>
       </div>
     </section>
 
     <section id='pin'>
       <div class='panel'>
-        <h2>The 6-digit code</h2>
+        <h2>The 6-digit code <a class='doc' href='https://v6-dev--twbs-bootstrap.netlify.app/docs/6.0/forms/otp-input'>Bootstrap&nbsp;6 documentation</a></h2>
         <p>The six slots a one-time code is typed into, drawn from one real field — so a phone can offer the code straight from the text that brought it.</p>
         <div class='split'>
           <div>
@@ -807,10 +799,7 @@ footer {
             </div>
           </div>
         </div>
-        <div class='refs'>
-          <a class='ref' href='https://rubydoc.info/gems/bh/Bh/FormBuilder/Pins'>Reference&nbsp;&rarr;</a>
-          <a class='ref' href='https://v6-dev--twbs-bootstrap.netlify.app/docs/6.0/forms/otp-input'>OTP input in Bootstrap&nbsp;6</a>
-        </div>
+        <a class='ref' href='https://rubydoc.info/gems/bh/Bh/FormBuilder/Pins'>API Reference&nbsp;&rarr;</a>
       </div>
     </section>
 
@@ -827,13 +816,13 @@ footer {
             <div class='f-control'>415-555-0000</div>
           </div>
         </div>
-        <a class='ref' href='https://rubydoc.info/gems/bh/Bh/FormBuilder'>Reference&nbsp;&rarr;</a>
+        <a class='ref' href='https://rubydoc.info/gems/bh/Bh/FormBuilder'>API Reference&nbsp;&rarr;</a>
       </div>
     </section>
 
     <section id='dialog'>
       <div class='panel'>
-        <h2>Dialogs</h2>
+        <h2>Dialogs <a class='doc' href='https://v6-dev--twbs-bootstrap.netlify.app/docs/6.0/components/dialog'>Bootstrap&nbsp;6 documentation</a></h2>
         <p>A link and the dialog it opens, with the backdrop, the focus trap and Esc that the browser's own element brings. Nothing is scripted, and no page invents an id.</p>
         <div class='split'>
           <div>
@@ -851,16 +840,13 @@ footer {
             </div>
           </div>
         </div>
-        <div class='refs'>
-          <a class='ref' href='https://rubydoc.info/gems/bh/Bh/Helpers/Dialogs'>Reference&nbsp;&rarr;</a>
-          <a class='ref' href='https://v6-dev--twbs-bootstrap.netlify.app/docs/6.0/components/dialog'>Dialog in Bootstrap&nbsp;6</a>
-        </div>
+        <a class='ref' href='https://rubydoc.info/gems/bh/Bh/Helpers/Dialogs'>API Reference&nbsp;&rarr;</a>
       </div>
     </section>
 
     <section id='toasts'>
       <div class='panel'>
-        <h2>Toasts</h2>
+        <h2>Toasts <a class='doc' href='https://v6-dev--twbs-bootstrap.netlify.app/docs/6.0/components/toasts'>Bootstrap&nbsp;6 documentation</a></h2>
         <p>The flash, as toasts at the bottom right. They stand before any script runs and leave on their own.</p>
         <div class='split'>
           <div>
@@ -873,10 +859,7 @@ footer {
             <div class='f-toast bad'>The hat would not open. <span class='f-x'>✕</span></div>
           </div>
         </div>
-        <div class='refs'>
-          <a class='ref' href='https://rubydoc.info/gems/bh/Bh/Helpers/Toasts'>Reference&nbsp;&rarr;</a>
-          <a class='ref' href='https://v6-dev--twbs-bootstrap.netlify.app/docs/6.0/components/toasts'>Toasts in Bootstrap&nbsp;6</a>
-        </div>
+        <a class='ref' href='https://rubydoc.info/gems/bh/Bh/Helpers/Toasts'>API Reference&nbsp;&rarr;</a>
       </div>
     </section>
 
@@ -898,7 +881,7 @@ footer {
             <div class='f-bubble f-in f-typing'><span></span><span></span><span></span></div>
           </div>
         </div>
-        <a class='ref' href='https://rubydoc.info/gems/bh/Bh/Helpers/Chats'>Reference&nbsp;&rarr;</a>
+        <a class='ref' href='https://rubydoc.info/gems/bh/Bh/Helpers/Chats'>API Reference&nbsp;&rarr;</a>
       </div>
     </section>
 
@@ -917,7 +900,6 @@ footer {
           <li><span class='gum' style='background:#268bd2'></span> <code>solarized</code></li>
           <li><span class='gum' style='background:#7aa2f7'></span> <code>tokyo_night</code></li>
         </ul>
-        <a class='ref' href='https://github.com/claudiob/bh/tree/master/app/stylesheets/theme'>Reference&nbsp;&rarr;</a>
         <h3>Swapping one for another</h3>
         <p>The <code>scheme</code> controller does it, and remembers what the reader picked.</p>
 <pre><code><span class='k'>&lt;button</span> type=<span class='s'>'button'</span> data-controller=<span class='s'>'scheme'</span> data-action=<span class='s'>'scheme#rotate'</span>
@@ -925,6 +907,7 @@ footer {
         data-scheme-path-value=<span class='s'>'/bh/theme'</span> data-scheme-storage-value=<span class='s'>'scheme'</span><span class='k'>&gt;</span>
   Another palette
 <span class='k'>&lt;/button&gt;</span></code></pre>
+        <a class='ref' href='https://github.com/claudiob/bh/tree/master/app/stylesheets/theme'>API Reference&nbsp;&rarr;</a>
       </div>
     </section>
 
@@ -962,7 +945,7 @@ footer {
     <section id='dummy'>
       <div class='panel'>
         <h2>Trying it out</h2>
-        <p>The gem carries a dummy app that draws every helper on one page, and a <code>bin/rails</code> at the root, so there is no <code>cd</code> first. From the root of a clone:</p>
+        <p>The gem carries a dummy app that draws every helper on one page. From the root of a clone:</p>
 <pre><code>bin/setup
 rails s</code></pre>
         <p style='margin-top:1rem'><code>localhost:3000</code> is every component at once, and <code>?flash=1</code> adds the toasts.</p>
@@ -1014,7 +997,7 @@ rails s</code></pre>
 <footer>
   <div class='foot-in'>
     <img src='icon.svg' alt='' width='48' height='48'>
-    <p style='margin:0;font-weight:700'>Bh · Bootstrap Helpers<br><span style='font-weight:500;color:var(--ink-soft)'><span class='foot-line'>Drawn for <a class='lockup quicksand' href='https://houseaccount.com/'><svg style='width: 0.8117em; height: 0.8117em; top: 0.0358em' aria-hidden='true' xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'><g fill='none' stroke='#3b8ae8' stroke-width='28' stroke-linecap='round' stroke-linejoin='round'><path d='M256 302Q256 256 295.8 233L406.2 169.3Q446 146.3 446 192.3V319.7Q446 365.7 406.2 388.7L295.8 452.4Q256 475.4 256 429.4Z' fill='#1B5288'/><path d='M216.2 59.6Q256 36.6 295.8 59.6L406.2 123.3Q446 146.3 446 192.3V319.7Q446 365.7 406.2 388.7L295.8 452.4Q256 475.4 216.2 452.4L105.8 388.7Q66 365.7 66 319.7V192.3Q66 146.3 105.8 123.3Z'/><path d='M256 256 95.4 163.3'/><path d='M256 256 416.6 163.3'/><path d='M256 256V441.4'/></g></svg><span class='house'>house</span>account</a></span> <span class='foot-line'>by the Earl of Bubblehum</span> <span class='foot-line'>under MIT license</span></span></p>
+    <p style='margin:0;font-weight:700'>Bh · Bootstrap Helpers<br><span style='font-weight:500;color:var(--ink-soft)'><span class='foot-line'>Drawn for <a class='lockup quicksand' href='https://houseaccount.com/'><svg style='width: 0.8117em; height: 0.8117em; top: 0.0358em' aria-hidden='true' xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'><g fill='none' stroke='#3b8ae8' stroke-width='28' stroke-linecap='round' stroke-linejoin='round'><path d='M256 302Q256 256 295.8 233L406.2 169.3Q446 146.3 446 192.3V319.7Q446 365.7 406.2 388.7L295.8 452.4Q256 475.4 256 429.4Z' fill='#1B5288'/><path d='M216.2 59.6Q256 36.6 295.8 59.6L406.2 123.3Q446 146.3 446 192.3V319.7Q446 365.7 406.2 388.7L295.8 452.4Q256 475.4 216.2 452.4L105.8 388.7Q66 365.7 66 319.7V192.3Q66 146.3 105.8 123.3Z'/><path d='M256 256 95.4 163.3'/><path d='M256 256 416.6 163.3'/><path d='M256 256V441.4'/></g></svg><span class='house'>house</span>account</a></span> <span class='foot-line'>under MIT license</span></span></p>
     <div class='foot-links'>
       <a href='https://github.com/claudiob/bh'>Source</a>
       <a href='https://rubydoc.info/gems/bh'>API reference</a>
