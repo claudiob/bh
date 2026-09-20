@@ -20,18 +20,13 @@ gem install bh
 ```
 
 ```ruby
-# Gemfile
 gem 'bh', '~> 6.8.0'
 ```
 
-`~> 6.8.0` stops short of `6.9`, and that is the pin to hold: **until this line settles it
-breaks on a minor, not on a major.** Rails 8.1 and Ruby 3.2 are the minimum.
+`~> 6.8.0` stops short of `6.9`, which is the pin to hold while this line still breaks on a
+minor rather than on a major.
 
-6.2.0 breaks everything before it and keeps its major anyway. 6.0 through 6.1.4 were an alpha
-in everything but the number — Bootstrap 3 wrappers with a Bootstrap 6 stopgap bolted on, cut
-while Bootstrap 6 was itself pre-release — so there was no settled API to break. Those numbers
-are taken and cannot be withdrawn, RubyGems keeping anything published over thirty days ago, so
-this release steps over them.
+## The stylesheet and the script
 
 With the gem in the bundle an app serves `/bh/css/bh.css` and `/bh/js/bh.js` itself, at the
 prefix its engine is mounted at. A layout links both:
@@ -81,6 +76,7 @@ end
 | `fieldset` `label` `submit` `button` | the form's furniture, with the pill Bootstrap draws |
 | every `*_field`, `text_area`, `select`, `check` | dressed at one size, so a view says which kind and nothing about how it looks |
 | `phone_field` | a North American number, shaped `555-555-5555` as it is typed |
+| `price_field` `percentage_field` | money and a share of a hundred, typed into Bootstrap's adorned control |
 | `pin_field` | one real field drawn as six slots, offered by the phone from the text that brought it |
 | `combobox` | a `<select>` drawn as a searchable menu, still the one thing the form submits |
 | `dialog` | a link and the `<dialog>` it opens, sharing an id made from the link's own words |
@@ -111,4 +107,4 @@ rails s
 - [API reference](https://rubydoc.info/gems/bh) — built from what RubyGems holds
 - [CHANGELOG](CHANGELOG.md) — what each release is, and which of the three it is
 
-MIT licensed. Drawn for [houseaccount](https://houseaccount.com/) by the Earl of Bubblehum.
+MIT licensed.
