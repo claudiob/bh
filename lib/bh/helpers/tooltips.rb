@@ -7,7 +7,7 @@ module Bh
       # @param title [String] the words the tooltip says.
       # @param placement [String, nil] which side of the element it opens on.
       # @return [Hash] the `data` an element wearing a tooltip takes.
-      def bh_tooltip(title, placement: nil)
+      def tooltip_data(title, placement: nil)
         { controller: 'tooltip', bs_placement: placement, bs_title: title }.compact
       end
     end

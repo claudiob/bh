@@ -56,7 +56,7 @@ For more information about changelogs, check
   The bundle draws the question as a dialog, and the form is sent only where it is answered
   yes.
 
-* [FEATURE] `bh_tooltip` is the data an element wearing a tooltip takes
+* [FEATURE] `tooltip_data` is the data an element wearing a tooltip takes
 
 * [FEATURE] A phone field shows the shape it will take
 

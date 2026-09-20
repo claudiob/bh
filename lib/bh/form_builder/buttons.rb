@@ -33,7 +33,7 @@ module Bh
     private
 
       def tooltipped(button, title)
-        @template.tag.span button, class: "d-grid #{SPACE}", data: @template.bh_tooltip(title)
+        @template.tag.span button, class: "d-grid #{SPACE}", data: @template.tooltip_data(title)
       end
     end
   end
