@@ -8,6 +8,15 @@ For more information about changelogs, check
 
 ## [Unreleased]
 
+## 6.9.1 - 2026-09-20
+
+* [FIX] A combobox's search box carries an id
+
+  The field that narrows a long menu had neither an id nor a name, which a browser
+  reports as a form field it cannot offer to fill. It takes an id — the select's own
+  where it has one — rather than a name, a name being what would submit a box that
+  narrows a menu in front of a reader rather than asking the server anything.
+
 ## 6.9.0 - 2026-09-20
 
 * [FEATURE] A box can say what ticking it means

@@ -38,12 +38,18 @@ function menu(select, controller) {
   return menu
 }
 
-// The box that narrows a long menu, with the X that empties it inside the field.
+// The box that narrows a long menu, with the X that empties it inside the field. It takes
+// an id and no name: a field with neither is one a browser says it cannot offer to fill,
+// and a name would submit a box that narrows a menu rather than asking the server anything.
+let searches = 0
+
 function search(select) {
   const box = element('div', 'combobox-search')
   box.dataset.controller = 'clear'
   const input = element('input', 'form-control combobox-search-input', {
-    type: 'text', autocomplete: 'off', placeholder: select.dataset.search || '', 'aria-label': select.dataset.search || '',
+    id: select.id ? `${select.id}-search` : `combobox-search-${++searches}`,
+    type: 'text', autocomplete: 'off',
+    placeholder: select.dataset.search || '', 'aria-label': select.dataset.search || '',
   })
   input.dataset.clearTarget = 'input'
   input.dataset.action = 'input->clear#toggle'
