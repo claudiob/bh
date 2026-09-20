@@ -8,6 +8,14 @@ For more information about changelogs, check
 
 ## [Unreleased]
 
+## 6.9.0 - 2026-09-20
+
+* [FEATURE] A box can say what ticking it means
+
+  `check` takes a `description:`, which is the line Bootstrap draws under the words beside
+  a box: `form.check :insured, 'Insured', description: 'Uninsured providers are only
+  offered preferred work.'` Given none, the markup is what it was.
+
 ## 6.8.0 - 2026-09-19
 
 * [FEATURE] A field a browser keeps an answer for says which

@@ -41,6 +41,10 @@ class TestBhForms < IntegrationCase
     assert_includes body, '<div class="form-field">'
     assert_includes body, '<input class="check" type="checkbox"'
     assert_includes body, '<label for="contact_agreed">I agree to the terms</label>'
+    # A box whose label is too short to say what ticking it means says the rest under it.
+    assert_includes body, '<div class="form-field-content">' \
+                          '<label for="contact_insured">Insured</label>' \
+                          '<small class="form-text">A gumball is not a hat.</small></div>'
     assert_includes body, '<input class="radio" type="radio"'
   end
 

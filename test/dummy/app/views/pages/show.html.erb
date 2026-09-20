@@ -24,6 +24,7 @@
     <%= form.select :state, %w[ California Oregon ] %>
     <%= form.combobox :county, %w[ Alameda Marin ], { prompt: 'Pick a county' }, multiple: true %>
     <%= form.check :agreed, 'I agree to the terms' %>
+    <%= form.check :insured, 'Insured', description: 'A gumball is not a hat.' %>
     <%= form.radio_button :size, 'big' %>
     <%= form.phone_field :phone, class: 'text-center', autocomplete: 'off', data: { places_target: 'phone' } %>
     <%= form.submit 'Confirm' %>

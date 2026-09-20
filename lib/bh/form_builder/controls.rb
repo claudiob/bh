@@ -58,11 +58,24 @@ module Bh
 
       # A box and the words beside it, which is the one place words sit after a control rather
       # than over it -- so they are not the label a field wears, and are written here instead.
+      # A `description:` is the line under those words, for a box whose label is too short to
+      # say what ticking it means. Every other option is the box's.
       def check(method, text, options = {})
-        words = @template.label_tag field_id(method), text
-        inside = @template.safe_join [check_box(method, options), words]
+        box = check_box method, options.except(:description)
+        inside = @template.safe_join [box, checked_words(method, text, options[:description])]
 
         @template.tag.div inside, class: 'form-field'
+      end
+
+    private
+
+      def checked_words(method, text, description)
+        words = @template.label_tag field_id(method), text
+        return words unless description
+
+        said = @template.tag.small description, class: 'form-text'
+
+        @template.tag.div @template.safe_join([words, said]), class: 'form-field-content'
       end
     end
   end

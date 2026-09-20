@@ -20,10 +20,10 @@ gem install bh
 ```
 
 ```ruby
-gem 'bh', '~> 6.8.0'
+gem 'bh', '~> 6.9.0'
 ```
 
-`~> 6.8.0` stops short of `6.9`, which is the pin to hold while this line still breaks on a
+`~> 6.9.0` stops short of `6.10`, which is the pin to hold while this line still breaks on a
 minor rather than on a major.
 
 ## The stylesheet and the script
