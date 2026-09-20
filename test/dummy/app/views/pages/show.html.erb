@@ -18,10 +18,17 @@
     <%= form.time_field :hour %>
     <%= form.datetime_field :moment %>
     <%= form.text_area :notes %>
+    <%= form.file_field :photo %>
+    <%= form.price_field :fee %>
+    <%= form.percentage_field :rate %>
     <%= form.select :state, %w[ California Oregon ] %>
     <%= form.combobox :county, %w[ Alameda Marin ], { prompt: 'Pick a county' }, multiple: true %>
     <%= form.check :agreed, 'I agree to the terms' %>
     <%= form.radio_button :size, 'big' %>
+    <%= form.phone_field :phone, class: 'text-center', autocomplete: 'off', data: { places_target: 'phone' } %>
+    <%= form.submit 'Confirm' %>
+    <%= form.button do %><b>Text</b> us<% end %>
+    <%= form.button 'Call us', type: :button, disabled: true, title: 'Available soon' %>
   <% end %>
 <% end %>
 
@@ -40,3 +47,7 @@
       ], note: 'About the March invoice' %>
 
 <%= chat_with url: '/questions', messages: [Bh::Message.new(side: :right, text: 'Read only')] %>
+
+<%= bh_confirm_button 'Disconnect', '/integration', confirm: "Sure?\nThis cannot be undone.", method: :delete, class: 'btn btn-solid theme-danger' %>
+
+<%= toasts(data: { written_row_value: 'row_9' }) { |key, message| key == 'notice' ? link_to(message, '/') : message } %>

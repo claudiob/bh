@@ -1,7 +1,8 @@
 require_relative 'test_helper'
 
+# The components Bootstrap ships behavior for and no markup.
 class TestBhComponents < IntegrationCase
-  def test_notices_are_the_flash_as_toasts_and_nothing_where_there_is_nothing_to_say
+  def test_toasts_are_the_flash_and_nothing_where_there_is_nothing_to_say
     visit '/'
 
     refute_includes body, 'toast-container'
@@ -23,7 +24,11 @@ class TestBhComponents < IntegrationCase
     assert_includes body, 'The team could not be reached.'
     # Data another part of a host keeps in the flash is not a message.
     refute_includes body, 'team_1'
-    assert_equal 2, body.scan('class="toast fade show').size
+    # A host marking what the page is about, and splicing a link into the words it says.
+    assert_includes body, '<div class="toast-container position-fixed bottom-0 end-0 p-3" ' \
+                          'data-turbo-temporary="" data-written-row-value="row_9">'
+    assert_includes body, '<span class="me-auto"><a href="/">Blue Crew was updated.</a></span>'
+    assert_equal 4, body.scan('class="toast fade show').size
   end
 
   def test_a_dialog_is_a_link_and_the_browsers_own_element_sharing_an_id_made_from_the_words
@@ -47,37 +52,12 @@ class TestBhComponents < IntegrationCase
     assert_includes body, '<div class="dialog-body">None.</div></dialog>'
   end
 
-  def test_a_pin_field_is_one_real_field_the_slots_are_drawn_over
+  def test_a_button_that_asks_before_it_acts_carries_the_question_on_its_form
     visit '/'
 
-    assert_includes body, '<div class="otp otp-lg" data-controller="otp" data-bs-otp="true">' \
-                          '<input class="otp-input" inputmode="numeric" pattern="[0-9]{6}" ' \
-                          'minlength="6" maxlength="6" autocomplete="one-time-code" ' \
-                          'required="required" size="6" type="text" ' \
-                          'name="contact[pin_confirmation]" id="contact_pin_confirmation" /></div>'
-  end
-
-  def test_every_kind_of_field_is_dressed_by_the_builder_rather_than_by_a_page
-    visit '/'
-
-    assert_includes body, '<input class="form-control form-control-lg" type="number"'
-    assert_includes body, '<textarea class="form-control form-control-lg"'
-    assert_includes body, '<select class="form-select form-select-lg" name="contact[state]"'
-    # Rails writes the unticked value as a hidden field first, so the box is not the first child.
-    assert_includes body, '<div class="form-check">'
-    assert_includes body, '<input class="form-check-input" type="checkbox"'
-    assert_includes body, '<label class="form-check-label" for="contact_agreed">' \
-                          'I agree to the terms</label>'
-  end
-
-  def test_a_combobox_is_a_select_the_bundle_searches_in_the_house_s_own_words
-    visit '/'
-
-    # rubocop:disable-next Style/FormatStringToken -- the bundle fills these two, not Ruby
-    assert_includes body, 'data-controller="combobox" ' \
-                          'data-combobox-placeholder-value="Pick a county" ' \
-                          'data-combobox-all-value="All" data-clear="Clear" ' \
-                          'data-combobox-more-value="%{first} + %{count} more" ' \
-                          'data-no-results="Nothing matches that" data-search="Search"'
+    assert_includes body, %(<form data-turbo-confirm="Sure?\nThis cannot be undone.")
+    assert_includes body, 'class="button_to" method="post" action="/integration">'
+    assert_includes body, '<button class="btn btn-solid theme-danger" type="submit">' \
+                          'Disconnect</button>'
   end
 end

@@ -1,8 +1,0 @@
-<% content_for :content do %>
-  <%= flow header: link_to('bh', root_path, class: 'fs-4 text-decoration-none'),
-           footer: [yield(:footer), button_to('Sign out', '/session', method: :delete, class: 'btn btn-link')] do %>
-    <%= yield %>
-  <% end %>
-<% end %>
-
-<%= render template: 'layouts/bh' %>

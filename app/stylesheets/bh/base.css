@@ -25,3 +25,6 @@ mark { padding: 0; }
    ::before, so the hover transform on the .bi box itself is untouched. */
 .icon-link > .bi::before { vertical-align: .0625em; }
 
+/* A group of controls carries its own spacing, and twice as much under it as over: the words
+   over a group belong to it, and even space either side would let them drift between two. */
+.bh-fieldset { margin-block: 1rem 2rem; gap: 1rem }

@@ -1,7 +1,7 @@
 module Bh
   module Helpers
     # What the flash says, as the toasts every Bh page shows them in.
-    module Notices
+    module Toasts
       # Bootstrap's tone for each key, so a notice and an alert read apart; a key of the
       # host's own reads neutral.
       TONES = { 'notice' => 'theme-success', 'alert' => 'theme-danger' }.freeze
@@ -16,14 +16,21 @@ module Bh
       # other part of a host keeps in the flash, and is not something to show. Nothing at all
       # where there is nothing to say. `data-turbo-temporary`, so a toast born visible does
       # not replay from the page's snapshot on every Back.
-      def notices
+      # @param data [Hash] anything else the stack of them carries, for a host marking what
+      #   the page it stands on is about.
+      # @yield [key, message] what to draw in place of the message, for a host with a link
+      #   to splice into it. The message itself where no block is given.
+      # @return [String, nil] the toasts, or nothing where the flash says nothing.
+      def toasts(data: {}, &)
         messages = flash.to_hash.select { |_, message| message.is_a? String }
         return if messages.empty?
 
-        toasts = messages.map { |key, message| bh_toast key, message }
+        toasts = messages.map do |key, message|
+          bh_toast key, block_given? ? yield(key, message) : message
+        end
 
         tag.div safe_join(toasts), class: 'toast-container position-fixed bottom-0 end-0 p-3',
-                                   data: { turbo_temporary: '' }
+                                   data: { turbo_temporary: '' }.merge(data)
       end
 
     private
