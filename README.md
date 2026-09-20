@@ -83,9 +83,11 @@ end
 | `pin_field` | one real field drawn as six slots, offered by the phone from the text that brought it |
 | `combobox` | a `<select>` drawn as a searchable menu, still the one thing the form submits |
 | `dialog` | a link and the `<dialog>` it opens, sharing an id made from the link's own words |
-| `notices` | the flash as toasts, held while they are read |
+| `toasts` | the flash as toasts, held while they are read |
 | `chat_with` | a thread of bubbles, and the field that posts the next one |
-| `flow` | the page of a signup flow: a header, a title, one card, a footer |
+| `bh_confirm_button` | a button whose form is sent only where the question it carries is answered yes |
+| `bh_adorned` | a control with its unit inside the border, which `price_field` and `percentage_field` draw |
+| `bh_tooltip` | the `data` an element wearing a tooltip takes |
 | 22 Stimulus controllers | registered by the bundle, called by `data-controller` |
 | 9 palettes | served at `/bh/theme/`, swapped by the `scheme` controller |
 
@@ -101,8 +103,7 @@ bin/setup
 rails s
 ```
 
-`localhost:3000` is every component at once, `?flash=1` adds the toasts, and `/flow` is the
-signup page.
+`localhost:3000` is every component at once, and `?flash=1` adds the toasts.
 
 ## Elsewhere
 

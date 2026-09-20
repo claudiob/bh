@@ -19,6 +19,6 @@
     <main class='container-fluid py-4 flex-grow-1 d-flex flex-column'>
       <%= content_for?(:content) ? yield(:content) : yield %>
     </main>
-    <%= notices %>
+    <%= toasts %>
   </body>
 </html>

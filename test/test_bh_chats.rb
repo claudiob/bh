@@ -74,7 +74,7 @@ class TestBhChats < IntegrationCase
     # One suggestion or none is nothing to cycle through.
     assert_includes body, 'class="form-control rounded-4 flex-grow-1 chat-ask" ' \
                           'data-thread-target="field" data-turbo-permanent="" />'
-    # Two chats' forms, and the pin field's beside them.
-    assert_equal 3, body.scan('<form').size
+    # Two chats' forms, and the page's other two beside them.
+    assert_equal 4, body.scan('<form').size
   end
 end

@@ -1,12 +1,14 @@
+require_relative 'helpers/adornments'
 require_relative 'helpers/chats'
+require_relative 'helpers/confirmations'
 require_relative 'helpers/dialogs'
-require_relative 'helpers/flows'
 require_relative 'helpers/heads'
-require_relative 'helpers/notices'
+require_relative 'helpers/toasts'
+require_relative 'helpers/tooltips'
 
 module Bh
   # Everything a view may call, in one module the engine puts on every Action View.
   module Helpers
-    include Chats, Dialogs, Flows, Heads, Notices
+    include Adornments, Chats, Confirmations, Dialogs, Heads, Toasts, Tooltips
   end
 end

@@ -8,6 +8,64 @@ For more information about changelogs, check
 
 ## [Unreleased]
 
+## 6.7.0 - 2026-09-19
+
+* [CHANGE] The signup page goes
+
+  `flow` drew a page no part of Bootstrap names, out of three `content_for` keys a caller
+  never passes, in rules only one product's onboarding wanted. It belongs to whoever ships
+  that product, and this gem keeps what Bootstrap defines.
+
+  The two classes the builder writes go with it in name only: `flow-fieldset` is now
+  `bh-fieldset` and `flow-field` is `bh-field`, both being the form's business rather than
+  a page's, and the spacing of a fieldset stays here with them.
+
+* [CHANGE] `notices` is `toasts`
+
+  It draws a stack of Bootstrap's toasts and says so. `toast` is left for the one a host
+  hands over itself.
+
+  It takes `data:` for a host marking what the page it stands on is about, and a block for
+  one splicing a link into the words a message says.
+
+* [FEATURE] A control says what it is to a reader who meets it alone
+
+  Every field the builder dresses carries an `aria-label` off the attribute it sets, which
+  a page's own `aria` still overrides key by key.
+
+* [FEATURE] Money and a share of a hundred are typed into an adorned control
+
+  `price_field` and `percentage_field` draw Bootstrap's adorned control: the unit in a span
+  and the field inside it wearing no border of its own. `bh_adorned` is the drawing, for a
+  caller building the field itself.
+
+* [FEATURE] `file_field`, which Rails handed over undressed
+
+* [FEATURE] `bh_confirm_button` asks before it acts
+
+  The bundle draws the question as a dialog, and the form is sent only where it is answered
+  yes.
+
+* [FEATURE] `bh_tooltip` is the data an element wearing a tooltip takes
+
+* [FEATURE] A phone field shows the shape it will take
+
+  `555-555-5555`, from the locale rather than the code, since how a number is written is
+  the reader's language and not this gem's. A page saying its own placeholder keeps it.
+
+  The only field given one: a placeholder is decoration over a label, and it earns its
+  place where it shows a shape a reader could get wrong rather than where it repeats what
+  the label already says. This is the one field where the gem knows the shape, because the
+  gem is what imposes it.
+
+* [FIX] A menu, a box and a circle wear what Bootstrap 6 draws
+
+  A `<select>` wore `form-select form-select-lg`, a ticked box `form-check-input`, and the
+  words beside it sat in a `form-check` under a `form-check-label`. Bootstrap 6 defines
+  none of those: a menu is a control like any other, a box is a `check`, a circle is a
+  `radio`, and the two of them stand in a `form-field`, which lays them out in a row. Every
+  one of them was drawing undressed.
+
 ## 6.6.0 - 2026-09-18
 
 * [CHANGE] A picture in a bubble is a thumbnail
