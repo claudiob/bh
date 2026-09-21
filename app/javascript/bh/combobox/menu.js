@@ -5,7 +5,7 @@
 // The toggle takes the select's size and its error, and is labelled the way the select was.
 export function menuFor(select, controller) {
   const toggle = element('button', 'form-control combobox-toggle', { type: 'button' })
-  if (select.classList.contains('form-select-sm')) { toggle.classList.add('form-control-sm') }
+  if (['form-select-sm', 'form-control-sm'].some(size => select.classList.contains(size))) { toggle.classList.add('form-control-sm') }
   if (select.classList.contains('is-invalid')) { toggle.classList.add('is-invalid') }
   toggle.dataset.bsToggle = 'combobox'
   toggle.dataset.bsSearch = 'true'

@@ -8,6 +8,15 @@ For more information about changelogs, check
 
 ## [Unreleased]
 
+## 6.9.2 - 2026-09-20
+
+* [FIX] A small select's combobox is small too
+
+  The button that stands in for a `<select>` took the compact size from `form-select-sm`
+  alone, so a select wearing `form-control-sm` — which is what a filter beside a search
+  box wears — was replaced by a full-height one. It stood two pixels taller than the trail
+  beside it, which is what set the height of every row it sat in.
+
 ## 6.9.1 - 2026-09-20
 
 * [FIX] A combobox's search box carries an id
