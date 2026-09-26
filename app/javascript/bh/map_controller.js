@@ -6,6 +6,11 @@ import { load } from './map/loader.js'
 // none, a pin at the place; a row keeping coordinates is a pin there and then, with
 // nothing to look up. The key and the map are the host's, read from its credentials; the
 // rows are the page's, and the map is fitted round whatever it drew.
+//
+// A row may carry where it leads and what it is called: a point as `[lat, lng, href, title]`,
+// a place as `[id, href, title]`, where a bare place ID or a bare `[lat, lng]` leads nowhere.
+// A pin or an area with somewhere to lead is clicked through to it, the way the row's own
+// link in the table is.
 export default class extends Controller {
   static values = { key: String, id: String, boundary: String, places: Array, points: Array }
 
@@ -30,7 +35,8 @@ export default class extends Controller {
   async place(map, bounds) {
     if (this.placesValue.length === 0) return
     const { Place } = await google.maps.importLibrary('places')
-    const places = this.placesValue.map(id => new Place({ id }))
+    const rows = this.placesValue.map(row => [].concat(row))
+    const places = rows.map(([id, href, title]) => ({ place: new Place({ id }), href, title }))
 
     if (this.hasBoundaryValue) return this.fill(map, bounds, places)
     return this.pin(map, bounds, places)
@@ -38,13 +44,19 @@ export default class extends Controller {
 
   // The layer styles every boundary Google knows at that level, and a function saying
   // which of them are ours is what fills them in. The bounds are the places' viewports.
+  // An area with somewhere to lead is followed there when clicked.
   async fill(map, bounds, places) {
-    const ours = new Set(this.placesValue)
-    map.getFeatureLayer(this.boundaryValue).style = ({ feature }) => {
-      if (ours.has(feature.placeId)) return FILLED
+    const hrefs = new Map(places.map(({ place, href }) => [place.id, href]))
+    const layer = map.getFeatureLayer(this.boundaryValue)
+    layer.style = ({ feature }) => {
+      if (hrefs.has(feature.placeId)) return FILLED
     }
+    layer.addListener('click', ({ features }) => {
+      const href = features.map(feature => hrefs.get(feature.placeId)).find(Boolean)
+      if (href) visit(href)
+    })
 
-    await Promise.all(places.map(place =>
+    await Promise.all(places.map(({ place }) =>
       fetched(place, 'viewport').then(() => { if (place.viewport) bounds.union(place.viewport) })
     ))
   }
@@ -52,8 +64,8 @@ export default class extends Controller {
   async pin(map, bounds, places) {
     const drop = await this.dropper(map, bounds)
 
-    await Promise.all(places.map(place =>
-      fetched(place, 'location').then(() => { if (place.location) drop(place.location) })
+    await Promise.all(places.map(({ place, href, title }) =>
+      fetched(place, 'location').then(() => { if (place.location) drop(place.location, href, title) })
     ))
   }
 
@@ -62,18 +74,27 @@ export default class extends Controller {
     if (this.pointsValue.length === 0) return
     const drop = await this.dropper(map, bounds)
 
-    for (const [lat, lng] of this.pointsValue) drop({ lat, lng })
+    for (const [lat, lng, href, title] of this.pointsValue) drop({ lat, lng }, href, title)
   }
 
-  // One marker at a position, and the bounds widened to hold it.
+  // One marker at a position, and the bounds widened to hold it. A marker with somewhere to
+  // lead is clickable, names what it leads to on hover, and is followed there when clicked.
   async dropper(map, bounds) {
     const { AdvancedMarkerElement } = await google.maps.importLibrary('marker')
 
-    return (position) => {
-      new AdvancedMarkerElement({ map, position })
+    return (position, href, title) => {
+      const marker = new AdvancedMarkerElement({ map, position, title, gmpClickable: Boolean(href) })
+      if (href) marker.addEventListener('gmp-click', () => visit(href))
       bounds.extend(position)
     }
   }
+}
+
+// Through Turbo where the page has it, so the table's frame and scroll behave as a click on
+// the row's own link would; a plain navigation otherwise.
+function visit(href) {
+  if (window.Turbo) window.Turbo.visit(href)
+  else window.location.assign(href)
 }
 
 // A place that cannot be fetched — an ID Google no longer knows — is left off the map

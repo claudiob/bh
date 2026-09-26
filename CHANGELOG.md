@@ -8,6 +8,15 @@ For more information about changelogs, check
 
 ## [Unreleased]
 
+## 6.10.0 - 2026-09-26
+
+* [FEATURE] A pin or an area on a map leads where its row does
+
+  The map controller takes a point as `[lat, lng, href, title]` and a place as
+  `[id, href, title]`. A pin with an `href` is clickable, shows its `title` on hover, and a
+  click follows it through Turbo; an area filled on a boundary layer is followed the same
+  way. A bare `[lat, lng]` or a bare place ID still draws a pin that leads nowhere.
+
 ## 6.9.2 - 2026-09-20
 
 * [FIX] A small select's combobox is small too
