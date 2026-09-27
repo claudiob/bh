@@ -8,6 +8,15 @@ For more information about changelogs, check
 
 ## [Unreleased]
 
+## 6.10.1 - 2026-09-26
+
+* [FIX] A tooltip closes when its icon, or the button or link holding it, is clicked
+
+  A click that takes the icon away — the sidebar's moon and sun swap places — left the tooltip
+  open with nothing under the pointer to close it, and Popper put it in the page's corner,
+  where a hidden element is. It is closed in the capture phase, before the click's own action
+  changes the page.
+
 ## 6.10.0 - 2026-09-26
 
 * [FEATURE] A pin or an area on a map leads where its row does
